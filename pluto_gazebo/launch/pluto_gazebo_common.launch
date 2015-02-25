@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Upload Pluto urdf to parameter server -->
+  <include file="$(find pluto_description)/launch/upload_pluto.launch"/>
+
+  <!-- Push robot_description to factory and spawn robot in gazebo -->
+  <include file="$(find pluto_gazebo)/launch/spawn_pluto.launch" />
+
+  <!-- EKF -->
+  <include file="$(find pluto_gazebo)/launch/ekf.launch"/>
+
+  <!-- Default Controllers -->
+	<rosparam command="load" file="$(find pluto_gazebo)/config/rotunit_controller.yaml" />
+	<rosparam command="load" file="$(find pluto_gazebo)/config/joint_state_controller.yaml" />
+
+  <!-- Robot state publisher -->
+	<node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher">
+		<param name="publish_frequency" type="double" value="100.0" />
+		<param name="tf_prefix" type="string" value="" />
+	</node>
+
+  <!-- Fake calibration -->
+  <node pkg="rostopic" type="rostopic" name="fake_joint_calibration"
+    args="pub /calibrated std_msgs/Bool true" />
+
+	<!-- Rotunit speed -->
+	<node pkg="rostopic" type="rostopic" name="command_rotunit_speed"
+		args="pub /rotunit_controller/command std_msgs/Float64 1.0"/>
+
+	<node name="default_loaded_controllers_spawner2"
+		pkg="controller_manager" type="spawner" output="screen" respawn="false"
+		args="rotunit_controller joint_state_controller" />
+
+</launch>
+

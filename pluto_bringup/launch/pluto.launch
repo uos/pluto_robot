@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<launch>
+  ## Upload Pluto to parameter server
+  <include file="$(find pluto_description)/launch/upload_pluto.launch"/>
+  
+  ## Roboter Setup
+	<arg name="use_3d_scanner" value="true" />
+  <arg name="use_imu" value="true" />
+
+  	<param name="robot_description" command="$(find xacro)/xacro.py '$(find volksbot_driver)/urdf/example.urdf.xacro'" />
+  	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+  	<node name="volksbot" pkg="volksbot_driver" type="volksbot" respawn="false" output="screen">
+    		<!-- default values: -->
+		<!--
+		<param name="wheel_radius" type="double" value="0.0985" />
+		<param name="axis_length" type="double" value="0.41" />
+		<param name="gear_ratio" type="int" value="74" />
+		<param name="turning_adaptation" type="double" value="0.95" />
+		<param name="x_stddev" type="double" value="0.002" />
+		<param name="rotation_stddev" type="double" value="0.017" />
+		<param name="cov_xy" type="double" value="0.0" />
+		<param name="cov_xrotation" type="double" value="0.0" />
+		<param name="cov_yrotation" type="double" value="0.0" />
+		<param name="publish_tf" type="bool" value="False" />
+	   	 -->
+ 	</node>
+	
+	## Bringup 3D scanner, if enabled
+	<group if="$(arg use_3d_scanner)">
+		## Bringup Rotunit
+		<node pkg="kurt_base" type="kurt_base" name="kurt_base" output="screen">
+			<param name="use_kurt" value="false" />
+			<param name="use_rotunit" value="$(arg use_3d_scanner)" />
+			<param name="rotunit_speed" value="0.6" />
+		</node>
+		## Bringup Laser Scanner
+		<include file="$(find kurt_bringup)/launch/sick_lms200.launch">
+			<arg name="device" value="/dev/scanner360"/>
+			<arg name="topic" value="scan360"/>
+			<arg name="frame" value="laser360"/>
+		</include>
+	</group>
+
+  ## Bringup IMU
+  <group if="$(arg use_imu)">
+    <include file="$(find kurt_bringup)/launch/phidgets_imu.launch" />
+  </group>
+</launch>

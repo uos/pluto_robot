@@ -1,0 +1,290 @@
+<?xml version="1.0"?>
+<robot
+  xmlns:xacro="http://ros.org/wiki/xacro"
+  xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+  xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+  name="pluto">
+
+  <xacro:include filename="$(find uos_common_urdf)/common.xacro" />
+  <xacro:include filename="$(find uos_common_urdf)/urdf/imu.gazebo.urdf.xacro" />
+  <xacro:include filename="$(find pluto_description)/urdf/rotunit.urdf.xacro" />
+  
+  <xacro:property name="M_PI" value="3.14159265359"/>
+  
+  <xacro:property name="imu_stdev" value="0.00017" />
+  
+  <xacro:property name="body_height" value="0.21"/>
+  <xacro:property name="body_length" value="0.592"/>
+  <xacro:property name="body_width" value="0.29"/>
+  
+  <xacro:property name="horizontal_lever_height" value="0.09"/>
+  <xacro:property name="horizontal_lever_length" value="0.266"/>
+  <xacro:property name="horizontal_lever_thickness" value="0.04"/>
+  <xacro:property name="horizontal_lever_mass" value="0.1"/>
+  
+  <xacro:property name="vertical_lever_height" value="0.21"/>
+  <xacro:property name="vertical_lever_width" value="0.09"/>
+
+  <xacro:property name="bearing_pos_wheel_1" value="0.047"/>
+  <xacro:property name="bearing_pos_wheel_2_3" value="0.075"/>
+  
+  <xacro:property name="bearing_width" value="0.05"/>
+  <xacro:property name="bearing_height" value="0.09"/>
+  <xacro:property name="bearing_thickness" value="0.01"/>
+  
+  <xacro:property name="pannel_length" value="0.32"/>
+  <xacro:property name="pannel_height" value="0.09"/>
+  <xacro:property name="pannel_depth" value="0.082"/>
+  
+  <xacro:property name="rotunit_offset_x"
+    value="${body_width/2 - 0.1 - 0.19/2 + rotunit_box_x/2}"/>
+  <xacro:property name="rotunit_offset_y"
+    value="0"/>
+  <xacro:property name="rotunit_offset_z"
+    value="${body_height/2-0.014 + rotunit_box_z/2}"/>
+
+  <xacro:property name="virtual_axis_left_offset_x"
+    value="${body_length/2 - pannel_depth-bearing_pos_wheel_2_3
+      - bearing_height/2}"/>
+  <xacro:property name="virtual_axis_left_offset_y"
+    value="${body_width/2 + 0.03}" />
+  <xacro:property name="virtual_axis_left_offset_z"
+    value="${body_height/2-(vertical_lever_height + 0.03
+      - bearing_width/2)}" />
+    
+  <xacro:property name="virtual_axis_right_offset_x"
+    value="${body_length/2 - pannel_depth - bearing_pos_wheel_2_3
+      - bearing_height/2}"/>
+  <xacro:property name="virtual_axis_right_offset_y"
+    value="${-(body_width/2 + 0.03)}"/>
+  <xacro:property name="virtual_axis_right_offset_z"
+    value="${body_height/2 -(vertical_lever_height + 0.03
+      - bearing_width/2)}"/>
+
+  <xacro:property name="wheel_radius" value="0.103" />
+  <xacro:property name="axis_length" value="0.47" />
+  <xacro:property name="turning_adaptation" value="0.95" />
+
+  <xacro:property name="body_mass" value="0.1"/>
+  <xacro:property name="wheel_mass" value="0.01"/>
+  <xacro:property name="wheel_radius" value="0.15"/>
+  <xacro:property name="wheel_thickness" value="0.065"/>
+
+  <xacro:property name="imu_offset_x" value="${body_length/2 - 0.285}"/>
+  <xacro:property name="imu_offset_y" value="0"/>
+  <xacro:property name="imu_offset_z" value="${- body_height/2 + 0.03}"/>
+
+  <link name="base_footprint"/>
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://pluto_description/meshes/pluto_base.stl"/>
+      </geometry>
+      <material name="silver" >
+        <color rgba="0.5 0.5 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://pluto_description/meshes/pluto_base.stl"/>
+      </geometry>
+    </collision>
+    <xacro:box_inertial
+      x="${body_length}"
+      y="${body_width}"
+      z="${body_height}"
+      mass="${body_mass}"/>
+  </link>
+  
+  <joint name="base_footprint_to_base_joint" type="fixed">
+    <origin xyz="0 0 0.2" rpy="0 ${-M_PI/18.0} 0" />
+    <parent link="base_footprint"/>
+    <child link="base_link" />
+  </joint>
+  
+  <!--Virtual Axis Macro-->
+
+  <xacro:macro name="virtual_axis" params="side xyz rot">
+    <link name="virtual_axis_${side}">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 ${rot}" />
+        <geometry>
+          <mesh filename="package://pluto_description/meshes/pluto_lever.stl"/>
+        </geometry>
+        <material name="silver" >
+          <color rgba="0.5 0.5 0.5 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 ${rot}" />
+        <geometry>
+          <mesh filename="package://pluto_description/meshes/pluto_lever.stl"/>
+        </geometry>
+      </collision>
+      <xacro:box_inertial
+        x="${horizontal_lever_length}"
+        y="${horizontal_lever_thickness}"
+        z="${horizontal_lever_height}"
+        mass="${horizontal_lever_mass}"/>
+    </link>
+    
+    <joint name="virtual_${side}_to_base_joint" type="revolute">
+      <origin xyz="${xyz}"/>
+      <axis xyz="0 1 0"/>
+      <limit effort="1000" lower="-0.4" upper="0.4" velocity="10"/>
+      <parent link="base_link"/>
+      <child link="virtual_axis_${side}"/>
+    </joint>
+  </xacro:macro>
+  
+  <xacro:virtual_axis
+    side="left" 
+    xyz=" ${virtual_axis_left_offset_x}
+          ${virtual_axis_left_offset_y}
+          ${virtual_axis_left_offset_z}"
+    rot="${M_PI}"/>
+
+  <xacro:virtual_axis
+    side="right"
+    xyz=" ${virtual_axis_right_offset_x}
+          ${virtual_axis_right_offset_y}
+          ${virtual_axis_right_offset_z}"
+          
+    rot="0"/>
+
+  <!--Wheel Macro-->
+
+  <xacro:macro name="wheel" params="name parent xyz">
+    <link name="wheel_${name}">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://pluto_description/meshes/pluto_wheel.stl"/>
+        </geometry>
+        <material name="black" >
+          <color rgba="0.3 0.3 0.3 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://pluto_description/meshes/pluto_wheel.stl"/>
+        </geometry>
+      </collision>
+      <xacro:cylinder_inertial
+        radius="${wheel_radius}"
+        length="${wheel_thickness}"
+        mass="${wheel_mass}" />
+    </link>
+
+    <joint name="${name}_joint" type="continuous">
+      <origin xyz="${xyz}" rpy="0 0 0"/>
+      <parent link="${parent}"/>
+      <child link="wheel_${name}"/>
+      <axis xyz="0 1 0"/>
+    </joint>
+  </xacro:macro>
+
+  <xacro:wheel
+    name="left_front_wheel"
+    parent="virtual_axis_left"
+    xyz="0.1075 0.095 0" />
+
+  <xacro:wheel
+    name="left_middle_wheel"
+    parent="virtual_axis_left"
+    xyz="-0.1075 0.095 0" />
+  
+  <xacro:wheel
+    name="left_rear_wheel"
+    parent="base_link"
+    xyz="-0.23 0.19 ${(-body_height/2.0)+(bearing_height/2.0)}" />
+  
+  <xacro:wheel
+    name="right_front_wheel"
+    parent="virtual_axis_right"
+    xyz="0.1075 -0.095 0" />
+  
+  <xacro:wheel
+    name="right_middle_wheel"
+    parent="virtual_axis_right"
+    xyz="-0.1075 -0.095 0" />
+  
+  <xacro:wheel
+    name="right_rear_wheel"
+    parent="base_link"
+    xyz="-0.23 -0.19 ${(-body_height/2.0)+(bearing_height/2.0)}" />
+
+  <link name="imu">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.06 0.06 0.02"/>
+      </geometry>
+      <material name="white" >
+        <color rgba="0.8 0.8 0.8 1" />
+      </material>
+    </visual>
+  
+  </link>
+  
+  <joint name="imu_to_base_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="imu" />
+    <origin
+      xyz=" ${imu_offset_x}
+            ${imu_offset_y}
+            ${imu_offset_z}"
+      rpy="0 0 0" />
+  </joint>
+  
+  <!-- inertial measurement unit for gazebo -->
+  <xacro:imu_gazebo link="imu" imu_topic="imu/data" update_rate="100.0" stdev="${imu_stdev}" />
+
+  <joint name="rotunit_to_base_joint" type="fixed">
+    <child link="rotunit_box_link" />
+    <parent link="base_link" />
+    <origin
+      xyz=" ${rotunit_offset_x}
+            ${rotunit_offset_y}
+            ${rotunit_offset_z}"
+      rpy="0 0 ${-M_PI/2}" />
+  </joint>
+
+  <gazebo>
+    <plugin name="volksbot_diffdrive" filename="libgazebo_ros_diffdrive_uos.so">
+      <alwaysOn>true</alwaysOn>
+      <cmd_vel_topic_name>cmd_vel</cmd_vel_topic_name>
+      <odom_topic_name>odom</odom_topic_name>
+      <joint_states_topic_name>joint_states</joint_states_topic_name>
+      <left_front_wheel_joint>left_front_wheel_joint</left_front_wheel_joint>
+      <left_middle_wheel_joint>left_middle_wheel_joint</left_middle_wheel_joint>
+      <left_rear_wheel_joint>left_rear_wheel_joint</left_rear_wheel_joint>
+      <right_front_wheel_joint>right_front_wheel_joint</right_front_wheel_joint>
+      <right_middle_wheel_joint>right_middle_wheel_joint</right_middle_wheel_joint>
+      <right_rear_wheel_joint>right_rear_wheel_joint</right_rear_wheel_joint>
+      <wheel_separation>${axis_length}</wheel_separation>
+      <wheel_diameter>${2*wheel_radius}</wheel_diameter>
+      <turning_adaptation>${turning_adaptation}</turning_adaptation>
+      <torque>4.0</torque>
+      <max_velocity>1.0</max_velocity>
+      <updateRate>40.0</updateRate>
+    </plugin>
+  </gazebo>
+
+  <!-- publish ground truth for pose of base_footprint -->
+  <gazebo>
+    <plugin name="base_footprint_controller" filename="libgazebo_ros_p3d.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>30.0</updateRate>
+      <bodyName>base_footprint</bodyName>
+      <topicName>base_footprint_pose_ground_truth</topicName>
+      <gaussianNoise>0.0</gaussianNoise>
+      <frameName>map</frameName>
+      <interface:position name="base_footprint_p3d_position_iface" />
+    </plugin>
+  </gazebo>
+
+</robot>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="spawn_pluto_model" pkg="gazebo_ros" type="spawn_model"
+    args="$(optenv ROBOT_INITIAL_POSE) -unpause -urdf -param robot_description
+    -model pluto" respawn="false" output="screen"/>
+</launch>
