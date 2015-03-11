@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+	<node pkg="ps3joy" type="ps3joy.py" name="ps3joy" output="screen" launch-prefix="sudo"/>
+
+	<node pkg="joy" type="joy_node" name="joy_node">
+		<param name="autorepeat_rate" value="10"/>
+		<param name="dev" value="/dev/input/js0"/>
+	</node>
+  
+  <node name="laser_ps3_control" pkg="laser_ps3_control" type="laser_ps3_control" output="screen" />
+	<param name="acc" type="double" value="0.01" />
+</launch>

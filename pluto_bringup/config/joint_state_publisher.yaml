@@ -1,0 +1,3 @@
+use_gui: false
+source_list: [rotunit_joints, volksbot_joints]
+zeros: {virtual_left_to_base_joint: 0.18, virtual_right_to_base_joint: 0.18}

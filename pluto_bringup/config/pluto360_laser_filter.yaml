@@ -1,0 +1,14 @@
+scan_filter_chain:
+- name: shadows
+  type: laser_filters/ScanShadowsFilter
+  params:
+    min_angle: 4
+    max_angle: 176
+    neighbors: 3
+    window: 1
+
+- name: footprint_filter
+  type: laser_filters/LaserScanFootprintFilter
+  params:
+    target_frame: base_link
+    inscribed_radius: 0.45

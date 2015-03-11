@@ -6,34 +6,37 @@
   ## Roboter Setup
 	<arg name="use_3d_scanner" value="true" />
   <arg name="use_imu" value="true" />
-
-  	<param name="robot_description" command="$(find xacro)/xacro.py '$(find volksbot_driver)/urdf/example.urdf.xacro'" />
-  	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
-
-  	<node name="volksbot" pkg="volksbot_driver" type="volksbot" respawn="false" output="screen">
-    		<!-- default values: -->
-		<!--
-		<param name="wheel_radius" type="double" value="0.0985" />
-		<param name="axis_length" type="double" value="0.41" />
-		<param name="gear_ratio" type="int" value="74" />
-		<param name="turning_adaptation" type="double" value="0.95" />
-		<param name="x_stddev" type="double" value="0.002" />
-		<param name="rotation_stddev" type="double" value="0.017" />
-		<param name="cov_xy" type="double" value="0.0" />
-		<param name="cov_xrotation" type="double" value="0.0" />
-		<param name="cov_yrotation" type="double" value="0.0" />
-		<param name="publish_tf" type="bool" value="False" />
+  
+  ##Bringup Joint State Publisher and Robot State Publisher
+  <rosparam file="$(find pluto_bringup)/config/joint_state_publisher.yaml" command="load" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" />
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen" />
+  
+  ## Bringup Volksbot
+  <node name="volksbot" pkg="volksbot_driver" type="volksbot" respawn="false" output="screen">
+    <remap from="/joint_states" to="/volksbot_joints" />
+		<param name="wheel_radius" type="double" value="0.103" />
+		<param name="axis_length" type="double" value="0.55" />
+    	<!-- default values: -->
+      <!--
+      <param name="gear_ratio" type="int" value="74" />
+      <param name="turning_adaptation" type="double" value="0.95" />
+      <param name="x_stddev" type="double" value="0.002" />
+      <param name="rotation_stddev" type="double" value="0.017" />
+      <param name="cov_xy" type="double" value="0.0" />
+      <param name="cov_xrotation" type="double" value="0.0" />
+      <param name="cov_yrotation" type="double" value="0.0" />
+      <param name="publish_tf" type="bool" value="False" />
 	   	 -->
  	</node>
 	
 	## Bringup 3D scanner, if enabled
 	<group if="$(arg use_3d_scanner)">
 		## Bringup Rotunit
-		<node pkg="kurt_base" type="kurt_base" name="kurt_base" output="screen">
-			<param name="use_kurt" value="false" />
-			<param name="use_rotunit" value="$(arg use_3d_scanner)" />
+		<node pkg="rotunit" type="rotunit" name="rotunit" output="screen">
 			<param name="rotunit_speed" value="0.6" />
-		</node>
+      <remap from="/joint_states" to="/rotunit_joints" />
+    </node>
 		## Bringup Laser Scanner
 		<include file="$(find kurt_bringup)/launch/sick_lms200.launch">
 			<arg name="device" value="/dev/scanner360"/>
@@ -46,4 +49,40 @@
   <group if="$(arg use_imu)">
     <include file="$(find kurt_bringup)/launch/phidgets_imu.launch" />
   </group>
+  
+  ## Bringup EKF
+  <include file="$(find pluto_bringup)/launch/ekf.launch"/>
+
+  ## Bringup Filterchain
+  <arg name="cloud_frame" default="/base_link"/>
+  <!-- filter laser scan to remove 'shadow points' from scan and convert to point cloud -->
+  <node pkg="laser_filters" type="scan_to_cloud_filter_chain" name="scan360_filter" output="screen">
+    <remap from="scan" to="scan360" />
+    <remap from="cloud_filtered" to="cloud360_filtered" />
+    <param name="target_frame" value="$(arg cloud_frame)" />
+    <param name="high_fidelity" value="true" />
+    <rosparam command="load" file="$(find pluto_bringup)/config/pluto360_laser_filter.yaml"/>
+  </node>
+
+  <!-- self filter the point cloud according to urdf model of the robot -->
+  <node pkg="robot_self_filter" type="self_filter" name="self_filter" output="screen">
+    <remap from="cloud_in" to="cloud360_filtered" />
+    <remap from="cloud_out" to="cloud360_self_filtered" />
+    <param name="sensor_frame" value="laser360" />
+    <rosparam command="load" file="$(find pluto_bringup)/config/pluto360_self_filter.yaml" />
+  </node>
+
+  <!-- assembler for filtered point clouds, provides assemble_scans service -->
+  <node pkg="laser_assembler" type="point_cloud2_assembler" name="laser_scan_assembler" output="screen">
+    <param name="sensor_frame" value="laser360" />
+    <param name="fixed_frame" value="$(arg cloud_frame)" />
+    <remap from="/cloud" to="/cloud360_self_filtered"/>
+    <param name="max_clouds" value="15000" />
+    <param name="ignore_laser_skew" value="false" />
+  </node>
+
+  ## Bringup Snapshotter Action Server
+  <node name="snapshotter360" pkg="rotunit_snapshotter" type="snapshotter360" output="screen"/>
+
+
 </launch>
