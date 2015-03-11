@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+  <node name="rotunit" pkg="rotunit" type="rotunit" output="screen" />
+		<param name="rotunit_speed" type="double" value="0.6" />
+</launch>
