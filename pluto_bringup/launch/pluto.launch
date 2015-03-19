@@ -17,9 +17,9 @@
     <remap from="/joint_states" to="/volksbot_joints" />
 		<param name="wheel_radius" type="double" value="0.103" />
 		<param name="axis_length" type="double" value="0.55" />
+    <param name="gear_ratio" type="int" value="156" />
     	<!-- default values: -->
       <!--
-      <param name="gear_ratio" type="int" value="74" />
       <param name="turning_adaptation" type="double" value="0.95" />
       <param name="x_stddev" type="double" value="0.002" />
       <param name="rotation_stddev" type="double" value="0.017" />

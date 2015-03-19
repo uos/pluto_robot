@@ -10,5 +10,5 @@ scan_filter_chain:
 - name: footprint_filter
   type: laser_filters/LaserScanFootprintFilter
   params:
-    target_frame: base_link
+    target_frame: odom_combined
     inscribed_radius: 0.45
