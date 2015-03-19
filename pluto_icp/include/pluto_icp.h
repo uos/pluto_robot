@@ -2,6 +2,7 @@
 #include <sensor_msgs/PointCloud2.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <tf/transform_datatypes.h>
+#include <tf/transform_listener.h>
 
 #include <pcl/registration/registration.h>
 #include <pcl/registration/icp.h>
@@ -23,6 +24,7 @@ class PlutoICP{
     ros::ServiceServer service;
     pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ, float> icp;
     ros::NodeHandle nh_;
+    tf::TransformListener tf_listener;
 
     bool registerCloudsSrv( pluto_icp::IcpSrv::Request &req,
                             pluto_icp::IcpSrv::Response &res);
@@ -46,8 +48,13 @@ class PlutoICP{
     bool registerClouds(
       pcl::PointCloud<pcl::PointXYZ>::Ptr &target, 
       pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud,
-      pcl::Registration<pcl::PointXYZ, pcl::PointXYZ, float>::Matrix4 &guess_transform,
+      Eigen::Matrix4f &guess_transform,
       pcl::PointCloud<pcl::PointXYZ> &result,
-      pcl::Registration<pcl::PointXYZ, pcl::PointXYZ, float>::Matrix4 &final_transform);
+      Eigen::Matrix4f &final_transform);
+
+    bool getPointCloudPose(
+      const sensor_msgs::PointCloud2 &cloud,
+      const std::string &fixed_frame,
+      geometry_msgs::PoseStamped &pose);
 
 };
