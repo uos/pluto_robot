@@ -4,28 +4,45 @@ PlutoICP::PlutoICP(ros::NodeHandle &nh)
  :  nh_(nh),
     tf_listener(ros::Duration(60.0))
 {
-  service = nh_.advertiseService("pluto_icp", &PlutoICP::registerCloudsSrv, this);    
+  tf::Transform null_transform;
+  map_to_odom.push(tf::StampedTransform(null_transform, ros::Time::now(), "map", "odom_combined"));
+  service = nh_.advertiseService("pluto_icp", &PlutoICP::registerCloudsSrv, this); 
 }
 
 
 bool PlutoICP::registerCloudsSrv( pluto_icp::IcpSrv::Request &req,
-                                  pluto_icp::IcpSrv::Response &res){                                  
-  return registerClouds(req.target, req.target_pose, req.cloud, req.target_pose, res.result, res.result_pose);
+                                  pluto_icp::IcpSrv::Response &res){
+
+  return registerClouds(req.target,
+                        req.target_pose,
+                        req.cloud,
+                        req.cloud_pose,
+                        res.result_pose,
+                        res.delta_transform);
 }
 
 bool PlutoICP::registerClouds(
-  const sensor_msgs::PointCloud2 target,
-  const geometry_msgs::PoseStamped target_pose,
-  const sensor_msgs::PointCloud2 cloud,
-  const geometry_msgs::PoseStamped cloud_pose,
-  sensor_msgs::PointCloud2 &result,
-  geometry_msgs::PoseStamped &result_pose
-  )
+  const sensor_msgs::PointCloud2 &target,
+  const geometry_msgs::PoseStamped &target_pose,
+  const sensor_msgs::PointCloud2 &cloud,
+  const geometry_msgs::PoseStamped &cloud_pose,
+  geometry_msgs::PoseStamped &result_pose,
+  geometry_msgs::Transform &delta_transform)
 {
 
   // calculate transformation between target_pose and cloud_pose
+  
+  tf::Stamped<tf::Pose> target_pose_tf;
+  tf::Stamped<tf::Pose> cloud_pose_tf;
+
+  tf::poseStampedMsgToTF(target_pose, target_pose_tf);
+  tf::poseStampedMsgToTF(cloud_pose, cloud_pose_tf);
+
+  tf::Transform guess_transform_tf = target_pose_tf.inverseTimes(cloud_pose_tf);
   Eigen::Matrix4f guess_transform;
-  poseToEigen(target_pose.pose, cloud_pose.pose, guess_transform);
+  tfToEigen(guess_transform_tf, guess_transform);
+
+  // poseToEigen(target_pose.pose, cloud_pose.pose, guess_transform);
   std::cout << guess_transform << std::endl;
 
   // convert point clouds ro pcl
@@ -43,18 +60,23 @@ bool PlutoICP::registerClouds(
 
   // do icp
   Eigen::Matrix4f final_transform;
-  pcl::PointCloud<pcl::PointXYZ> result_xyz;
-  
-  if(!registerClouds(target_xyz_ptr, cloud_xyz_ptr, guess_transform, result_xyz, final_transform)){
+  if(!registerClouds(target_xyz_ptr, cloud_xyz_ptr, guess_transform, final_transform)){
     return false;
   }
-  pcl::PCLPointCloud2 pcl_result;
-  pcl::toPCLPointCloud2(result_xyz, pcl_result);
-  pcl_conversions::fromPCL(pcl_result, result);
+
+  tf::Transform final_transform_tf;
+  eigenToTf(final_transform, final_transform_tf);
+
+  // combine the target_pose and the icp transformation 
+  // between the clouds to get the global pose
+  tf::Transform result_pose_tf = target_pose_tf * final_transform_tf;
+  tf::Stamped<tf::Pose> result_pose_stamped_tf(result_pose_tf, ros::Time::now(), cloud_pose.header.frame_id);
+  // convert to pose msg
+  tf::poseStampedTFToMsg(result_pose_stamped_tf, result_pose);
   
-  // convert transformation to pose
-  geometry_msgs::PoseStamped pose;
-  eigenToPose(final_transform, target_pose.pose, pose.pose);
+  tf::Transform delta_transform_tf = guess_transform_tf.inverseTimes(final_transform_tf);
+  tf::transformTFToMsg(delta_transform_tf, delta_transform);
+
   return true;
 }
 
@@ -100,58 +122,39 @@ bool PlutoICP::getPointCloudPose( const sensor_msgs::PointCloud2 &cloud,
 
   return true;
 }
-void PlutoICP::eigenToPose(
-    Eigen::Matrix4f &transformation,
-    const geometry_msgs::Pose target_pose,
-    geometry_msgs::Pose &pose){
+void PlutoICP::eigenToTf(
+    const Eigen::Matrix4f &transform_eigen,
+    tf::Transform &transform_tf){
   
   //create an affine transformation as helper object
-  Eigen::Affine3f affine(transformation);
+  Eigen::Affine3f affine(transform_eigen);
   Eigen::Quaternionf q = (Eigen::Quaternionf)affine.linear();
   
   //create tf transform object
-  tf::Vector3 position;
-  position.setX(affine.translation()[0]);
-  position.setY(affine.translation()[1]);
-  position.setZ(affine.translation()[2]);
-  tf::Quaternion orientation;
+  tf::Vector3 origin;
+  origin.setX(affine.translation()[0]);
+  origin.setY(affine.translation()[1]);
+  origin.setZ(affine.translation()[2]);
+  tf::Quaternion rotation;
   if(q.w() > 0){
-    orientation.setX(q.x());
-    orientation.setY(q.y());
-    orientation.setZ(q.z());
-    orientation.setW(q.w());
+    rotation.setX(q.x());
+    rotation.setY(q.y());
+    rotation.setZ(q.z());
+    rotation.setW(q.w());
   }else{
-    orientation.setX(-q.x());
-    orientation.setY(-q.y());
-    orientation.setZ(-q.z());
-    orientation.setW(-q.w()); 
+    rotation.setX(-q.x());
+    rotation.setY(-q.y());
+    rotation.setZ(-q.z());
+    rotation.setW(-q.w()); 
   }
-  tf::Transform pose_tf(orientation, position);
-
-  // convert target pose to tf
-  tf::Pose target_pose_tf;
-  tf::poseMsgToTF(target_pose, target_pose_tf);
-
-  // combine the target_pose and the icp transformation 
-  // between the clouds to get the global pose
-  tf::Transform result_pose = target_pose_tf * pose_tf;
-  // convert to pose msg
-  tf::poseTFToMsg(result_pose, pose);
+  transform_tf.setOrigin(origin);
+  transform_tf.setRotation(rotation);
 }
 
-void PlutoICP::poseToEigen(
-  const geometry_msgs::Pose target_pose,
-  const geometry_msgs::Pose cloud_pose,
-  Eigen::Matrix4f &transformation)
+void PlutoICP::tfToEigen(
+  const tf::Transform &transform_tf,
+  Eigen::Matrix4f &transform_eigen)
 {
-  tf::Pose target_pose_tf;
-  tf::Pose cloud_pose_tf;
-
-  tf::poseMsgToTF(target_pose, target_pose_tf);
-  tf::poseMsgToTF(cloud_pose, cloud_pose_tf);
-
-  tf::Transform transform_tf = target_pose_tf.inverseTimes(cloud_pose_tf);
-
   tf::Vector3 translation = transform_tf.getOrigin();
   tf::Quaternion rotation = transform_tf.getRotation();
 
@@ -163,18 +166,57 @@ void PlutoICP::poseToEigen(
                         rotation.getX(),
                         rotation.getY(),
                         rotation.getZ()); 
-  transformation = affine.matrix();
+  transform_eigen = affine.matrix(); // TODO check 
 }
+
+
+
+void PlutoICP::icpUpdateMapToOdomCombined(sensor_msgs::PointCloud2 &cloud){
+  if(!clouds.empty()){
+
+    geometry_msgs::PoseStamped target_pose;
+    getPointCloudPose(clouds.top(), "map", target_pose);
+
+    geometry_msgs::PoseStamped cloud_pose;
+    getPointCloudPose(cloud, "map", cloud_pose);
+
+    geometry_msgs::PoseStamped result_pose;
+    geometry_msgs::Transform delta_transform;
+
+    registerClouds(clouds.top(),
+                   target_pose,
+                   cloud,
+                   cloud_pose,
+                   result_pose,
+                   delta_transform);
+
+    tf::Transform delta_transform_tf;
+    tf::transformMsgToTF(delta_transform, delta_transform_tf);
+    tf::Transform update_transform_tf = map_to_odom.top() * delta_transform_tf;
+    tf::StampedTransform(update_transform_tf, cloud.header.stamp, "map", "odom_combined");
+  }
+  clouds.push(cloud);
+}
+
+void PlutoICP::sendMapToOdomCombined(){
+  tf_broadcaster.sendTransform(tf::StampedTransform(map_to_odom.top(), ros::Time::now(), "map", "odom_combined"));
+  if (last_sent.stamp_ != map_to_odom.top().stamp_){
+    ROS_INFO("updated transform for map to odom_combined.");
+  }
+  last_sent = map_to_odom.top();
+}
+
 
 bool PlutoICP::registerClouds(
     pcl::PointCloud<pcl::PointXYZ>::Ptr &target,
     pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud,
     Eigen::Matrix4f &guess_transform,
-    pcl::PointCloud<pcl::PointXYZ> &result,
     Eigen::Matrix4f &final_transform){
 
   icp.setInputSource(cloud);
   icp.setInputTarget(target);
+  
+  pcl::PointCloud<pcl::PointXYZ> result;
   icp.align(result, guess_transform);
 
   std::cout << "has converged:" << icp.hasConverged() << " score: " <<
@@ -192,7 +234,9 @@ int main(int args, char** argv){
 
   PlutoICP pluto_icp(nh);
 
-  while(ros::ok()){
-    ros::spinOnce();
+  ros::Rate rate(10.0);
+  while(nh.ok()){
+    pluto_icp.sendMapToOdomCombined();
+    rate.sleep();
   }
 }

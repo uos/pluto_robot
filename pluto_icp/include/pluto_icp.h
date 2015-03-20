@@ -1,8 +1,10 @@
 #include <ros/ros.h>
+
 #include <sensor_msgs/PointCloud2.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <tf/transform_datatypes.h>
 #include <tf/transform_listener.h>
+#include <tf/transform_broadcaster.h>
 
 #include <pcl/registration/registration.h>
 #include <pcl/registration/icp.h>
@@ -15,41 +17,50 @@
 
 #include <pluto_icp/IcpSrv.h>
 
+#include <stack>
+
 class PlutoICP{
 
   public:
     PlutoICP(ros::NodeHandle &nh);
     
+    void sendMapToOdomCombined();
   private:
     ros::ServiceServer service;
     pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ, float> icp;
     ros::NodeHandle nh_;
     tf::TransformListener tf_listener;
 
+    tf::TransformBroadcaster tf_broadcaster;
+
+    void icpUpdateMapToOdomCombined(sensor_msgs::PointCloud2 &cloud);
+
+    std::stack<tf::StampedTransform>map_to_odom;
+    tf::StampedTransform last_sent;
+
+    std::stack<sensor_msgs::PointCloud2> clouds;
+    
     bool registerCloudsSrv( pluto_icp::IcpSrv::Request &req,
                             pluto_icp::IcpSrv::Response &res);
   
     bool registerClouds(
-      const sensor_msgs::PointCloud2 target,
-      const geometry_msgs::PoseStamped target_pose,
-      const sensor_msgs::PointCloud2 cloud,
-      const geometry_msgs::PoseStamped cloud_pose,
-      sensor_msgs::PointCloud2 &result,
-      geometry_msgs::PoseStamped &result_pose);
+      const sensor_msgs::PointCloud2 &target,
+      const geometry_msgs::PoseStamped &target_pose,
+      const sensor_msgs::PointCloud2 &cloud,
+      const geometry_msgs::PoseStamped &cloud_pose,
+      geometry_msgs::PoseStamped &result_pose,
+      geometry_msgs::Transform &delta_transform);
 
-    void poseToEigen(const geometry_msgs::Pose target_pose,
-                     const geometry_msgs::Pose cloud_pose,
-                     Eigen::Matrix4f &transformation);
+    void tfToEigen( const tf::Transform &transform_tf,
+                    Eigen::Matrix4f &transform_eigen);
     
-    void eigenToPose(Eigen::Matrix4f &transformation,
-                     const geometry_msgs::Pose target_pose,
-                     geometry_msgs::Pose &pose);
+    void eigenToTf( const Eigen::Matrix4f &transform_eigen,
+                    tf::Transform &transform_tf);
 
     bool registerClouds(
       pcl::PointCloud<pcl::PointXYZ>::Ptr &target, 
       pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud,
       Eigen::Matrix4f &guess_transform,
-      pcl::PointCloud<pcl::PointXYZ> &result,
       Eigen::Matrix4f &final_transform);
 
     bool getPointCloudPose(
