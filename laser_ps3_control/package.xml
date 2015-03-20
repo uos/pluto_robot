@@ -11,11 +11,13 @@
   <build_depend>geometry_msgs</build_depend>
   <build_depend>actionlib_msgs</build_depend>
   <build_depend>actionlib</build_depend>
+  <build_depend>rotunit_snapshotter</build_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>sensor_msgs</run_depend>
   <run_depend>geometry_msgs</run_depend>
   <run_depend>actionlib_msgs</run_depend>
   <run_depend>actionlib</run_depend>
+  <run_depend>rotunit_snapshotter</run_depend>
   
   <buildtool_depend>catkin</buildtool_depend>
 
