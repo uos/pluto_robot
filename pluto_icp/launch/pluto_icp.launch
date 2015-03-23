@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <node name="pluto_icp" pkg="pluto_icp" type="pluto_icp" output="screen">
+    <remap from="clouds_in" to="angle_snapshot" />
+ 	</node>
+</launch>

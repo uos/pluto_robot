@@ -27,13 +27,15 @@ class PlutoICP{
     void sendMapToOdomCombined();
   private:
     ros::ServiceServer service;
+    ros::Subscriber cloud_sub;
+
     pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ, float> icp;
     ros::NodeHandle nh_;
     tf::TransformListener tf_listener;
 
     tf::TransformBroadcaster tf_broadcaster;
 
-    void icpUpdateMapToOdomCombined(sensor_msgs::PointCloud2 &cloud);
+    void icpUpdateMapToOdomCombined(const sensor_msgs::PointCloud2::ConstPtr &cloud);
 
     std::stack<tf::StampedTransform>map_to_odom;
     tf::StampedTransform last_sent;

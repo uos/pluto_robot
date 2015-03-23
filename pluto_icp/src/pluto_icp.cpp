@@ -5,8 +5,10 @@ PlutoICP::PlutoICP(ros::NodeHandle &nh)
     tf_listener(ros::Duration(60.0))
 {
   tf::Transform null_transform;
+  null_transform.setIdentity();
   map_to_odom.push(tf::StampedTransform(null_transform, ros::Time::now(), "map", "odom_combined"));
-  service = nh_.advertiseService("pluto_icp", &PlutoICP::registerCloudsSrv, this); 
+  service = nh_.advertiseService("pluto_icp", &PlutoICP::registerCloudsSrv, this);
+  cloud_sub = nh_.subscribe("cloud", 1, &PlutoICP::icpUpdateMapToOdomCombined, this);
 }
 
 
@@ -108,17 +110,6 @@ bool PlutoICP::getPointCloudPose( const sensor_msgs::PointCloud2 &cloud,
   tf::Stamped<tf::Transform> transform_pose(transform, transform.stamp_, transform.frame_id_);
   tf::poseStampedTFToMsg(transform_pose, pose);
 
-  ROS_INFO("Looked Up Transform from %s to  %s is \n %s - (%f %f %f) (%f %f %f %f)",
-      fixed_frame.c_str(),
-      cloud.header.frame_id.c_str(),
-      pose.header.frame_id.c_str(),
-      pose.pose.position.x,
-      pose.pose.position.y,
-      pose.pose.position.z,
-      pose.pose.orientation.x,
-      pose.pose.orientation.y,
-      pose.pose.orientation.z,
-      pose.pose.orientation.w);
 
   return true;
 }
@@ -171,21 +162,21 @@ void PlutoICP::tfToEigen(
 
 
 
-void PlutoICP::icpUpdateMapToOdomCombined(sensor_msgs::PointCloud2 &cloud){
+void PlutoICP::icpUpdateMapToOdomCombined(const sensor_msgs::PointCloud2::ConstPtr &cloud){
   if(!clouds.empty()){
 
     geometry_msgs::PoseStamped target_pose;
     getPointCloudPose(clouds.top(), "map", target_pose);
 
     geometry_msgs::PoseStamped cloud_pose;
-    getPointCloudPose(cloud, "map", cloud_pose);
+    getPointCloudPose(*cloud, "map", cloud_pose);
 
     geometry_msgs::PoseStamped result_pose;
     geometry_msgs::Transform delta_transform;
 
     registerClouds(clouds.top(),
                    target_pose,
-                   cloud,
+                   *cloud,
                    cloud_pose,
                    result_pose,
                    delta_transform);
@@ -193,15 +184,27 @@ void PlutoICP::icpUpdateMapToOdomCombined(sensor_msgs::PointCloud2 &cloud){
     tf::Transform delta_transform_tf;
     tf::transformMsgToTF(delta_transform, delta_transform_tf);
     tf::Transform update_transform_tf = map_to_odom.top() * delta_transform_tf;
-    tf::StampedTransform(update_transform_tf, cloud.header.stamp, "map", "odom_combined");
+    tf::StampedTransform(update_transform_tf, cloud->header.stamp, "map", "odom_combined");
   }
-  clouds.push(cloud);
+  clouds.push(*cloud);
 }
 
 void PlutoICP::sendMapToOdomCombined(){
   tf_broadcaster.sendTransform(tf::StampedTransform(map_to_odom.top(), ros::Time::now(), "map", "odom_combined"));
   if (last_sent.stamp_ != map_to_odom.top().stamp_){
-    ROS_INFO("updated transform for map to odom_combined.");
+    tf::Transform transform = map_to_odom.top();
+    tf::Vector3 origin = transform.getOrigin();
+    tf::Matrix3x3 basis = transform.getBasis();
+    tfScalar roll, pitch, yaw;
+    basis.getRPY(roll, pitch, yaw);
+
+    ROS_INFO("Updated Transform from map to odom: The new transformation is \n (x:%f y:%f z:%f) (roll:%f pitch:%f yaw:%f)",
+      origin.getX(),
+      origin.getY(),
+      origin.getY(),
+      roll,
+      pitch,
+      yaw);
   }
   last_sent = map_to_odom.top();
 }
