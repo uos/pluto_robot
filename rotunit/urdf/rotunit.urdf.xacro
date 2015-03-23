@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<robot xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+  xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+  xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+  xmlns:xacro="http://ros.org/wiki/xacro"
+  name="rotunit">
+
+  <xacro:include filename="$(find uos_common_urdf)/common.xacro" />
+
+  <xacro:include filename="$(find uos_common_urdf)/urdf/sick_lms200.urdf.xacro" />
+  <xacro:sick_lms200 laser_link="laser360" gazebo_topic="scan360" />
+
+  <xacro:property name="rotunit_box_x" value="0.18" />
+  <xacro:property name="rotunit_box_y" value="0.18" />
+  <xacro:property name="rotunit_box_z" value="0.116" />
+  <xacro:property name="rotunit_box_mass" value="1.5" />
+
+  <xacro:property name="rotunit_harting_x" value="0.09" />
+  <xacro:property name="rotunit_harting_y" value="0.09" />
+  <xacro:property name="rotunit_harting_z" value="0.06" />
+  <xacro:property name="rotunit_harting_mass" value="0.2" />
+
+  <xacro:property name="rotunit_turntable_radius" value="0.09" />
+  <xacro:property name="rotunit_turntable_length" value="0.015" />
+  <xacro:property name="rotunit_turntable_mass" value="0.1" />
+
+  <xacro:property name="rotunit_support_radius" value="0.021" />
+  <xacro:property name="rotunit_support_length" value="0.028" />
+  <xacro:property name="rotunit_support_mass" value="0.1" />
+
+  <xacro:property name="rotunit_connector_radius" value="0.02" />
+  <xacro:property name="rotunit_connector_length" value="0.045" />
+  <xacro:property name="rotunit_connector_mass" value="0.001" />
+
+  <xacro:property name="rotunit_mount_x" value="0.05" />
+  <xacro:property name="rotunit_mount_y" value="0.01" />
+  <xacro:property name="rotunit_mount_z" value="0.20" />
+  <xacro:property name="rotunit_mount_y_offset" value="-0.08" />
+  <xacro:property name="rotunit_mount_mass" value="0.1" />
+
+  <xacro:property name="rotunit_laser_x_offset" value="0.065" />
+  <xacro:property name="rotunit_laser_y_offset" value="-0.015" />
+  <xacro:property name="rotunit_laser_z_offset" value="0.116" />
+
+  <link name="rotunit_box_link">
+    <visual>
+      <geometry>
+        <box size="${rotunit_box_x} ${rotunit_box_y} ${rotunit_box_z}" />
+      </geometry>
+      <material name="silver" >
+        <color rgba="0.5 0.5 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${rotunit_box_x} ${rotunit_box_y} ${rotunit_box_z}" />
+      </geometry>
+    </collision>
+    <xacro:box_inertial x="${rotunit_box_x}" y="${rotunit_box_y}" z="${rotunit_box_z}" mass="${rotunit_box_mass}" />
+  </link>
+
+  <link name="rotunit_turntable_link">
+    <visual>
+      <geometry>
+        <cylinder radius="${rotunit_turntable_radius}" length="${rotunit_turntable_length}" />
+      </geometry>
+      <material name="silver" />
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${rotunit_turntable_radius}" length="${rotunit_turntable_length}" />
+      </geometry>
+    </collision>
+    <xacro:cylinder_inertial radius="${rotunit_turntable_radius}" length="${rotunit_turntable_length}" mass="${rotunit_turntable_mass}" />
+  </link>
+
+  <joint name="laser_rot_joint" type="continuous">
+    <parent link="rotunit_box_link" />
+    <child link="rotunit_turntable_link" />
+    <origin xyz="0 0 ${rotunit_box_z/2 + rotunit_turntable_length/2}" rpy="${M_PI} 0 ${M_PI/2}" />
+    <axis xyz="0 0 1" />
+  </joint>
+ 
+  <link name="rotunit_support_link">
+    <visual>
+      <geometry>
+        <cylinder radius="${rotunit_support_radius}" length="${rotunit_support_length}" />
+      </geometry>
+      <material name="silver" />
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${rotunit_support_radius}" length="${rotunit_support_length}" />
+      </geometry>
+    </collision>
+    <xacro:cylinder_inertial radius="${rotunit_support_radius}" length="${rotunit_support_length}" mass="${rotunit_support_mass}" />
+  </link>
+
+  <joint name="rotunit_support_joint" type="fixed">
+    <parent link="rotunit_turntable_link" />
+    <child link="rotunit_support_link" />
+    <origin xyz="0 0 ${-rotunit_turntable_length/2 - rotunit_support_length/2}" rpy="${M_PI} 0 0" />
+  </joint>
+
+  <link name="rotunit_mount_link">
+    <visual>
+      <geometry>
+        <box size="${rotunit_mount_x} ${rotunit_mount_y} ${rotunit_mount_z}" />
+      </geometry>
+      <material name="silver" />
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${rotunit_mount_x} ${rotunit_mount_y} ${rotunit_mount_z}" />
+      </geometry>
+    </collision>
+    <xacro:box_inertial x="${rotunit_mount_x}" y="${rotunit_mount_y}" z="${rotunit_mount_z}" mass="${rotunit_mount_mass}" />
+  </link> 
+
+  <joint name="rotunit_mount_joint" type="fixed">
+    <parent link="rotunit_turntable_link" />
+    <child link="rotunit_mount_link" />
+    <origin xyz="0 ${-rotunit_mount_y_offset} ${-rotunit_turntable_length/2 - rotunit_mount_z/2}" rpy="${M_PI} 0 0" />
+  </joint>
+
+  <joint name="rotunit_laser_joint" type="fixed">
+    <parent link="rotunit_turntable_link" />
+    <child link="laser360" />
+    <origin xyz="${rotunit_laser_x_offset} ${-rotunit_laser_y_offset} ${-rotunit_laser_z_offset}" rpy="${M_PI/2} 0 0"/>
+  </joint>
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100</updateRate>
+    </plugin>
+  </gazebo>
+
+  <transmission name="laser_rot_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="laser_rot_joint" />
+    <actuator name="laser_rot_motor" >
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+  </transmission>
+</robot>
