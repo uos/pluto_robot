@@ -2,7 +2,8 @@
 <launch>
   ## Upload Pluto to parameter server
   <include file="$(find pluto_description)/launch/upload_pluto.launch"/>
-  
+
+
   ## Roboter Setup
 	<arg name="use_3d_scanner" value="true" />
   <arg name="use_imu" value="true" />
@@ -44,6 +45,9 @@
 			<arg name="frame" value="laser360"/>
 		</include>
 	</group>
+  
+  ## Bringup Pizza Clouds Publishing
+  <include file="$(find pluto_bringup)/launch/pizza_clouds.launch"/>
 
   ## Bringup IMU
   <group if="$(arg use_imu)">
