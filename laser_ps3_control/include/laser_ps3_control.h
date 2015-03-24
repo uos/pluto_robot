@@ -34,6 +34,7 @@
 #include <actionlib/client/simple_action_client.h>
 #include <actionlib/client/terminal_state.h>
 #include <rotunit_snapshotter/Scan360Action.h>
+#include <rotunit/RotVelSrv.h>
 
 #define PS3_BUTTON_SELECT            0
 #define PS3_BUTTON_STICK_LEFT        1
@@ -86,7 +87,8 @@ class LaserPS3Control{
     ros::NodeHandle nh_;
     ros::Subscriber joy_sub_;
     ros::Publisher vel_pub_;
-    
+    ros::ServiceClient rot_vel_client_;
+
     double acc_;
     double vel_;
     double scan_vel_;
