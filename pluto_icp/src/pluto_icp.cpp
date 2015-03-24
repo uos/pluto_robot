@@ -218,6 +218,8 @@ bool PlutoICP::registerClouds(
     pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud,
     Eigen::Matrix4f &guess_transform,
     Eigen::Matrix4f &final_transform){
+  
+  pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ, float> icp;
 
   icp.setInputSource(cloud);
   icp.setInputTarget(target);

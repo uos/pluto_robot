@@ -29,7 +29,6 @@ class PlutoICP{
     ros::ServiceServer service;
     ros::Subscriber cloud_sub;
 
-    pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ, float> icp;
     ros::NodeHandle nh_;
     tf::TransformListener tf_listener;
 
