@@ -14,7 +14,7 @@ LaserPS3Control::LaserPS3Control(ros::NodeHandle &nh)
   nh_.param("acc", acc_, 0.01);           // max velocity
   vel_pub_ = nh_.advertise<geometry_msgs::Twist>("rot_vel", 1);
   joy_sub_ = nh_.subscribe<sensor_msgs::Joy>("joy", 15,  &LaserPS3Control::PS3Callback, this);
-
+  rot_vel_client_ = nh_.serviceClient<rotunit::RotVelSrv>("rotunit_velocity");
 }
 
 LaserPS3Control::~LaserPS3Control(){
@@ -22,16 +22,19 @@ LaserPS3Control::~LaserPS3Control(){
 }
 
 void LaserPS3Control::PS3Callback(const sensor_msgs::Joy::ConstPtr &joy){
-  geometry_msgs::Twist msg;
+  rotunit::RotVelSrv rotvel;
   if(joy->buttons[PS3_BUTTON_REAR_RIGHT_2])
     vel_ += acc_;
   if(joy->buttons[PS3_BUTTON_REAR_RIGHT_1])
     vel_ -= acc_;
   
-  if(vel_ > 1.5) vel_ = 1.5;
+  if(vel_ > 1.3) vel_ = 1.3;
+  if(vel_ < -1.3) vel_ = -1.3;
 
-  msg.angular.z = vel_;
-  vel_pub_.publish(msg);
+  rotvel.request.twist.angular.z = vel_;
+  rot_vel_client_.call(rotvel);
+
+  //vel_pub_.publish(msg);
   
   if(joy->buttons[PS3_BUTTON_ACTION_CIRCLE]){
     int ret;
@@ -42,9 +45,9 @@ void LaserPS3Control::PS3Callback(const sensor_msgs::Joy::ConstPtr &joy){
 
   rotunit_snapshotter::Scan360Goal goal;
   if(joy->buttons[PS3_BUTTON_ACTION_TRIANGLE]){
-    msg.angular.z = scan_vel_;
-    vel_pub_.publish(msg);
-    ros::Duration(5.0).sleep();
+    rotvel.request.twist.angular.z = scan_vel_;
+    rot_vel_client_.call(rotvel);
+    ros::Duration(3.0).sleep();
     ROS_INFO("start scanning.");
     goal.number_rounds = 1;
     // send a goal to the action
@@ -61,9 +64,8 @@ void LaserPS3Control::PS3Callback(const sensor_msgs::Joy::ConstPtr &joy){
     else
       ROS_INFO("Action did not finish before the time out.");
  
-    msg.angular.z = 0;
-    vel_pub_.publish(msg);
-
+    rotvel.request.twist.angular.z = vel_;
+    rot_vel_client_.call(rotvel);
   }
 }
 

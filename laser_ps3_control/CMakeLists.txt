@@ -2,11 +2,26 @@ cmake_minimum_required(VERSION 2.4.6)
 
 project(laser_ps3_control)
 
-find_package(catkin REQUIRED COMPONENTS roscpp sensor_msgs geometry_msgs actionlib actionlib_msgs rotunit_snapshotter)
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  sensor_msgs
+  geometry_msgs
+  actionlib
+  actionlib_msgs
+  rotunit_snapshotter
+  rotunit
+)
+
 include_directories(include ${catkin_INCLUDE_DIRS})
 
-catkin_package(
-  CATKIN_DEPENDS roscpp sensor_msgs geometry_msgs actionlib actionlib_msgs rotunit_snapshotter
+catkin_package(CATKIN_DEPENDS
+  roscpp
+  sensor_msgs
+  geometry_msgs
+  actionlib
+  actionlib_msgs
+  rotunit_snapshotter
+  rotunit
 )
 
 add_executable(laser_ps3_control src/laser_ps3_control.cpp)
