@@ -3,9 +3,10 @@
 Rotunit::Rotunit(ros::NodeHandle &nh)
   : nh_(nh)
 {
-  pub_ = nh_.advertise<sensor_msgs::JointState> ("joint_states", 1);
+  rot_pub_ = nh_.advertise<sensor_msgs::JointState> ("rotunit_joint_states", 1);
+  vel_pub_ = nh_.advertise<geometry_msgs::TwistStamped> ("rotunit_velocity", 1);
   sub_ = nh_.subscribe("rot_vel", 10, &Rotunit::rotunitCallback, this);
-
+  rot_vel_srv_ = nh_.advertiseService("rot_vel", &Rotunit::rotunitRotVelSrv, this);
   double rotunit_speed;
   nh_.param("rotunit_speed", rotunit_speed, M_PI/6.0);
   can_rotunit_send(rotunit_speed);
@@ -44,6 +45,14 @@ double Rotunit::normalize2PI (double angle)
   return angle;
 }
 
+
+bool Rotunit::rotunitRotVelSrv(
+  rotunit::RotVelSrv::Request &req,
+  rotunit::RotVelSrv::Response &res){
+  can_rotunit_send(req.twist.angular.z);  
+  return true;
+}
+
 void Rotunit::rotunitCallback(const geometry_msgs::Twist::ConstPtr& msg)
 {
   can_rotunit_send(msg->angular.z);
@@ -55,15 +64,29 @@ void Rotunit::can_rotunit(const can_frame &frame)
   double rot2 = rot * 2 * M_PI / 10240;
   rot2 = rot2 - 6 * M_PI / 180.0; // 6 degree angle correction
   rot2 = normalize2PI(rot2);      // normalize to element of [0 2PI]
+  
+  ros::Time now = ros::Time::now();
 
   sensor_msgs::JointState joint_state;
-  joint_state.header.stamp = ros::Time::now();
+  joint_state.header.stamp = now;
   joint_state.name.resize(1);
   joint_state.position.resize(1);
   joint_state.name[0] = "laser_rot_joint";
   joint_state.position[0] = rot2;
   
-  pub_.publish(joint_state);
+  rot_pub_.publish(joint_state);
+
+  geometry_msgs::TwistStamped twist;
+  if(previous_state.header.stamp.toSec() == 0){
+    twist.twist.angular.z = 0;
+  }
+  else{
+    twist.twist.angular.z = (joint_state.position[0] - previous_state.position[0])
+      / (joint_state.header.stamp - previous_state.header.stamp).toSec();   
+  }
+  twist.header.stamp = now;
+  vel_pub_.publish(twist);
+  previous_state = joint_state;
 }
 
 int Rotunit::can_read_fifo()
