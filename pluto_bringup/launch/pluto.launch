@@ -15,7 +15,7 @@
   
   ## Bringup Volksbot
   <node name="volksbot" pkg="volksbot_driver" type="volksbot" respawn="false" output="screen">
-    <remap from="/joint_states" to="/volksbot_joints" />
+    <remap from="joint_states" to="volksbot_joint_states" />
 		<param name="wheel_radius" type="double" value="0.103" />
 		<param name="axis_length" type="double" value="0.55" />
     <param name="gear_ratio" type="int" value="156" />
@@ -36,7 +36,6 @@
 		## Bringup Rotunit
 		<node pkg="rotunit" type="rotunit" name="rotunit" output="screen">
 			<param name="rotunit_speed" value="0.6" />
-      <remap from="/joint_states" to="/rotunit_joints" />
     </node>
 		## Bringup Laser Scanner
 		<include file="$(find kurt_bringup)/launch/sick_lms200.launch">
