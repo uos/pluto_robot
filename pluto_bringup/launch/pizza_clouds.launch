@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
 <launch>
-  <param name="M_PI" value="3.14159265358979323846"/>
-  ## Bringup Angle Snapshotter for pizza snapshots
-  <node pkg="rotunit_snapshotter" type="snapshotter360" name="angle_snapshotter" output="screen">
-    <remap from="assembled_cloud" to="angle_snapshot"/>
+  ## Bringup Pizza Snapshotter
+  <node pkg="uos_rotunit_snapshotter" type="uos_rotunit_snapshotter" name="pizza_snapshotter" output="screen">
+    <remap from="assembled_cloud" to="pizza_snapshot"/>
+    <remap from="rotunit_snapshotter" to="pizza_snapshotter"/>
     <param name="continuous" value="true"/>
-    <param name="rotation_angle" value="${M_PI/4}" />
+    <!-- 45 Grad pizza pieces -> PI/4 = 0.785398... -->
+    <param name="rotation_angle" value="0.785398" />
   </node>
 </launch>

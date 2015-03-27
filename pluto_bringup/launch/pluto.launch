@@ -34,7 +34,7 @@
 	## Bringup 3D scanner, if enabled
 	<group if="$(arg use_3d_scanner)">
 		## Bringup Rotunit
-		<node pkg="rotunit" type="rotunit" name="rotunit" output="screen">
+		<node pkg="uos_rotunit_driver" type="uos_rotunit_driver" name="uos_rotunit_driver" output="screen">
 			<param name="rotunit_speed" value="0.6" />
     </node>
 		## Bringup Laser Scanner
@@ -84,8 +84,13 @@
     <param name="ignore_laser_skew" value="false" />
   </node>
 
-  ## Bringup Snapshotter Action Server
-  <node name="snapshotter360" pkg="rotunit_snapshotter" type="snapshotter360" output="screen"/>
+  ## Bringup Rotunit Snapshotter Action Server
+  <node name="uos_rotunit_snapshotter" pkg="uos_rotunit_snapshotter" type="uos_rotunit_snapshotter" output="screen">
+    <param name="continuous" value="false" />
+    <param name="rotation_angle" value="6.2831853" />
+  </node>
 
+  ## Bringup Rotunit PS3 Teleop
+  <node name="uos_rotunit_teleop_ps3joy" pkg="uos_rotunit_teleop" type="uos_rotunit_teleop_ps3joy" output="screen"/>
 
 </launch>
