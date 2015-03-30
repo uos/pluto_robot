@@ -6,6 +6,7 @@
 #include <tf/transform_listener.h>
 #include <tf/transform_broadcaster.h>
 
+#include <pcl/filters/filter.h>
 #include <pcl/registration/registration.h>
 #include <pcl/registration/icp.h>
 #include <pcl/io/pcd_io.h>
@@ -28,6 +29,7 @@ class PlutoICP{
   private:
     ros::ServiceServer service;
     ros::Subscriber cloud_sub;
+    ros::Publisher cloud_pub;
 
     ros::NodeHandle nh_;
     tf::TransformListener tf_listener;
@@ -40,6 +42,7 @@ class PlutoICP{
     tf::StampedTransform last_sent;
 
     std::stack<sensor_msgs::PointCloud2> clouds;
+    std::stack<geometry_msgs::PoseStamped> poses;
     
     bool registerCloudsSrv( pluto_icp::IcpSrv::Request &req,
                             pluto_icp::IcpSrv::Response &res);
@@ -57,12 +60,6 @@ class PlutoICP{
     
     void eigenToTf( const Eigen::Matrix4f &transform_eigen,
                     tf::Transform &transform_tf);
-
-    bool registerClouds(
-      pcl::PointCloud<pcl::PointXYZ>::Ptr &target, 
-      pcl::PointCloud<pcl::PointXYZ>::Ptr &cloud,
-      Eigen::Matrix4f &guess_transform,
-      Eigen::Matrix4f &final_transform);
 
     bool getPointCloudPose(
       const sensor_msgs::PointCloud2 &cloud,
