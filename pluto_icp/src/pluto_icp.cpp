@@ -10,6 +10,9 @@ PlutoICP::PlutoICP(ros::NodeHandle &nh)
   service = nh_.advertiseService("pluto_icp", &PlutoICP::registerCloudsSrv, this);
   cloud_sub = nh_.subscribe("assembled_cloud", 20, &PlutoICP::icpUpdateMapToOdomCombined, this);
   cloud_pub = nh_.advertise<sensor_msgs::PointCloud2> ("registered_cloud", 1);
+  ros::NodeHandle private_nh("~");
+
+  private_nh.param("correspondence_distance", correspondence_distance, 0.1);
 }
 
 
@@ -21,7 +24,8 @@ bool PlutoICP::registerCloudsSrv( pluto_icp::IcpSrv::Request &req,
                         req.cloud,
                         req.cloud_pose,
                         res.result_pose,
-                        res.delta_transform);
+                        res.delta_transform,
+                        req.correspondence_distance);
 }
 
 bool PlutoICP::registerClouds(
@@ -30,7 +34,11 @@ bool PlutoICP::registerClouds(
   const sensor_msgs::PointCloud2 &cloud,
   const geometry_msgs::PoseStamped &cloud_pose,
   geometry_msgs::PoseStamped &result_pose,
-  geometry_msgs::Transform &delta_transform)
+  geometry_msgs::Transform &delta_transform,
+  double correspondence_distance,
+  double transformation_epsilon,
+  int maximum_iterations
+  )
 {
 
   // create shared pointers
@@ -67,6 +75,10 @@ bool PlutoICP::registerClouds(
   // do icp
   pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ, float> icp;
 
+  icp.setMaxCorrespondenceDistance(correspondence_distance);
+  icp.setMaximumIterations (maximum_iterations);
+  icp.setTransformationEpsilon (transformation_epsilon);
+  
   icp.setInputSource(cloud_xyz_ptr);
   icp.setInputTarget(target_xyz_ptr);
   
@@ -196,7 +208,8 @@ void PlutoICP::icpUpdateMapToOdomCombined(const sensor_msgs::PointCloud2::ConstP
                    *cloud,
                    cloud_pose,
                    result_pose,
-                   delta_transform);
+                   delta_transform,
+                   correspondence_distance);
     ROS_INFO("... register point clouds done.");
 
     // convert to tf
@@ -246,9 +259,11 @@ void PlutoICP::sendMapToOdomCombined(){
       pitch * 180 / M_PI,
       yaw * 180 / M_PI);
 
-    sensor_msgs::PointCloud2 cloud = clouds.top();
-    cloud.header.stamp = now;
-    cloud_pub.publish(cloud);
+    if(!clouds.empty()){
+      sensor_msgs::PointCloud2 cloud = clouds.top();
+      cloud.header.stamp = now;
+      cloud_pub.publish(cloud);
+    }
   }
   last_sent = map_to_odom.top();
 }

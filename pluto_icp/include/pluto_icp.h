@@ -53,7 +53,10 @@ class PlutoICP{
       const sensor_msgs::PointCloud2 &cloud,
       const geometry_msgs::PoseStamped &cloud_pose,
       geometry_msgs::PoseStamped &result_pose,
-      geometry_msgs::Transform &delta_transform);
+      geometry_msgs::Transform &delta_transform,
+      double correspondence_distance = 0.01,
+      double transformation_epsilon = 1e-8,
+      int maximum_iterations = 100);
 
     void tfToEigen( const tf::Transform &transform_tf,
                     Eigen::Matrix4f &transform_eigen);
@@ -65,5 +68,9 @@ class PlutoICP{
       const sensor_msgs::PointCloud2 &cloud,
       const std::string &fixed_frame,
       geometry_msgs::PoseStamped &pose);
+
+    double correspondence_distance;
+    double transformation_epsilon;
+    int maximum_iterations;
 
 };
