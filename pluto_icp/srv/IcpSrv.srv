@@ -1,8 +1,0 @@
-sensor_msgs/PointCloud2 target
-geometry_msgs/PoseStamped target_pose
-sensor_msgs/PointCloud2 cloud
-geometry_msgs/PoseStamped cloud_pose
-float64 correspondence_distance
----
-geometry_msgs/PoseStamped result_pose
-geometry_msgs/Transform delta_transform
