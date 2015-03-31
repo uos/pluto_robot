@@ -9,6 +9,8 @@ MapOdomICP::MapOdomICP(ros::NodeHandle &nh)
   map_to_odom_.push(tf::StampedTransform(null_transform, ros::Time::now(), "map", "odom_combined"));
   cloud_sub_ = nh_.subscribe("assembled_cloud", 20, &MapOdomICP::icpUpdateMapToOdomCombined, this);
   cloud_pub_ = nh_.advertise<sensor_msgs::PointCloud2> ("registered_cloud", 1);
+  ros::NodeHandle private_nh("~");
+  private_nh.param("correspondence_distance", correspondence_distance, 0.1);
 }
 
 
@@ -64,7 +66,8 @@ void MapOdomICP::icpUpdateMapToOdomCombined(const sensor_msgs::PointCloud2::Cons
       *cloud,
       cloud_pose,
       result_pose,
-      delta_transform
+      delta_transform,
+      correspondence_distance
     );
 
     if(succeeded){

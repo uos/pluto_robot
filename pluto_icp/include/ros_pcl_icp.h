@@ -15,7 +15,7 @@
 #include <pcl/PCLPointCloud2.h>
 #include <pcl_conversions/pcl_conversions.h>
 
-#include <pluto_icp/IcpSrv.h>
+#include <map_odom_icp/IcpSrv.h>
 
 class RosPclIcp{
 
@@ -28,14 +28,17 @@ class RosPclIcp{
       const sensor_msgs::PointCloud2 &cloud,
       const geometry_msgs::PoseStamped &cloud_pose,
       geometry_msgs::PoseStamped &result_pose,
-      geometry_msgs::Transform &delta_transform);
+      geometry_msgs::Transform &delta_transform,
+      double correspondence_distance = 0.1,
+      double transformation_epsilon = 1e-8,
+      int maximum_iterations = 100);
 
   private:
     ros::NodeHandle nh_;
     ros::ServiceServer service;
 
-    bool registerCloudsSrv( pluto_icp::IcpSrv::Request &req,
-                            pluto_icp::IcpSrv::Response &res);
+    bool registerCloudsSrv( map_odom_icp::IcpSrv::Request &req,
+                            map_odom_icp::IcpSrv::Response &res);
   
 
     void tfToEigen( const tf::Transform &transform_tf,
@@ -43,5 +46,6 @@ class RosPclIcp{
     
     void eigenToTf( const Eigen::Matrix4f &transform_eigen,
                     tf::Transform &transform_tf);
+
 
 };

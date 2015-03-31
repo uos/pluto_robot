@@ -47,7 +47,7 @@ target_link_libraries(map_odom_icp
   ${PCL_LIBRARY_DIRS}
 )
 
-add_dependencies(map_odom_icp ${catkin_EXPORTED_TARGETS})
+add_dependencies(map_odom_icp ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
 
 install(TARGETS
   map_odom_icp

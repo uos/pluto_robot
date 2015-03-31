@@ -6,15 +6,16 @@ RosPclIcp::RosPclIcp(ros::NodeHandle &nh)
   service = nh_.advertiseService("icp", &RosPclIcp::registerCloudsSrv, this);
 }
 
-bool RosPclIcp::registerCloudsSrv( pluto_icp::IcpSrv::Request &req,
-                                  pluto_icp::IcpSrv::Response &res){
+bool RosPclIcp::registerCloudsSrv( map_odom_icp::IcpSrv::Request &req,
+                                  map_odom_icp::IcpSrv::Response &res){
 
   return registerClouds(req.target,
                         req.target_pose,
                         req.cloud,
                         req.cloud_pose,
                         res.result_pose,
-                        res.delta_transform);
+                        res.delta_transform,
+                        req.correspondence_distance);
 }
 
 bool RosPclIcp::registerClouds(
@@ -23,7 +24,11 @@ bool RosPclIcp::registerClouds(
   const sensor_msgs::PointCloud2 &cloud,
   const geometry_msgs::PoseStamped &cloud_pose,
   geometry_msgs::PoseStamped &result_pose,
-  geometry_msgs::Transform &delta_transform)
+  geometry_msgs::Transform &delta_transform,
+  double correspondence_distance,
+  double transformation_epsilon,
+  int maximum_iterations
+  )
 {
 
   // create shared pointers
@@ -60,6 +65,10 @@ bool RosPclIcp::registerClouds(
   // do icp
   pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ, float> icp;
 
+  icp.setMaxCorrespondenceDistance(correspondence_distance);
+  icp.setMaximumIterations (maximum_iterations);
+  icp.setTransformationEpsilon (transformation_epsilon);
+  
   icp.setInputSource(cloud_xyz_ptr);
   icp.setInputTarget(target_xyz_ptr);
   

@@ -45,4 +45,7 @@ class MapOdomICP{
       const std::string &fixed_frame,
       geometry_msgs::PoseStamped &pose);
 
+    double correspondence_distance;
+    double transformation_epsilon;
+    int maximum_iterations;
 };
