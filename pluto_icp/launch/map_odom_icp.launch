@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-  <node name="pluto_icp" pkg="pluto_icp" type="pluto_icp" output="screen">
+  <node name="map_odom_icp" pkg="map_odom_icp" type="map_odom_icp" output="screen">
     <remap from="cloud" to="assembled_cloud" />
  	</node>
 </launch>

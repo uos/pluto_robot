@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.4.6)
 
-project(pluto_icp)
+project(map_odom_icp)
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
@@ -40,16 +40,16 @@ catkin_package(
   INCLUDE_DIRS include
 )
 
-add_executable(pluto_icp src/pluto_icp.cpp)
+add_executable(map_odom_icp src/map_odom_icp.cpp src/ros_pcl_icp.cpp)
 
-target_link_libraries(pluto_icp 
+target_link_libraries(map_odom_icp
   ${catkin_LIBRARIES}
   ${PCL_LIBRARY_DIRS}
 )
 
-add_dependencies(pluto_icp ${catkin_EXPORTED_TARGETS})
+add_dependencies(map_odom_icp ${catkin_EXPORTED_TARGETS})
 
 install(TARGETS
-  pluto_icp
+  map_odom_icp
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
