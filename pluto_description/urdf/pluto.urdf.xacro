@@ -89,7 +89,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
-        <mesh filename="package://pluto_description/meshes/pluto_base.stl"/>
+        <mesh filename="package://pluto_description/meshes/pluto_base_collision.stl"/>
       </geometry>
     </collision>
     <xacro:box_inertial
@@ -172,7 +172,8 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://pluto_description/meshes/pluto_wheel.stl"/>
+          <mesh
+          filename="package://pluto_description/meshes/pluto_wheel_collision.stl"/>
         </geometry>
       </collision>
       <xacro:cylinder_inertial
