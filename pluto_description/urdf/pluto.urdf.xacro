@@ -122,7 +122,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 ${rot}" />
         <geometry>
-          <mesh filename="package://pluto_description/meshes/pluto_lever.stl"/>
+          <mesh filename="package://pluto_description/meshes/pluto_lever_collision.stl"/>
         </geometry>
       </collision>
       <xacro:box_inertial
