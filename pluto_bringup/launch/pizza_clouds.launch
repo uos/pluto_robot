@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
   ## Bringup Pizza Snapshotter
-  <node pkg="uos_rotunit_snapshotter" type="uos_rotunit_snapshotter" name="pizza_snapshotter" output="screen">
+  <node pkg="uos_rotunit_snapshotter" type="uos_rotunit_snapshotter" name="pizza_snapshotter">
     <remap from="assembled_cloud" to="pizza_snapshot"/>
     <remap from="rotunit_snapshotter" to="pizza_snapshotter"/>
     <param name="continuous" value="true"/>

@@ -6,3 +6,9 @@ scan_filter_chain:
     max_angle: 176
     neighbors: 3
     window: 1
+
+- name: footprint_filter
+  type: laser_filters/LaserScanFootprintFilter
+  params:
+    target_frame: odom_combined
+    inscribed_radius: 0.45
