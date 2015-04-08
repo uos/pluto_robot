@@ -1,0 +1,9 @@
+<library path="lib/libbox_filter">
+  <class name="box_filter/PointCloudBoxFilter"
+         type="box_filter::PointCloudBoxFilter" 
+         base_class_type="filters::FilterBase<sensor_msgs::PointCloud2>">
+    <description>
+      Remove points from the pointcloud inside a box. 
+    </description>
+  </class>
+</library>
