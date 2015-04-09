@@ -1,9 +1,9 @@
 <library path="lib/libbox_filter">
-  <class name="box_filter/PointCloudBoxFilter"
-         type="box_filter::PointCloudBoxFilter" 
-         base_class_type="filters::FilterBase<sensor_msgs::PointCloud2>">
+  <class name="laser_filters/LaserScanBoxFilter"
+         type="laser_filters::LaserScanBoxFilter" 
+         base_class_type="filters::FilterBase<sensor_msgs::LaserScan>">
     <description>
-      Remove points from the pointcloud inside a box. 
+      Remove points from the LaserScan inside a box. 
     </description>
   </class>
 </library>

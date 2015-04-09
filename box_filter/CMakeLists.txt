@@ -7,13 +7,17 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   sensor_msgs
+  tf
+  laser_geometry
+  message_filters
+  filters
 )
 
 find_package(catkin REQUIRED COMPONENTS ${THIS_PACKAGE_ROS_DEPS})
 include_directories(include ${catkin_INCLUDE_DIRS})
 
 catkin_package(
-  CATKIN_DEPENDS roscpp sensor_msgs
+  CATKIN_DEPENDS roscpp sensor_msgs tf laser_geometry message_filters filters
   INCLUDE_DIRS include
   
   LIBRARIES pointcloud_filters laser_scan_filters
