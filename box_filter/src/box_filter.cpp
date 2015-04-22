@@ -125,6 +125,7 @@ bool laser_filters::LaserScanBoxFilter::update(
 
     if(inBox(point)){
       output_scan.ranges[index] = std::numeric_limits<float>::quiet_NaN();
+      //output_scan.ranges.push_back(input_scan.ranges[index]);
     }
   }
   up_and_running_ = true;

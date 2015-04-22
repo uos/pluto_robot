@@ -7,6 +7,16 @@ scan_filter_chain:
     neighbors: 3
     window: 1
 
+- name: box_filter
+  type: laser_filters/LaserScanBoxFilter
+  params:
+    box_frame: base_link
+    max_x: 0.4
+    max_y: 0.4
+    max_z: 0.4
+    min_x: -0.4
+    min_y: -0.4
+    min_z: -0.3
 - name: footprint_filter
   type: laser_filters/LaserScanFootprintFilter
   params:

@@ -59,7 +59,9 @@
   ## Bringup EKF
   <include file="$(find pluto_bringup)/launch/ekf.launch"/>
 
-
+  ## Map to Odom Transform via ICP
+  <include file="$(find map_odom_icp)/launch/map_odom_icp.launch"/>
+  
   ## Bringup Rotunit Snapshotter Action Server
   <node name="uos_rotunit_snapshotter" pkg="uos_rotunit_snapshotter" type="uos_rotunit_snapshotter" output="screen">
     <param name="continuous" value="false" />

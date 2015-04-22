@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <launch>
+  <rosparam param="use_sim_time">true</rosparam>
   ## Upload Pluto to parameter server
   <include file="$(find pluto_description)/launch/upload_pluto.launch"/>
 
@@ -28,7 +29,8 @@
   </node>
 
   ## Bringup Rotunit PS3 Teleop
-  <node name="uos_rotunit_teleop_ps3joy" pkg="uos_rotunit_teleop" type="uos_rotunit_teleop_ps3joy" output="screen"/>
+  <node name="uos_rotunit_teleop_ps3joy" pkg="uos_rotunit_teleop"
+  type="uos_rotunit_teleop_ps3joy" output="screen"/>
   
   ## Map to Odom Transform via ICP
   <include file="$(find map_odom_icp)/launch/map_odom_icp.launch"/>
