@@ -3,7 +3,6 @@
   ## Upload Pluto to parameter server
   <include file="$(find pluto_description)/launch/upload_pluto.launch"/>
 
-
   ## Roboter Setup
 	<arg name="use_3d_scanner" value="true" />
   <arg name="use_imu" value="true" />
@@ -44,12 +43,6 @@
 			<arg name="frame" value="laser360"/>
 		</include>
 	</group>
- 
-  ## Bringup Filter Chain
-  <include file="$(find pluto_bringup)/launch/filter_chain.launch"/>
-
-  ## Bringup Pizza Clouds Publishing
-  <include file="$(find pluto_bringup)/launch/pizza_clouds.launch"/>
 
   ## Bringup IMU
   <group if="$(arg use_imu)">
@@ -59,9 +52,6 @@
   ## Bringup EKF
   <include file="$(find pluto_bringup)/launch/ekf.launch"/>
 
-  ## Map to Odom Transform via ICP
-  <include file="$(find map_odom_icp)/launch/map_odom_icp.launch"/>
-  
   ## Bringup Rotunit Snapshotter Action Server
   <node name="uos_rotunit_snapshotter" pkg="uos_rotunit_snapshotter" type="uos_rotunit_snapshotter" output="screen">
     <param name="continuous" value="false" />
@@ -70,5 +60,15 @@
 
   ## Bringup Rotunit PS3 Teleop
   <node name="uos_rotunit_teleop_ps3joy" pkg="uos_rotunit_teleop" type="uos_rotunit_teleop_ps3joy" output="screen"/>
+
+  ## Map to Odom Transform via ICP
+  <include file="$(find map_odom_icp)/launch/map_odom_icp.launch"/>
+  
+  ## Bringup Pizza Clouds Publishing
+  <include file="$(find pluto_bringup)/launch/pizza_clouds.launch"/>
+  
+  ## Bringup Filter Chain
+  <include file="$(find pluto_bringup)/launch/filter_chain.launch"/>
+
 
 </launch>

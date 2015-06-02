@@ -13,26 +13,29 @@
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen" />
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" />
   
-  ## Bringup Filter Chain
-  <include file="$(find pluto_bringup)/launch/filter_chain.launch"/>
-
-  ## Bringup Pizza Clouds Publishing
-  <include file="$(find pluto_bringup)/launch/pizza_clouds.launch"/>
-  
   ## Bringup EKF
   <include file="$(find pluto_bringup)/launch/ekf.launch"/>
+
+  ## Bringup Rotunit PS3 Teleop
+  <node name="uos_rotunit_teleop_ps3joy" pkg="uos_rotunit_teleop"
+  type="uos_rotunit_teleop_ps3joy" output="screen"/>
+  
+  ## Bringup Filter Chain
+  <include file="$(find pluto_bringup)/launch/filter_chain.launch"/>
 
   ## Bringup Rotunit Snapshotter Action Server
   <node name="uos_rotunit_snapshotter" pkg="uos_rotunit_snapshotter" type="uos_rotunit_snapshotter" output="screen">
     <param name="continuous" value="false" />
     <param name="rotation_angle" value="6.2831853" />
   </node>
-
-  ## Bringup Rotunit PS3 Teleop
-  <node name="uos_rotunit_teleop_ps3joy" pkg="uos_rotunit_teleop"
-  type="uos_rotunit_teleop_ps3joy" output="screen"/>
+  
+  ## Bringup Pizza Clouds Publishing
+  <include file="$(find pluto_bringup)/launch/pizza_clouds.launch"/>
   
   ## Map to Odom Transform via ICP
   <include file="$(find map_odom_icp)/launch/map_odom_icp.launch"/>
+
+  ## Bringup Octomap Mapping
+  <include file="$(find pluto_bringup)/launch/octomap_mapping.launch"/>
 
 </launch>

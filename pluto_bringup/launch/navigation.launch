@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Publishes the voxel grid to rviz for display -->
+  <node pkg="costmap_2d" type="costmap_2d_markers" name="voxel_visualizer">
+    <remap from="voxel_grid" to="costmap/voxel_grid"/>
+  </node>
+
+  <!-- Run the costmap node -->
+  <!--node name="costmap_node" pkg="costmap_2d" type="costmap_2d_node"
+  output="screen" >
+
+    <rosparam file="$(find pluto_bringup)/config/costmap_params.yaml" command="load" ns="costmap" />
+    <remap from="octomap" to="octomap_full"/>
+  </node-->
+  <node name="move_base" pkg="move_base" respawn="false" type="move_base"
+  output="screen">
+    <!--rosparam file="$(find pluto_bringup)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find pluto_bringup)/config/global_costmap_params.yaml"
+    command="load" /-->
+    <rosparam file="$(find pluto_bringup)/config/costmap_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find pluto_bringup)/config/costmap_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find pluto_bringup)/config/base_local_planner_params.yaml" command="load" />
+  </node>
+</launch>

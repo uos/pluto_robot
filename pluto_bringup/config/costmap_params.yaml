@@ -1,0 +1,9 @@
+plugins:
+  - {name: dem_costmap_2d, type: "dem_costmap_2d::DEMCostmap2D"}
+  - {name: inflation, type: "costmap_2d::InflationLayer"}
+publish_frequency: 2.0
+update_frequency: 0.5
+footprint: [[-0.325, -0.325], [-0.325, 0.325], [0.325, 0.325], [0.46, 0.0], [0.325, -0.325]]
+global_frame: /map
+robot_base_frame: /base_link
+static_map: false
