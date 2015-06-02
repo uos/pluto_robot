@@ -70,5 +70,10 @@
   ## Bringup Filter Chain
   <include file="$(find pluto_bringup)/launch/filter_chain.launch"/>
 
+  ## Bringup Octomap Mapping
+  <include file="$(find pluto_bringup)/launch/octomap_mapping.launch"/>
+
+  ## Bringup Navigation Stack
+  <include file="$(find pluto_bringup)/launch/navigation.launch"/>
 
 </launch>
