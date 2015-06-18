@@ -74,6 +74,6 @@
   <include file="$(find pluto_bringup)/launch/octomap_mapping.launch"/>
 
   ## Bringup Navigation Stack
-  <include file="$(find pluto_bringup)/launch/navigation.launch"/>
+  <!--include file="$(find pluto_bringup)/launch/navigation.launch"/-->
 
 </launch>

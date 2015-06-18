@@ -1,0 +1,5 @@
+controller_frequency: 10.0
+controller_patience: 10.0
+
+#gmapping's move_base wanted to use, is this useful?
+#controller_patience: 2.0
