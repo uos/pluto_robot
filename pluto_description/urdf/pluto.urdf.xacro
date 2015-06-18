@@ -66,8 +66,8 @@
   <xacro:property name="axis_length" value="0.47" />
   <xacro:property name="turning_adaptation" value="0.95" />
 
-  <xacro:property name="body_mass" value="0.1"/>
-  <xacro:property name="wheel_mass" value="0.01"/>
+  <xacro:property name="body_mass" value="40.0"/>
+  <xacro:property name="wheel_mass" value="3.0"/>
   <xacro:property name="wheel_radius" value="0.15"/>
   <xacro:property name="wheel_thickness" value="0.065"/>
 
@@ -166,7 +166,7 @@
           <mesh filename="package://pluto_description/meshes/pluto_wheel.stl"/>
         </geometry>
         <material name="black" >
-          <color rgba="0.3 0.3 0.3 1" />
+          <color rgba="0 0 0 1" />
         </material>
       </visual>
       <collision>
@@ -188,6 +188,15 @@
       <child link="${name}_link"/>
       <axis xyz="0 1 0"/>
     </joint>
+
+    <gazebo reference="${name}_link">
+      <mu1>1</mu1>
+      <mu2>1</mu2>
+      <material>Gazebo/Black</material>
+      <kp>10000000</kp>
+      <kd>10</kd>
+      <selfCollide>false</selfCollide>
+    </gazebo>
   </xacro:macro>
 
   <xacro:wheel
