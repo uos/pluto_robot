@@ -1,0 +1,53 @@
+ABOUT
+====
+This software is a wrapper to the Las Vegas Reconstruction Toolkit, which makes it possible to use the Las Vegas functionality in ROS. Simply said, it is a ROS-node, which can listen to incoming PointClouds, use the Las Vegas functions on it, while being able to dynamicly change all parameters with the rqt_reconfigure tool, and finally publish a Mesh in different formats. 
+As input format it accepts any PointCloud2, while only "rgb" color data and "intensities"(untested, see warning) can be parsed. (This is simple to extend though)
+(WARNING: currently parsing intensities as FLOAT32, which probably is wrong. Before usage, check data format of intensity data and adjust it in PointCloud2Parsing.cpp:36,39)
+The most simple output format that is published is a visualization_msgs::Marker::TRIANGLE_LIST. This can only be used to visualize the meshes in Rviz and doesn't support Textures.
+We also publish a selfdesigned message, which consists of a header and a (very big) String, that is holding the whole mesh in Collada format. This can be visualized by the selfdesigned "rviz_mesh_plugin" in Rviz. (The plugin also doesn't support Textures and apparently doesn't even support colors, the mesh will completely be white - and only visible from one side)
+Also it is possible to write down the Collada as a file. This can be visualized by any editor supporting Collada meshes (e.g. meshlab). The Collada file also contains textures.
+
+
+COMPILATION
+===========
+"just do the normal "rosmake" thing"(Dave)
+
+
+REQUIRED LIBRARIES
+=================
+
++ Las-Vegas-Reconstruction-Kit, place it in your home-folder or set an environment-variable called $Las-Vegas with your path 
++ rviz_mesh_plugin, which is another ros-package
+
+
+USAGE
+====
+
+You can experiment with the software using any bagfiles that contain PointCloud2 data or using live PointCloud2 Data e.g. from Kinect or 3D Laser Scanners.
+If you use Kinect data or Kinect bagfiles simply run the program by
+/rosrun lasvegas lasvegas
+
+In any other case you need to remap the topic, since the Kinect topic is hard-coded in lasvegas.cpp. An example for using the 3D laserscanner:
+/rosrun lasvegas lasvegas /camera/depth_registered/points:=/assembled_cloud
+
+Reconfigure Parameters with
+rorsun rqt_reconfigure rqt_reconfigure
+to add/remove/change parameters, look in cfg/lvr.cfg and follow the pattern. Use your parameter by calling config.paramname in the callback (lasvegas.cpp)
+
+View Data with
+rosrun rviz rviz
+and set fixed frame to /camera_link for kinect or /base_link for laserscan
+Marker topic /triangles shows the triangle_list msg,
+PointCloud2 topic /lascloud shows the corresponding PointCloud,
+Mesh topic /coltriangles shows the Collada mesh
+
+Collada file with textures currently is written to working directory as "mesh_with_material.dae"
+
+
+TODO
+====
++ write Collada and Texture files into folders managed by ring buffer, to get history
++ PointCloud2Parsing can easily be extended by further data blob formats (such as rgba, currently only rgb channels are registered).
++ Also feel free to play around with the published Data, since currently the collada file only is generated, if the texture flag is set. The triangle_list and the selfdesigned Mesh message are always published.
++ Change Collada format into Binary format
++ fix bug where lasvegas hangs up at estimating normals 100%

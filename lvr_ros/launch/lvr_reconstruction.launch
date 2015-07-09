@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+	<node name="lvr_reconstruction" pkg="lvr_ros" type="lvr_reconstruction_node" output="screen">
+		<param name="use_callback" value="true"/>
+    <param name="input_cloud" value="/registered_cloud" />
+		<param name="output_mesh" value="/triangle_mesh" />
+		<param name="output_texture" value="/textures" />
+    <remap from="/mapping_cloud" to="/octomap_point_cloud_centers" />
+  </node>
+</launch>
+
+

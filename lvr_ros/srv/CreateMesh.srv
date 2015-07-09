@@ -1,0 +1,4 @@
+sensor_msgs/PointCloud2 cloud
+---
+lvr_ros/Mesh mesh
+lvr_ros/PointNormals normals

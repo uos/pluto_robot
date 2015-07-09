@@ -1,0 +1,8 @@
+string dimension
+float64 min_value
+float64 max_value
+float64 slicing_resolution
+lvr_ros/Mesh mesh
+---
+float64[] segments
+geometry_msgs/Point[] points

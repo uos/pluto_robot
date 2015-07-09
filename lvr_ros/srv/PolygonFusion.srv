@@ -1,0 +1,4 @@
+lvr_ros/PolygonMesh[] polymeshes
+string frame
+---
+lvr_ros/PolygonMesh polymesh

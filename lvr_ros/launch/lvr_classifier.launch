@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+
+	<node name="lvr_reconstruction" pkg="lvr_ros" type="lvr_reconstruction_node" output="screen">
+		<param name="input_cloud" value="slam_input_cloud" />
+		<param name="output_mesh" value="reconstruction_mesh" />
+		<param name="output_texture" value="reconstruction_texture" />
+	</node>
+
+	<node name="lvr_classifier" pkg="lvr_ros" type="lvr_classifier_node" output="screen">
+		<remap from="classifier_in" to="reconstruction_mesh" />
+	</node>
+</launch>

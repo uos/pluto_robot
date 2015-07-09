@@ -1,0 +1,6 @@
+string dimension
+float64 value
+lvr_ros/Mesh mesh
+---
+float64[] segments
+geometry_msgs/Point[] points
