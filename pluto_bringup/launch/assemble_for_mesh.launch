@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<launch>
+  ## Bringup Laser Assembler with organized mode
+  <node pkg="laser_assembler" type="point_cloud2_assembler" name="organized_assembler" output="screen">
+    <param name="sensor_frame" value="laser360" />
+    <param name="fixed_frame" value="odom_combined" />
+    <remap from="cloud" to="cloud360_filtered"/>
+    <param name="max_clouds" value="15000" />
+    <param name="ignore_laser_skew" value="false" />
+    <param name="downsample_factor" value="3" />
+    <param name="organized" value="true" />
+    <remap from="assemble_scans2" to="assemble_organized"/>
+  </node>
+
+  ## Bringup Rotunit Snapshotter Action Server
+  <node name="organized_snapshotter" pkg="uos_rotunit_snapshotter" type="uos_rotunit_snapshotter" output="screen">
+    <remap from="assemble_scans2" to="assemble_organized"/>
+    <remap from="assembled_cloud" to="organized_cloud"/>
+    <param name="continuous" value="false" />
+    <param name="rotation_angle" value="6.2831853" />
+  </node>
+
+  ## Organized Fast Mesh
+  <node name="organized_fast_mesh" pkg="organized_fast_mesh" type="organized_fast_mesh" output="screen" >
+    <remap from="input_cloud" to="organized_cloud" />
+  </node>
+</launch>
+
