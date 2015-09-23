@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-	<node name="lvr_classifier" pkg="lvr_ros" type="lvr_classifier_node" output="screen" />
-	<node name="lvr_reconstruction" pkg="lvr_ros" type="lvr_reconstruction_node" output="screen">
-		<remap from="input_cloud" to="assembled_cloud" />
-	</node>
-	<node pkg="rosbag" type="play" name="player" output="log" args="--clock --rate=5 /local/rosfiles/slam_bags/2013-06-22-17-09-13.bag"/>
-</launch>
