@@ -4,8 +4,9 @@
   <include file="$(find pluto_description)/launch/upload_pluto.launch"/>
 
   ## Roboter Setup
-	<arg name="use_3d_scanner" value="true" />
-  <arg name="use_imu" value="true" />
+	<arg name="use_3D_sick" default="true" />
+  <arg name="use_3D_velodyne" default="true" />
+  <arg name="use_imu" default="true" />
   
   ##Bringup Joint State Publisher and Robot State Publisher
   <rosparam file="$(find pluto_bringup)/config/joint_state_publisher.yaml" command="load" />
@@ -31,7 +32,7 @@
  	</node>
 	
 	## Bringup 3D scanner, if enabled
-	<group if="$(arg use_3d_scanner)">
+	<group if="$(arg use_3D_sick)">
 		## Bringup Rotunit
 		<node pkg="uos_rotunit_driver" type="uos_rotunit_driver" name="uos_rotunit_driver" output="screen">
 			<param name="rotunit_speed" value="0.6" />
@@ -44,6 +45,9 @@
 		</include>
 	</group>
 
+  
+  ## Bringup Velodyne Scanner
+  <include if="$(arg use_3D_velodyne)" file="$(find velodyne_pointcloud)/launch/32e_points.launch"/>
   ## Bringup IMU
   <group if="$(arg use_imu)">
     <include file="$(find kurt_bringup)/launch/phidgets_imu.launch" />
