@@ -43,6 +43,16 @@
     value="0"/>
   <xacro:property name="rotunit_offset_z"
     value="${body_height/2-0.014 + rotunit_box_z/2}"/>
+        
+        
+  <xacro:property name="velodyne_height" value="0.1442"/>
+  <xacro:property name="velodyne_radius" value="0.04265"/>
+  
+  <xacro:property name="velodyne_height_to_lense" value="0.090805"/>
+  <xacro:property name="velodyne_offset_x" value="${body_length/2 - 0.0265 + 0.02}"/>
+  <xacro:property name="velodyne_offset_y" value="0"/>
+  <xacro:property name="velodyne_offset_z"
+    value="${-0.005 + velodyne_height/2}"/>
 
   <xacro:property name="virtual_axis_left_offset_x"
     value="${body_length/2 - pannel_depth-bearing_pos_wheel_2_3
@@ -255,6 +265,28 @@
   <!-- inertial measurement unit for gazebo -->
   <xacro:imu_gazebo link="imu" imu_topic="imu/data" update_rate="100.0" stdev="${imu_stdev}" />
 
+  <link name="velodyne">
+    <visual>
+      <origin xyz="0 0 ${-velodyne_height_to_lense}" rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.1442" radius="0.04265"/>
+      </geometry>
+      <material name="silver">
+        <color rgba="0.5 0.5 0.5 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="velodyne_to_base_joint" type="fixed">
+    <child link="velodyne" />
+    <parent link="base_link" />
+    <origin
+      xyz=" ${velodyne_offset_x}
+            ${velodyne_offset_y}
+            ${velodyne_offset_z + velodyne_height_to_lense}"
+      rpy="0 0 0" />
+  </joint>
+  
   <joint name="rotunit_to_base_joint" type="fixed">
     <child link="rotunit_box_link" />
     <parent link="base_link" />
