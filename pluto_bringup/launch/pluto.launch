@@ -5,8 +5,10 @@
 
   ## Roboter Setup
 	<arg name="use_3D_sick" default="true" />
-  <arg name="use_3D_velodyne" default="true" />
+  <arg name="use_3D_velodyne" default="false" />
   <arg name="use_imu" default="true" />
+  <arg name="use_snapshotter" default="true"/>
+  <arg name="snapshotter_continuous" default="false"/>
   
   ##Bringup Joint State Publisher and Robot State Publisher
   <rosparam file="$(find pluto_bringup)/config/joint_state_publisher.yaml" command="load" />
@@ -49,35 +51,20 @@
   ## Bringup Velodyne Scanner
   <include if="$(arg use_3D_velodyne)" file="$(find velodyne_pointcloud)/launch/32e_points.launch"/>
   ## Bringup IMU
-  <group if="$(arg use_imu)">
-    <include file="$(find kurt_bringup)/launch/phidgets_imu.launch" />
-  </group>
+  <include if="$(arg use_imu)" file="$(find kurt_bringup)/launch/phidgets_imu.launch" />
   
   ## Bringup EKF
   <include file="$(find pluto_bringup)/launch/ekf.launch"/>
 
   ## Bringup Rotunit Snapshotter Action Server
-  <node name="uos_rotunit_snapshotter" pkg="uos_rotunit_snapshotter" type="uos_rotunit_snapshotter" output="screen">
-    <param name="continuous" value="false" />
-    <param name="rotation_angle" value="6.2831853" />
-  </node>
-
+  <include if="$(arg use_snapshotter)" file="$(find uos_rotunit_snapshotter)/launch/360_degree_snapshotter.launch">
+    <arg name="continuous" value="$(arg snapshotter_continuous)"/>
+  </include>
+  
   ## Bringup Rotunit PS3 Teleop
-  <node name="uos_rotunit_teleop_ps3joy" pkg="uos_rotunit_teleop" type="uos_rotunit_teleop_ps3joy" output="screen"/>
+  <include if="$(arg snapshotter_continuous)" file="$(find uos_rotunit_teleop)/launch/ps3joy.launch"/>
 
-  ## Map to Odom Transform via ICP
-  <include file="$(find map_odom_icp)/launch/map_odom_icp.launch"/>
-  
-  ## Bringup Pizza Clouds Publishing
-  <include file="$(find pluto_bringup)/launch/pizza_clouds.launch"/>
-  
   ## Bringup Filter Chain
   <include file="$(find pluto_bringup)/launch/filter_chain.launch"/>
-
-  ## Bringup Octomap Mapping
-  <include file="$(find pluto_bringup)/launch/octomap_mapping.launch"/>
-
-  ## Bringup Navigation Stack
-  <!--include file="$(find pluto_bringup)/launch/navigation.launch"/-->
 
 </launch>

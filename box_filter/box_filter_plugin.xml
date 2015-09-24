@@ -1,9 +1,0 @@
-<library path="lib/libbox_filter">
-  <class name="laser_filters/LaserScanBoxFilter"
-         type="laser_filters::LaserScanBoxFilter" 
-         base_class_type="filters::FilterBase<sensor_msgs::LaserScan>">
-    <description>
-      Remove points from the LaserScan inside a box. 
-    </description>
-  </class>
-</library>

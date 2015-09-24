@@ -1,3 +1,0 @@
-plugins:
-  - {name: dem_costmap, type: "dem_costmap_2d::DEMCostmap2D"}
-static_map: false
