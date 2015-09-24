@@ -13,5 +13,7 @@
   <run_depend>urdf</run_depend>
   <run_depend>uos_common_urdf</run_depend>
   <run_depend>xacro</run_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>joint_state_publisher</run_depend>
 
 </package>
