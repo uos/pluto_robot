@@ -13,5 +13,8 @@
   <run_depend>pluto_gazebo</run_depend>
   
   <buildtool_depend>catkin</buildtool_depend>
+  <export>
+    <metapackage />  
+  </export>
 
 </package>
