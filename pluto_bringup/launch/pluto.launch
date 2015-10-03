@@ -40,7 +40,7 @@
 			<param name="rotunit_speed" value="0.6" />
     </node>
 		## Bringup Laser Scanner
-		<include file="$(find kurt_bringup)/launch/sick_lms200.launch">
+		<include file="$(find pluto_bringup)/launch/sick_lms200.launch">
 			<arg name="device" value="/dev/scanner360"/>
 			<arg name="topic" value="scan360"/>
 			<arg name="frame" value="laser360"/>
@@ -51,13 +51,13 @@
   ## Bringup Velodyne Scanner
   <include if="$(arg use_3D_velodyne)" file="$(find velodyne_pointcloud)/launch/32e_points.launch"/>
   ## Bringup IMU
-  <include if="$(arg use_imu)" file="$(find kurt_bringup)/launch/phidgets_imu.launch" />
+  <include if="$(arg use_imu)" file="$(find pluto_bringup)/launch/phidgets_imu.launch" />
   
   ## Bringup EKF
   <include file="$(find pluto_bringup)/launch/ekf.launch"/>
 
   ## Bringup Rotunit Snapshotter Action Server
-  <include if="$(arg use_snapshotter)" file="$(find uos_rotunit_snapshotter)/launch/360_degree_snapshotter.launch">
+  <include if="$(arg use_snapshotter)" file="$(find uos_rotunit_snapshotter)/launch/deg360_snapshotter.launch">
     <arg name="continuous" value="$(arg snapshotter_continuous)"/>
   </include>
   

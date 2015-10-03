@@ -3,7 +3,7 @@
   <rosparam param="use_sim_time">true</rosparam>
   
   <arg name="use_snapshotter" default="true"/>
-  <arg name="snapshotter_continuous" default="false"/>
+  <arg name="snapshotter_continuous" default="true"/>
   
   ## Upload Pluto to parameter server
   <include file="$(find pluto_description)/launch/upload_pluto.launch"/>
@@ -15,15 +15,12 @@
   
   ## Bringup EKF
   <include file="$(find pluto_bringup)/launch/ekf.launch"/>
-
-  ## Bringup Rotunit PS3 Teleop
-  <include if="$(arg snapshotter_continuous)" file="$(find uos_rotunit_teleop)/launch/ps3joy.launch"/>
   
   ## Bringup Filter Chain
   <include file="$(find pluto_bringup)/launch/filter_chain.launch"/>
 
   ## Bringup Rotunit Snapshotter Action Server
-  <include if="$(arg use_snapshotter)" file="$(find uos_rotunit_snapshotter)/launch/360_degree_snapshotter.launch">
+  <include if="$(arg use_snapshotter)" file="$(find uos_rotunit_snapshotter)/launch/deg360_snapshotter.launch">
     <arg name="continuous" value="$(arg snapshotter_continuous)"/>
   </include>
 
