@@ -3,7 +3,7 @@
   <rosparam param="use_sim_time">true</rosparam>
   
   <arg name="use_snapshotter" default="true"/>
-  <arg name="snapshotter_continuous" default="true"/>
+  <arg name="snapshotter_continuous" default="false"/>
   
   ## Upload Pluto to parameter server
   <include file="$(find pluto_description)/launch/upload_pluto.launch"/>
