@@ -14,9 +14,8 @@ network-wlan(){
 }
 
 network-local(){
-  export ROS_IP=10.42.0.1
-  export ROS_HOSTNAME=10.42.0.1
-  export ROS_MASTER_URI="http://10.42.0.1:11311"
+  export ROS_HOSTNAME=${HOSTNAME}
+	export ROS_MASTER_URI="http://${ROS_HOSTNAME}:11311"
 }
 
 start-robot11(){
@@ -34,7 +33,6 @@ robot11wlan(){
 }
 
 robot11local(){
-  export ROS_HOSTNAME=10.42.0.1
-  export ROS_MASTER_URI="http://10.42.0.1:11311"
-  export ROS_IP=10.42.0.1
+  export ROS_HOSTNAME=${HOSTNAME}
+  export ROS_MASTER_URI="http://robot11:11311"
 }
