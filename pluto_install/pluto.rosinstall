@@ -17,4 +17,4 @@
 - git: {local-name: rviz_mesh_plugin, uri: 'https://github.com/lvr-ros/rviz_mesh_plugin', version: indigo}
 - git: {local-name: organized_fast_mesh, uri: 'https://github.com/lvr-ros/organized_fast_mesh', version: indigo}
 - git: {local-name: mesh_navigation, uri: 'https://github.com/lvr-ros/mesh_navigation', version: indigo}
-- git: {local-name: laser_filter, uri: 'https://github.com/spuetz/laser_filter', version: indigo-devel}
+- git: {local-name: laser_filters, uri: 'https://github.com/spuetz/laser_filters', version: indigo-devel}
