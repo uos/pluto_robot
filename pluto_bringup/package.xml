@@ -20,5 +20,7 @@
   <run_depend>uos_rotunit_snapshotter</run_depend>
   <run_depend>uos_rotunit_teleop</run_depend>
   <run_depend>laser_filters</run_depend>
+  <run_depend>sound_play</run_depend>
+  <run_depend>battery_guard</run_depend>
 
 </package>

@@ -67,4 +67,9 @@
   ## Bringup Filter Chain
   <include file="$(find pluto_bringup)/launch/filter_chain.launch"/>
 
+  <!-- sound output -->
+  <include file="$(find sound_play)/soundplay_node.launch" />
+
+  <!-- battery guard -->
+  <include file="$(find battery_guard)/launch/battery_guard.launch" />
 </launch>
