@@ -4,27 +4,64 @@
 
   #### Nodelet manager ######################################################
 
-  <node pkg="nodelet" type="nodelet" name="imu_manager"
-    args="manager" output="screen" />
+  <node pkg="nodelet" type="nodelet" name="imu_manager_left"
+    args="manager" output="screen">
+
+    <remap from="imu/data_raw" to="imu/data_raw/left"/>
+    <remap from="diagnostics" to="diagnostics/left"/>
+  </node>
+
+  <node pkg="nodelet" type="nodelet" name="imu_manager_right"
+      args="manager" output="screen">
+
+      <remap from="imu/data_raw" to="imu/data_raw/right"/>
+      <remap from="diagnostics" to="diagnostics/right"/>
+    </node>
 
   #### IMU Driver ###########################################################
 
-  <node pkg="nodelet" type="nodelet" name="PhidgetsImuNodelet"
-    args="load phidgets_imu/PhidgetsImuNodelet imu_manager"
+  <node pkg="nodelet" type="nodelet" name="PhidgetsImuNodelet_left"
+    args="load phidgets_imu/PhidgetsImuNodelet imu_manager_left"
     output="screen">
 
     # supported data rates: 4 8 16 24 32 40 ... 1000 (in ms)
     <param name="period" value="4"/>
 
+    <param name="serial_number" value="415954"/>
+
     # The name of the frame attached to the published messages (default: imu)
     <param name="frame_id" value="imu" />
 
+    # Remap to new topic
+    <remap from="imu/data_raw" to="imu/data_raw/left"/>
+    <remap from="imu/is_calibrated" to="imu/is_calibrated/left"/>
+    <remap from="imu/mag" to="imu/mag/left"/>
+
   </node>
+
+  <node pkg="nodelet" type="nodelet" name="PhidgetsImuNodelet_right"
+      args="load phidgets_imu/PhidgetsImuNodelet imu_manager_right"
+      output="screen">
+
+      # supported data rates: 4 8 16 24 32 40 ... 1000 (in ms)
+      <param name="period" value="4"/>
+
+      <param name="serial_number" value="369774"/>
+
+      # The name of the frame attached to the published messages (default: imu)
+      <param name="frame_id" value="imu" />
+
+      # Remap to new topic
+      <remap from="imu/data_raw" to="imu/data_raw/right"/>
+      <remap from="imu/is_calibrated" to="imu/is_calibrated/right"/>
+      <remap from="imu/mag" to="imu/mag/right"/>
+
+    </node>
 
   #### IMU Orientation Filter ###############################################
 
-  <node pkg="nodelet" type="nodelet" name="ImuFilterNodelet"
-    args="load imu_filter_madgwick/ImuFilterNodelet imu_manager"
+  <node pkg="nodelet" type="nodelet" name="ImuFilterNodelet_left"
+    args="load imu_filter_madgwick/ImuFilterNodelet imu_manager_left"
     output="screen">
 
     # don't use mag! (causes IMU to drag behind after fast turns)
@@ -34,6 +71,25 @@
     <param name="fixed_frame" value="imu" />
 
     <param name="publish_tf" value="false" />
+
+    # Remap to new topic
+    <remap from="imu/data" to="imu/data/left"/>
   </node>
+
+  <node pkg="nodelet" type="nodelet" name="ImuFilterNodelet_right"
+      args="load imu_filter_madgwick/ImuFilterNodelet imu_manager_right"
+      output="screen">
+
+      # don't use mag! (causes IMU to drag behind after fast turns)
+      <param name="use_mag" value="false"/>
+
+      # The fixed frame in which the orientation is expressed (default: odom).
+      <param name="fixed_frame" value="imu" />
+
+      <param name="publish_tf" value="false" />
+
+      # Remap to new topic
+      <remap from="imu/data" to="imu/data/right"/>
+    </node>
 
 </launch>
