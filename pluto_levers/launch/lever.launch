@@ -6,16 +6,16 @@
         <param name="joint_state_name" value="virtual_left_to_base_joint" type="str"/>
 
         <remap from="lever" to="/joint_states"/>
-        <remap from="/imu/one" to="/imu/data/left"/>
-        <remap from="/imu/two" to="/imu/data/right"/>
+        <remap from="imu/one" to="imu/left/data"/>
+        <remap from="imu/two" to="imu/center/data"/>
     </node>
 
     <node pkg="pluto_levers" type="pluto_levers_node" name="pluto_levers_node_right" output="screen">
         <param name="joint_state_name" value="virtual_right_to_base_joint" type="str"/>
 
         <remap from="lever" to="/joint_states"/>
-        <remap from="/imu/one" to="/imu/data/right"/>
-        <remap from="/imu/two" to="/imu/data/right"/>
+        <remap from="imu/one" to="imu/right/data"/>
+        <remap from="imu/two" to="imu/center/data"/>
     </node>
 
 </launch>

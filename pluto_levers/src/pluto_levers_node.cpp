@@ -62,8 +62,8 @@ int main(int argc, char **argv) {
     }
 
     // create subscriber
-    Subscriber <Imu> imu_one(n, "/imu/one", 1000);
-    Subscriber <Imu> imu_two(n, "/imu/two", 1000);
+    Subscriber <Imu> imu_one(n, "imu/one", 1000);
+    Subscriber <Imu> imu_two(n, "imu/two", 1000);
 
     // sync imus
     typedef sync_policies::ApproximateTime <Imu, Imu> SyncPolicy;
