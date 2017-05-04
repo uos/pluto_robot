@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+      <rosparam command="load" file="$(find pluto_bringup)/config/ekf_rl.yaml" />
+  </node>
+</launch>
