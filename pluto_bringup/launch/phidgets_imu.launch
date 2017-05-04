@@ -8,21 +8,18 @@
     args="manager" output="screen">
 
     <remap from="imu/data_raw" to="imu/left/data_raw"/>
-    <remap from="diagnostics" to="imu/left/diagnostics"/>
   </node>
 
   <node pkg="nodelet" type="nodelet" name="imu_manager_right"
       args="manager" output="screen">
 
       <remap from="imu/data_raw" to="imu/right/data_raw"/>
-      <remap from="diagnostics" to="imu/right/diagnostics"/>
     </node>
 
     <node pkg="nodelet" type="nodelet" name="imu_manager_center"
           args="manager" output="screen">
 
         <remap from="imu/data_raw" to="imu/center/data_raw"/>
-        <remap from="diagnostics" to="imu/center/diagnostics"/>
     </node>
 
   #### IMU Driver ###########################################################
