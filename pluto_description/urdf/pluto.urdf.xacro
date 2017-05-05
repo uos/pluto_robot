@@ -268,7 +268,6 @@
 
 
 
-
   <link name="velodyne">
     <visual>
       <origin xyz="0 0 ${-velodyne_height_to_lense}" rpy="0 0 0" />
@@ -280,6 +279,8 @@
       </material>
     </visual>
   </link>
+
+
 
   <joint name="velodyne_to_base_joint" type="fixed">
     <child link="velodyne" />
@@ -301,6 +302,44 @@
       rpy="0 0 ${-M_PI/2}" />
   </joint>
   <!-- GPS Sensor -->
+
+
+
+  <gazebo reference="velodyne">
+    <sensor name="velodyne" type="ray">
+      <always_on>true</always_on>
+      <update_rate>5</update_rate>
+      <visualize>false</visualize>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14159</min_angle>
+            <max_angle>3.14159</max_angle>
+          </horizontal>
+          <vertical>
+            <samples>3</samples>
+            <resolution>1</resolution>
+            <min_angle>-0.43284</min_angle>
+            <max_angle>0.03490</max_angle>
+          </vertical>
+        </scan>
+        <range>
+          <min>0.22</min>
+          <max>50</max>
+          <resolution>0.02</resolution>
+        </range>
+      </ray>
+      <plugin name="laser_controller" filename="libgazebo_ros_block_laser.so">
+        <frameName>velodyne</frameName>
+        <topicName>velodyne</topicName>
+        <gaussianNoise>0.02</gaussianNoise>
+        <updateRate>5</updateRate>
+      </plugin>
+    </sensor>
+  </gazebo>
+
   <gazebo>
     <plugin name="novatel_gps_sim" filename="libhector_gazebo_ros_gps.so">
       <alwaysOn>1</alwaysOn>
