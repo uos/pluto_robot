@@ -7,7 +7,10 @@
   <include file="$(find pluto_gazebo)/launch/spawn_pluto.launch" />
 
   <!-- EKF -->
-  <include file="$(find pluto_gazebo)/launch/ekf.launch"/>
+  <include file="$(find pluto_bringup)/launch/ekf_rl.launch"/>
+  <!-- GPS -->
+  <!-- <include file="$(find pluto_bringup)/launch/gps_rl.launch"/> -->
+
 
   <!-- Default Controllers -->
 	<rosparam command="load" file="$(find pluto_gazebo)/config/rotunit_controller.yaml" />
@@ -32,4 +35,3 @@
 		args="rotunit_controller joint_state_controller" />
 
 </launch>
-
