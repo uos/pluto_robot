@@ -8,46 +8,46 @@
 
   <xacro:include filename="$(find uos_common_urdf)/common.xacro" />
   <xacro:include filename="$(find uos_common_urdf)/urdf/imu.gazebo.urdf.xacro" />
-  <xacro:include filename="$(find uos_rotunit_driver)/urdf/rotunit.urdf.xacro" />
-  
+  <xacro:include filename="$(find riegl_vline_driver)/urdf/riegl_vz400i_mount.urdf.xacro" />
+
   <xacro:property name="M_PI" value="3.14159265359"/>
-  
+
   <xacro:property name="imu_stdev" value="0.00017" />
-  
+
   <xacro:property name="body_height" value="0.21"/>
   <xacro:property name="body_length" value="0.592"/>
   <xacro:property name="body_width" value="0.29"/>
-  
+
   <xacro:property name="horizontal_lever_height" value="0.09"/>
   <xacro:property name="horizontal_lever_length" value="0.266"/>
   <xacro:property name="horizontal_lever_thickness" value="0.04"/>
   <xacro:property name="horizontal_lever_mass" value="0.1"/>
-  
+
   <xacro:property name="vertical_lever_height" value="0.21"/>
   <xacro:property name="vertical_lever_width" value="0.09"/>
 
   <xacro:property name="bearing_pos_wheel_1" value="0.047"/>
   <xacro:property name="bearing_pos_wheel_2_3" value="0.075"/>
-  
+
   <xacro:property name="bearing_width" value="0.05"/>
   <xacro:property name="bearing_height" value="0.09"/>
   <xacro:property name="bearing_thickness" value="0.01"/>
-  
+
   <xacro:property name="pannel_length" value="0.32"/>
   <xacro:property name="pannel_height" value="0.09"/>
   <xacro:property name="pannel_depth" value="0.082"/>
-  
-  <xacro:property name="rotunit_offset_x"
-    value="${body_width/2 - 0.1 - 0.19/2 + rotunit_box_x/2}"/>
-  <xacro:property name="rotunit_offset_y"
+
+  <xacro:property name="riegl_vz400i_offset_x"
+    value="${body_width/2 - 0.1}"/>
+  <xacro:property name="riegl_vz400i_offset_y"
     value="0"/>
-  <xacro:property name="rotunit_offset_z"
-    value="${body_height/2-0.014 + rotunit_box_z/2}"/>
-        
-        
+  <xacro:property name="riegl_vz400i_offset_z"
+    value="${body_height/2-0.014 + 0.012}"/>
+
+
   <xacro:property name="velodyne_height" value="0.1442"/>
   <xacro:property name="velodyne_radius" value="0.04265"/>
-  
+
   <xacro:property name="velodyne_height_to_lense" value="0.090805"/>
   <xacro:property name="velodyne_offset_x" value="${body_length/2 - 0.0265 + 0.02}"/>
   <xacro:property name="velodyne_offset_y" value="0"/>
@@ -62,7 +62,7 @@
   <xacro:property name="virtual_axis_left_offset_z"
     value="${body_height/2-(vertical_lever_height + 0.03
       - bearing_width/2)}" />
-    
+
   <xacro:property name="virtual_axis_right_offset_x"
     value="${body_length/2 - pannel_depth - bearing_pos_wheel_2_3
       - bearing_height/2}"/>
@@ -108,14 +108,14 @@
       z="${body_height}"
       mass="${body_mass}"/>
   </link>
-  
+
   <joint name="base_footprint_to_base_joint" type="fixed">
     <!-- origin xyz="0 0 0.2" rpy="0 ${-M_PI/18.0} 0" /-->
     <origin xyz="0 0 0.2" rpy="0 0 0" />
     <parent link="base_footprint"/>
     <child link="base_link" />
   </joint>
-  
+
   <!--Virtual Axis Macro-->
 
   <xacro:macro name="virtual_axis" params="side xyz rot">
@@ -141,7 +141,7 @@
         z="${horizontal_lever_height}"
         mass="${horizontal_lever_mass}"/>
     </link>
-    
+
     <joint name="virtual_${side}_to_base_joint" type="revolute">
       <origin xyz="${xyz}"/>
       <axis xyz="0 1 0"/>
@@ -150,9 +150,9 @@
       <child link="virtual_axis_${side}"/>
     </joint>
   </xacro:macro>
-  
+
   <xacro:virtual_axis
-    side="left" 
+    side="left"
     xyz=" ${virtual_axis_left_offset_x}
           ${virtual_axis_left_offset_y}
           ${virtual_axis_left_offset_z}"
@@ -163,7 +163,7 @@
     xyz=" ${virtual_axis_right_offset_x}
           ${virtual_axis_right_offset_y}
           ${virtual_axis_right_offset_z}"
-          
+
     rot="0"/>
 
   <!--Wheel Macro-->
@@ -218,22 +218,22 @@
     name="left_middle_wheel"
     parent="virtual_axis_left"
     xyz="-0.1075 0.095 0" />
-  
+
   <xacro:wheel
     name="left_rear_wheel"
     parent="base_link"
     xyz="-0.23 0.19 ${(-body_height/2.0)+(bearing_height/2.0)}" />
-  
+
   <xacro:wheel
     name="right_front_wheel"
     parent="virtual_axis_right"
     xyz="0.1075 -0.095 0" />
-  
+
   <xacro:wheel
     name="right_middle_wheel"
     parent="virtual_axis_right"
     xyz="-0.1075 -0.095 0" />
-  
+
   <xacro:wheel
     name="right_rear_wheel"
     parent="base_link"
@@ -249,9 +249,9 @@
         <color rgba="0.8 0.8 0.8 1" />
       </material>
     </visual>
-  
+
   </link>
-  
+
   <joint name="imu_to_base_joint" type="fixed">
     <parent link="base_link" />
     <child link="imu" />
@@ -261,7 +261,7 @@
             ${imu_offset_z}"
       rpy="${M_PI} 0 ${M_PI/2.0}" />
   </joint>
-  
+
   <!-- inertial measurement unit for gazebo -->
   <xacro:imu_gazebo link="imu" imu_topic="imu/data" update_rate="100.0" stdev="${imu_stdev}" />
 
@@ -286,15 +286,15 @@
             ${velodyne_offset_z + velodyne_height_to_lense}"
       rpy="0 0 0" />
   </joint>
-  
-  <joint name="rotunit_to_base_joint" type="fixed">
-    <child link="rotunit_box_link" />
+
+  <joint name="riegl_vz400i_to_base_joint" type="fixed">
+    <child link="riegl_mount_base" />
     <parent link="base_link" />
     <origin
-      xyz=" ${rotunit_offset_x}
-            ${rotunit_offset_y}
-            ${rotunit_offset_z}"
-      rpy="0 0 ${-M_PI/2}" />
+      xyz=" ${riegl_vz400i_offset_x}
+            ${riegl_vz400i_offset_y}
+            ${riegl_vz400i_offset_z}"
+      rpy="0 0 0" />
   </joint>
 
   <gazebo>
@@ -348,3 +348,4 @@
   <xacro:simple_transmission name="virtual_right_to_base" />
 
 </robot>
+
