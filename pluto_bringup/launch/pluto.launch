@@ -41,7 +41,9 @@
   ## Launch Riegl Laser Scanner Driver
   <node name="riegl_vline_driver" pkg="riegl_vline_driver" type="riegl_vline_driver_node" output="screen">
     <remap from="joint_states" to="riegl_joint_states" />
-    <param name="address" value="rieglvz400i.informatik.uos.de" type="string" />
+    <param name="address" value="192.168.178.35" type="string" />
   </node>
 
+  ## Bringup Teleop
+  <include file="$(find pluto_bringup)/launch/ps3joy.launch"/>
 </launch>
