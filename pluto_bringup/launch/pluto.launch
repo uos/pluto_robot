@@ -15,8 +15,8 @@
   ## Bringup Volksbot
   <node name="volksbot" pkg="volksbot_driver" type="volksbot" respawn="false" output="screen">
     <remap from="joint_states" to="volksbot_joint_states" />
-		<param name="wheel_radius" type="double" value="0.103" />
-		<param name="axis_length" type="double" value="0.55" />
+      <param name="wheel_radius" type="double" value="0.103" />
+      <param name="axis_length" type="double" value="0.55" />
     <param name="gear_ratio" type="int" value="156" />
     	<!-- default values: -->
       <!--
