@@ -342,12 +342,13 @@
 
   <gazebo>
     <plugin name="novatel_gps_sim" filename="libhector_gazebo_ros_gps.so">
+      <frameId>odom_combined</frameId>
       <alwaysOn>1</alwaysOn>
       <updateRate>10.0</updateRate>
       <bodyName>base_footprint</bodyName>
       <topicName>gps/fix</topicName>
       <velocityTopicName>gps/fix_velocity</velocityTopicName>
-      <drift>0.5 0.5 0.5</drift>
+      <drift>1.0 1.0 1.0</drift>
       <gaussianNoise>0.1 0.1 0.1</gaussianNoise>
       <velocityDrift>0 0 0</velocityDrift>
       <velocityGaussianNoise>0.1 0.1 0.1</velocityGaussianNoise>
