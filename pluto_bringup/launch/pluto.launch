@@ -47,4 +47,7 @@
 
   ## Bringup Teleop
   <include file="$(find pluto_bringup)/launch/ps3joy.launch"/>
+
+  ## Bringup Velodyne
+  <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch"/>
 </launch>
