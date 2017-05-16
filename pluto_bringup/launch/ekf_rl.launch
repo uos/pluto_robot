@@ -1,9 +1,24 @@
 <launch>
+  
   <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_odom" clear_params="true">
       <rosparam command="load" file="$(find pluto_bringup)/config/ekf_rl_odom.yaml" />
   </node>
-  <!--<node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_map" clear_params="true">
-    <rosparam command="load" file="$(find pluto_bringup)/config/ekf_rl_map.yaml" />
-    <remap from="odometry/filtered" to="odometry/filtered_map"/>
+  
+  <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="true">
+      <param name="magnetic_declination_radians" value="0"/>
+
+      <param name="yaw_offset" value="0"/>
+
+      <!--
+      <remap from="/imu/data" to="/your/imu/topic" />
+      <remap from="/gps/fix" to="/your/gps/fix/topic" />
+      <remap from="/odometry/filtered" to="/your/robot_localization/output/topic" /> 
+      <param name="world_frame" value="world" />
+      <param name="odom_fram" value="world" /> -->
+  </node>
+  <!--
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_gps" clear_params="true">
+      <rosparam command="load" file="$(find pluto_bringup)/config/ekf_rl_gps.yaml" />
+      <remap from="/odometry/filtered" to="/odometry/filtered_gps" />
   </node> -->
 </launch>
