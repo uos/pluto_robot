@@ -37,12 +37,14 @@
   <xacro:property name="pannel_height" value="0.09"/>
   <xacro:property name="pannel_depth" value="0.082"/>
 
+
   <xacro:property name="riegl_vz400i_offset_x"
     value="${body_width/2 - 0.1}"/>
   <xacro:property name="riegl_vz400i_offset_y"
     value="0"/>
   <xacro:property name="riegl_vz400i_offset_z"
     value="${body_height/2-0.014 + 0.012}"/>
+
 
 
   <xacro:property name="velodyne_height" value="0.1442"/>
@@ -141,6 +143,7 @@
         z="${horizontal_lever_height}"
         mass="${horizontal_lever_mass}"/>
     </link>
+
 
     <joint name="virtual_${side}_to_base_joint" type="revolute">
       <origin xyz="${xyz}"/>
@@ -265,6 +268,9 @@
   <!-- inertial measurement unit for gazebo -->
   <xacro:imu_gazebo link="imu" imu_topic="imu/data" update_rate="100.0" stdev="${imu_stdev}" />
 
+
+
+
   <link name="velodyne">
     <visual>
       <origin xyz="0 0 ${-velodyne_height_to_lense}" rpy="0 0 0" />
@@ -277,6 +283,8 @@
     </visual>
   </link>
 
+
+
   <joint name="velodyne_to_base_joint" type="fixed">
     <child link="velodyne" />
     <parent link="base_link" />
@@ -287,6 +295,7 @@
       rpy="0 0 0" />
   </joint>
 
+
   <joint name="riegl_vz400i_to_base_joint" type="fixed">
     <child link="riegl_mount_base" />
     <parent link="base_link" />
@@ -296,7 +305,59 @@
             ${riegl_vz400i_offset_z}"
       rpy="0 0 0" />
   </joint>
+  <!-- GPS Sensor -->
 
+
+
+  <gazebo reference="velodyne">
+    <sensor name="velodyne" type="ray">
+      <always_on>true</always_on>
+      <update_rate>5</update_rate>
+      <visualize>false</visualize>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>360</samples>
+            <resolution>1</resolution>
+            <min_angle>-3.14159</min_angle>
+            <max_angle>3.14159</max_angle>
+          </horizontal>
+          <vertical>
+            <samples>3</samples>
+            <resolution>1</resolution>
+            <min_angle>-0.43284</min_angle>
+            <max_angle>0.03490</max_angle>
+          </vertical>
+        </scan>
+        <range>
+          <min>0.22</min>
+          <max>50</max>
+          <resolution>0.02</resolution>
+        </range>
+      </ray>
+      <plugin name="laser_controller" filename="libgazebo_ros_block_laser.so">
+        <frameName>velodyne</frameName>
+        <topicName>velodyne</topicName>
+        <gaussianNoise>0.02</gaussianNoise>
+        <updateRate>5</updateRate>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="novatel_gps_sim" filename="libhector_gazebo_ros_gps.so">
+      <frameId>odom_combined</frameId>
+      <alwaysOn>1</alwaysOn>
+      <updateRate>10.0</updateRate>
+      <bodyName>base_footprint</bodyName>
+      <topicName>gps/fix</topicName>
+      <velocityTopicName>gps/fix_velocity</velocityTopicName>
+      <drift>1.0 1.0 1.0</drift>
+      <gaussianNoise>0.1 0.1 0.1</gaussianNoise>
+      <velocityDrift>0 0 0</velocityDrift>
+      <velocityGaussianNoise>0.1 0.1 0.1</velocityGaussianNoise>
+    </plugin>
+   </gazebo>
   <gazebo>
     <plugin name="volksbot_diffdrive" filename="libgazebo_ros_diffdrive_uos.so">
       <alwaysOn>true</alwaysOn>
@@ -348,4 +409,3 @@
   <xacro:simple_transmission name="virtual_right_to_base" />
 
 </robot>
-
