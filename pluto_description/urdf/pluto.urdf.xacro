@@ -8,7 +8,7 @@
 
   <xacro:include filename="$(find uos_common_urdf)/common.xacro" />
   <xacro:include filename="$(find uos_common_urdf)/urdf/imu.gazebo.urdf.xacro" />
-  <xacro:include filename="$(find uos_rotunit_driver)/urdf/rotunit.urdf.xacro" />
+  <xacro:include filename="$(find riegl_vline_driver)/urdf/riegl_vz400i_mount.urdf.xacro" />
 
   <xacro:property name="M_PI" value="3.14159265359"/>
 
@@ -37,12 +37,14 @@
   <xacro:property name="pannel_height" value="0.09"/>
   <xacro:property name="pannel_depth" value="0.082"/>
 
-  <xacro:property name="rotunit_offset_x"
-    value="${body_width/2 - 0.1 - 0.19/2 + rotunit_box_x/2}"/>
-  <xacro:property name="rotunit_offset_y"
+
+  <xacro:property name="riegl_vz400i_offset_x"
+    value="${body_width/2 - 0.1}"/>
+  <xacro:property name="riegl_vz400i_offset_y"
     value="0"/>
-  <xacro:property name="rotunit_offset_z"
-    value="${body_height/2-0.014 + rotunit_box_z/2}"/>
+  <xacro:property name="riegl_vz400i_offset_z"
+    value="${body_height/2-0.014 + 0.012}"/>
+
 
 
   <xacro:property name="velodyne_height" value="0.1442"/>
@@ -142,7 +144,8 @@
         mass="${horizontal_lever_mass}"/>
     </link>
 
-    <joint name="virtual_${side}_to_base_joint" type="fixed">
+
+    <joint name="virtual_${side}_to_base_joint" type="revolute">
       <origin xyz="${xyz}"/>
       <axis xyz="0 1 0"/>
       <limit effort="1000" lower="-0.4" upper="0.4" velocity="10"/>
@@ -292,14 +295,15 @@
       rpy="0 0 0" />
   </joint>
 
-  <joint name="rotunit_to_base_joint" type="fixed">
-    <child link="rotunit_box_link" />
+
+  <joint name="riegl_vz400i_to_base_joint" type="fixed">
+    <child link="riegl_mount_base" />
     <parent link="base_link" />
     <origin
-      xyz=" ${rotunit_offset_x}
-            ${rotunit_offset_y}
-            ${rotunit_offset_z}"
-      rpy="0 0 ${-M_PI/2}" />
+      xyz=" ${riegl_vz400i_offset_x}
+            ${riegl_vz400i_offset_y}
+            ${riegl_vz400i_offset_z}"
+      rpy="0 0 0" />
   </joint>
   <!-- GPS Sensor -->
 

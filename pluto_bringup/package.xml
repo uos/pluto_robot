@@ -10,15 +10,22 @@
   <author email="spuetz@uos.de">Sebastian Pütz</author>
 
   <buildtool_depend>catkin</buildtool_depend>
+  <!-- <build_depend>pluto_description</build_depend> -->
+  <!-- <build_depend>robot_state_publisher</build_depend> -->
+  <!-- <build_depend>joint_state_publisher</build_depend> -->
+  <!-- <build_depend>laser_filters</build_depend> -->
+  <!-- <build_depend>sound_play</build_depend> -->
+  <!-- <build_depend>battery_guard</build_depend> -->
+
   <run_depend>pluto_description</run_depend>
   <run_depend>robot_state_publisher</run_depend>
   <run_depend>joint_state_publisher</run_depend>
-  <run_depend>velodyne_pointcloud</run_depend>
-  <run_depend>volksbot_driver</run_depend>
-  <run_depend>uos_rotunit_driver</run_depend>
-  <run_depend>kurt_bringup</run_depend>
-  <run_depend>uos_rotunit_snapshotter</run_depend>
-  <run_depend>uos_rotunit_teleop</run_depend>
+  <!-- <run_depend>velodyne_pointcloud</run_depend> -->
+  <!-- <run_depend>volksbot_driver</run_depend> -->
+  <!-- <run_depend>uos_rotunit_driver</run_depend> -->
+  <!-- <run_depend>kurt_bringup</run_depend> -->
+  <!-- <run_depend>uos_rotunit_snapshotter</run_depend> -->
+  <!-- <run_depend>uos_rotunit_teleop</run_depend> -->
   <run_depend>laser_filters</run_depend>
   <run_depend>sound_play</run_depend>
   <run_depend>battery_guard</run_depend>

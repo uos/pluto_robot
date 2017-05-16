@@ -4,24 +4,22 @@
   <include file="$(find pluto_description)/launch/upload_pluto.launch"/>
 
   ## Roboter Setup
-	<arg name="use_3D_sick" default="true" />
   <arg name="use_3D_velodyne" default="false" />
   <arg name="use_imu" default="true" />
-  <arg name="use_snapshotter" default="true"/>
-  <arg name="snapshotter_continuous" default="false"/>
-  
+
   ##Bringup Joint State Publisher and Robot State Publisher
   <rosparam file="$(find pluto_bringup)/config/joint_state_publisher.yaml" command="load" />
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" />
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen" />
-  
+
   ## Bringup Volksbot
   <node name="volksbot" pkg="volksbot_driver" type="volksbot" respawn="false" output="screen">
     <remap from="joint_states" to="volksbot_joint_states" />
-		<param name="wheel_radius" type="double" value="0.103" />
-		<param name="axis_length" type="double" value="0.55" />
+      <param name="wheel_radius" type="double" value="0.103" />
+      <param name="axis_length" type="double" value="0.55" />
     <param name="gear_ratio" type="int" value="156" />
-    	<!-- default values: -->
+
+      <!-- default values: -->
       <!--
       <param name="turning_adaptation" type="double" value="0.95" />
       <param name="x_stddev" type="double" value="0.002" />
@@ -30,46 +28,23 @@
       <param name="cov_xrotation" type="double" value="0.0" />
       <param name="cov_yrotation" type="double" value="0.0" />
       <param name="publish_tf" type="bool" value="False" />
-	   	 -->
- 	</node>
-	
-	## Bringup 3D scanner, if enabled
-	<group if="$(arg use_3D_sick)">
-		## Bringup Rotunit
-		<node pkg="uos_rotunit_driver" type="uos_rotunit_driver" name="uos_rotunit_driver" output="screen">
-			<param name="rotunit_speed" value="0.6" />
-    </node>
-		## Bringup Laser Scanner
-		<include file="$(find pluto_bringup)/launch/sick_lms200.launch">
-			<arg name="device" value="/dev/scanner360"/>
-			<arg name="topic" value="scan360"/>
-			<arg name="frame" value="laser360"/>
-		</include>
-	</group>
+          -->
+   </node>
 
-  
   ## Bringup Velodyne Scanner
   <include if="$(arg use_3D_velodyne)" file="$(find velodyne_pointcloud)/launch/32e_points.launch"/>
   ## Bringup IMU
   <include if="$(arg use_imu)" file="$(find pluto_bringup)/launch/phidgets_imu.launch" />
-  
+
   ## Bringup EKF
   <include file="$(find pluto_bringup)/launch/ekf.launch"/>
 
-  ## Bringup Rotunit Snapshotter Action Server
-  <include if="$(arg use_snapshotter)" file="$(find uos_rotunit_snapshotter)/launch/deg360_snapshotter.launch">
-    <arg name="continuous" value="$(arg snapshotter_continuous)"/>
-  </include>
-  
-  ## Bringup Rotunit PS3 Teleop
-  <include if="$(arg snapshotter_continuous)" file="$(find uos_rotunit_teleop)/launch/ps3joy.launch"/>
+  ## Launch Riegl Laser Scanner Driver
+  <node name="riegl_vline_driver" pkg="riegl_vline_driver" type="riegl_vline_driver_node" output="screen">
+    <remap from="joint_states" to="riegl_joint_states" />
+    <param name="address" value="192.168.178.35" type="string" />
+  </node>
 
-  ## Bringup Filter Chain
-  <include file="$(find pluto_bringup)/launch/filter_chain.launch"/>
-
-  <!-- sound output -->
-  <include file="$(find sound_play)/soundplay_node.launch" />
-
-  <!-- battery guard -->
-  <include file="$(find battery_guard)/launch/battery_guard.launch" />
+  ## Bringup Teleop
+  <include file="$(find pluto_bringup)/launch/ps3joy.launch"/>
 </launch>
