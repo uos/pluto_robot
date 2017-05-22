@@ -50,4 +50,7 @@
 
   ## Bringup Velodyne
   <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch"/>
+
+  ## Bringup Battery Life
+  <include file="$(find battery_life)/launch/battery_life.launch"/>
 </launch>
