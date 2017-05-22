@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+  <!--node pkg="ps3joy" type="ps3joy.py" name="ps3joy" output="screen" launch-prefix="sudo"/-->
+  <node pkg="joy" type="joy_node" name="joy_node">
+    <param name="autorepeat_rate" value="10"/>
+    <param name="dev" value="/dev/input/js0"/>
+  </node>
+
+  <node pkg="uos_diffdrive_teleop" type="uos_diffdrive_teleop_ps3joy" name="uos_diffdrive_teleop_ps3joy" output="screen">
+    <param name="max_vel" value="1.0"/>
+    <param name="max_rot_vel" value="2.0"/>
+
+    <param name="use_button_pressure" value="false"/>
+
+    <!-- m/s² -->
+    <param name="acc_ahead_pos" value="10.0"/>
+    <param name="acc_ahead_neg" value="10.0"/>
+    <param name="acc_ahead_stop" value="10.0"/>
+
+    <!-- rad/s² -->
+    <param name="acc_rot_pos" value="1.4"/>
+    <param name="acc_rot_neg" value="2.6"/>
+    <param name="acc_rot_stop" value="3.4"/>
+  </node>
+</launch>
