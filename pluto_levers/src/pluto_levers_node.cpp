@@ -17,6 +17,7 @@ int vector_one_index;
 int vector_two_index;
 bool invert_vector_one;
 bool invert_vector_two;
+bool invert_angle;
 std::string joint_state_name;
 
 void callback(const Imu::ConstPtr &msg_one, const Imu::ConstPtr &msg_two) {
@@ -46,14 +47,19 @@ void callback(const Imu::ConstPtr &msg_one, const Imu::ConstPtr &msg_two) {
         ROS_DEBUG("Inverted vector two!");
     }
 
+    tfScalar angle = v1.angle(v2);
+    if (invert_angle) {
+        angle *= -1;
+    }
+
     ROS_DEBUG("x1 -> x: [%f], y: [%f], z: [%f]", v1.x(), v1.y(), v1.z());
     ROS_DEBUG("x2 -> x: [%f], y: [%f], z: [%f]", v2.x(), v2.y(), v2.z());
-    ROS_DEBUG("Angle between v1 and v2: [%f]", v1.angle(v2));
+    ROS_DEBUG("Angle between v1 and v2: [%f]", angle);
 
     // publish joint state with angle between imus
     JointState msg;
     msg.name.push_back(joint_state_name);
-    msg.position.push_back(v1.angle(v2));
+    msg.position.push_back(angle);
     pub.publish(msg);
 }
 
@@ -68,6 +74,7 @@ int main(int argc, char **argv) {
     n_private.param("vector_two_column", vector_two_index, 0);
     n_private.param("invert_vector_one", invert_vector_one, false);
     n_private.param("invert_vector_two", invert_vector_two, false);
+    n_private.param("invert_angle", invert_angle, false);
     if (!n_private.getParam("joint_state_name", joint_state_name)) {
         ROS_FATAL("Parameter \"joint_state_name\" missing!");
         ros::shutdown(); // shutdown without joint state name
