@@ -53,4 +53,7 @@
 
   ## Bringup Battery Life
   <include file="$(find battery_life)/launch/battery_life.launch"/>
+
+  ## Bringup Levers
+  <include file="$(find pluto_levers)/launch/lever.launch"/>
 </launch>
