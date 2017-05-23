@@ -1,3 +1,2 @@
 use_gui: false
-source_list: [rotunit_joint_states, volksbot_joint_states]
-zeros: {virtual_left_to_base_joint: 0.18, virtual_right_to_base_joint: 0.18}
+source_list: [volksbot_joint_states, levers_joint_states]
