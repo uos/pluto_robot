@@ -7,7 +7,7 @@
 
         <param name="vector_one_column" value="0" type="int"/>
         <param name="vector_two_column" value="2" type="int"/>
-        <!--param name="invert_vector_one" value="true" type="bool"/-->
+        <param name="invert_vector_one" value="true" type="bool"/>
 
         <remap from="lever" to="/levers_joint_states"/>
         <remap from="imu/one" to="imu/left/data"/>

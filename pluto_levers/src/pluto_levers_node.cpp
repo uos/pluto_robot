@@ -15,6 +15,8 @@ using namespace tf;
 ros::Publisher pub;
 int vector_one_index;
 int vector_two_index;
+bool invert_vector_one;
+bool invert_vector_two;
 std::string joint_state_name;
 
 void callback(const Imu::ConstPtr &msg_one, const Imu::ConstPtr &msg_two) {
@@ -30,11 +32,19 @@ void callback(const Imu::ConstPtr &msg_one, const Imu::ConstPtr &msg_two) {
     Quaternion q1(msg_one->orientation.x, msg_one->orientation.y, msg_one->orientation.z, msg_one->orientation.w);
     Matrix3x3 m1(q1);
     Vector3 v1 = m1.getColumn(vector_one_index);
+    if (invert_vector_one) {
+        v1 *= -1;
+        ROS_DEBUG("Inverted vector one!");
+    }
 
     // convert imu two orientation to vector
     Quaternion q2(msg_two->orientation.x, msg_two->orientation.y, msg_two->orientation.z, msg_two->orientation.w);
     Matrix3x3 m2(q2);
     Vector3 v2 = m2.getColumn(vector_two_index);
+    if (invert_vector_two) {
+        v2 *= -1;
+        ROS_DEBUG("Inverted vector two!");
+    }
 
     ROS_DEBUG("x1 -> x: [%f], y: [%f], z: [%f]", v1.x(), v1.y(), v1.z());
     ROS_DEBUG("x2 -> x: [%f], y: [%f], z: [%f]", v2.x(), v2.y(), v2.z());
@@ -56,6 +66,8 @@ int main(int argc, char **argv) {
     // get params
     n_private.param("vector_one_column", vector_one_index, 0);
     n_private.param("vector_two_column", vector_two_index, 0);
+    n_private.param("invert_vector_one", invert_vector_one, false);
+    n_private.param("invert_vector_two", invert_vector_two, false);
     if (!n_private.getParam("joint_state_name", joint_state_name)) {
         ROS_FATAL("Parameter \"joint_state_name\" missing!");
         ros::shutdown(); // shutdown without joint state name
