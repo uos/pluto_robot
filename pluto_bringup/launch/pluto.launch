@@ -37,7 +37,7 @@
   <include if="$(arg use_imu)" file="$(find pluto_bringup)/launch/phidgets_imu.launch" />
 
   ## Bringup EKF
-  <include file="$(find pluto_bringup)/launch/ekf.launch"/>
+  <include file="$(find pluto_bringup)/launch/ekf_rl.launch"/>
 
   ## Launch Riegl Laser Scanner Driver
   <node name="riegl_vline_driver" pkg="riegl_vline_driver" type="riegl_vline_driver_node" output="screen">
