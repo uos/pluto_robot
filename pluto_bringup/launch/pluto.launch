@@ -4,7 +4,7 @@
   <include file="$(find pluto_description)/launch/upload_pluto.launch"/>
 
   ## Launch state publisher
-  <rosparam file="$(find pluto_bringup)/config/joint_state_publishe.yaml" command="load"/>
+  <rosparam file="$(find pluto_bringup)/config/joint_state_publisher.yaml" command="load"/>
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen"/>
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen"/>
 
@@ -37,13 +37,13 @@
   <include file="$(find lvr_ros)/launch/reconstruction.launch"/>
 
   ## Launch map server
-  <node name="mesh_map_server" pkg="mesh_map_server" type="mesh_map_server" respawn="false" output="screen"/>
+  <node name="mesh_map_server" pkg="mesh_map_server" type="mesh_map_server" output="screen"/>
 
   ## Launch teleop
   <include file="$(find pluto_bringup)/launch/ps3joy.launch"/>
 
   ## Launch battery life
-  <include file="$(find battery_life)/launch/battery_life.launch"/>
+  <!-- <include file="$(find battery_life)/launch/battery_life.launch"/> -->
 
   ## Launch levers
   <include file="$(find pluto_levers)/launch/lever.launch"/>
