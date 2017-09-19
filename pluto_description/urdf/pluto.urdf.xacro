@@ -83,9 +83,17 @@
   <xacro:property name="wheel_radius" value="0.15"/>
   <xacro:property name="wheel_thickness" value="0.065"/>
 
-  <xacro:property name="imu_offset_x" value="${body_length/2 - 0.285}"/>
-  <xacro:property name="imu_offset_y" value="0"/>
-  <xacro:property name="imu_offset_z" value="${- body_height/2 + 0.03}"/>
+  <xacro:property name="imu_center_offset_x" value="${body_length/2 - 0.285}"/>
+  <xacro:property name="imu_center_offset_y" value="0"/>
+  <xacro:property name="imu_center_offset_z" value="${- body_height/2 + 0.03}"/>
+
+  <xacro:property name="imu_left_offset_x" value="0.1"/>
+  <xacro:property name="imu_left_offset_y" value="0.2"/>
+  <xacro:property name="imu_left_offset_z" value="0.05"/>
+
+  <xacro:property name="imu_right_offset_x" value="0.1"/>
+  <xacro:property name="imu_right_offset_y" value="-0.2"/>
+  <xacro:property name="imu_right_offset_z" value="0.05"/>
 
   <link name="base_footprint"/>
   <link name="base_link">
@@ -242,7 +250,7 @@
     parent="base_link"
     xyz="-0.23 -0.19 ${(-body_height/2.0)+(bearing_height/2.0)}" />
 
-  <link name="imu">
+  <link name="imu_center">
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <geometry>
@@ -255,15 +263,64 @@
 
   </link>
 
-  <joint name="imu_to_base_joint" type="fixed">
+  <joint name="imu_center_to_base_joint" type="fixed">
     <parent link="base_link" />
-    <child link="imu" />
+    <child link="imu_center" />
     <origin
-      xyz=" ${imu_offset_x}
-            ${imu_offset_y}
-            ${imu_offset_z}"
-      rpy="${M_PI} 0 ${M_PI/2.0}" />
+      xyz=" ${imu_center_offset_x}
+            ${imu_center_offset_y}
+            ${imu_center_offset_z}"
+      rpy="${M_PI} -0.1660595 ${M_PI/2.0}" />
+   <!-- rpy="${M_PI} 0 ${M_PI/2.0}" /> -->
   </joint>
+
+  <link name="imu_left">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.06 0.06 0.02"/>
+      </geometry>
+      <material name="white" >
+        <color rgba="0.8 0.8 0.8 1" />
+      </material>
+    </visual>
+  </link>
+
+  <!-- phidgets driver solution for left to right handed coordinates : multiply a -1 to every axis -->
+
+  <joint name="imu_left_to_base_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="imu_left" />
+    <origin
+      xyz=" ${imu_left_offset_x}
+            ${imu_left_offset_y}
+            ${imu_left_offset_z}"
+            rpy="0 ${M_PI/2.0} ${-M_PI/2.0}" />
+  </joint>
+
+  <link name="imu_right">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <box size="0.06 0.06 0.02"/>
+      </geometry>
+      <material name="white" >
+        <color rgba="0.8 0.8 0.8 1" />
+      </material>
+    </visual>
+
+  </link>
+
+  <joint name="imu_right_to_base_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="imu_right" />
+    <origin
+      xyz=" ${imu_right_offset_x}
+            ${imu_right_offset_y}
+            ${imu_right_offset_z}"
+            rpy="0 ${-M_PI/2.0} ${-M_PI/2.0}" />
+  </joint>
+
 
   <!-- inertial measurement unit for gazebo -->
   <xacro:imu_gazebo link="imu" imu_topic="imu/data" update_rate="100.0" stdev="${imu_stdev}" />
