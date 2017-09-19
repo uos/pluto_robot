@@ -24,6 +24,7 @@
 
   ## Launch Riegl driver
   <include file="$(find riegl_driver)/launch/riegl_vz400i.launch">
+    <arg name="min_range" value="1.0"/>
     <arg name="address" value="192.168.178.35"/>
   </include>
 
