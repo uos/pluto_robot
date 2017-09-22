@@ -55,7 +55,7 @@
   <node name="mesh_map_server" pkg="mesh_map_server" type="mesh_map_server" output="screen"/>
 
   ## Launch teleop
-  <include file="$(find pluto_bringup)/launch/ps3joy.launch"/>
+  <!--<include file="$(find pluto_bringup)/launch/ps3joy.launch"/>-->
 
   ## Launch battery life
   <!-- <include file="$(find battery_life)/launch/battery_life.launch"/> -->

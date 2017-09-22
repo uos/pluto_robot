@@ -12,7 +12,7 @@
 
   <xacro:property name="M_PI" value="3.14159265359"/>
 
-  <xacro:property name="footprint_to_base_rpy_p" value="-0.1660595"/>
+  <xacro:property name="footprint_to_base_rpy_p" value="-0.12"/>
 
   <xacro:property name="imu_stdev" value="0.00017" />
 
@@ -272,7 +272,7 @@
       xyz=" ${imu_center_offset_x}
             ${imu_center_offset_y}
             ${imu_center_offset_z}"
-      rpy="${M_PI} ${-footprint_to_base_rpy_p} ${M_PI/2.0}" />
+            rpy="${M_PI} 0 ${M_PI/2.0}" />
    <!-- TODO: test -->
   </joint>
 
@@ -351,7 +351,7 @@
       xyz=" ${velodyne_offset_x}
             ${velodyne_offset_y}
             ${velodyne_offset_z + velodyne_height_to_lense}"
-      rpy="0 ${-M_PI/22} 0" />
+      rpy="0 0 0" />
   </joint>
 
 
