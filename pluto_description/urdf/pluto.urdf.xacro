@@ -8,7 +8,7 @@
 
   <xacro:include filename="$(find uos_common_urdf)/common.xacro" />
   <xacro:include filename="$(find uos_common_urdf)/urdf/imu.gazebo.urdf.xacro" />
-  <xacro:include filename="$(find riegl_vline_driver)/urdf/riegl_vz400i_mount.urdf.xacro" />
+  <xacro:include filename="$(find riegl_driver)/urdf/riegl_vz400i_mount.urdf.xacro" />
 
   <xacro:property name="M_PI" value="3.14159265359"/>
 
