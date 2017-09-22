@@ -12,6 +12,8 @@
 
   <xacro:property name="M_PI" value="3.14159265359"/>
 
+  <xacro:property name="footprint_to_base_rpy_p" value="-0.1660595"/>
+
   <xacro:property name="imu_stdev" value="0.00017" />
 
   <xacro:property name="body_height" value="0.21"/>
@@ -121,7 +123,7 @@
 
   <joint name="base_footprint_to_base_joint" type="fixed">
     <!-- origin xyz="0 0 0.2" rpy="0 ${-M_PI/18.0} 0" /-->
-    <origin xyz="0 0 0.2" rpy="0 0 0" />
+    <origin xyz="0 0 0.2" rpy="0 ${footprint_to_base_rpy_p} 0" />
     <parent link="base_footprint"/>
     <child link="base_link" />
   </joint>
@@ -270,8 +272,8 @@
       xyz=" ${imu_center_offset_x}
             ${imu_center_offset_y}
             ${imu_center_offset_z}"
-      rpy="${M_PI} -0.1660595 ${M_PI/2.0}" />
-   <!-- rpy="${M_PI} 0 ${M_PI/2.0}" /> -->
+      rpy="${M_PI} ${-footprint_to_base_rpy_p} ${M_PI/2.0}" />
+   <!-- TODO: test -->
   </joint>
 
   <link name="imu_left">
@@ -349,7 +351,7 @@
       xyz=" ${velodyne_offset_x}
             ${velodyne_offset_y}
             ${velodyne_offset_z + velodyne_height_to_lense}"
-      rpy="0 0 0" />
+      rpy="0 ${-M_PI/22} 0" />
   </joint>
 
 

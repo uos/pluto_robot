@@ -16,7 +16,7 @@
       <param name="gear_ratio" type="int" value="156" />
       <param name="turning_adaptation" type="double" value="0.67" />
       <param name="cov_xrotation" type="double" value="0.0" />
-      <param name="cov_yrotation" type="double" value="0.0" /> 
+      <param name="cov_yrotation" type="double" value="0.0" />
       <param name="rotation_stddev" type="double" value="0.2" />
       <!-- default values: -->
       <!--
