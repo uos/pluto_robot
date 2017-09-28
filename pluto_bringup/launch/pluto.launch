@@ -63,7 +63,7 @@
   <include file="$(find mesh_navigation)/launch/navigation.launch"/>
 
   ## Launch point cloud server
-  <node name="pointcloud_server" pkg="pointcloud_server" type="pointcloud_server" output="screen"/>
+  <include file="$(find pluto_bringup)/launch/pc_server.launch"/>
 
   ## Launch teleop
   <!--<include file="$(find pluto_bringup)/launch/ps3joy.launch"/>-->
@@ -73,4 +73,7 @@
 
   ## Launch levers
   <include file="$(find pluto_levers)/launch/lever.launch"/>
+
+  ## Sounds
+  <include file="$(find pluto_bringup)/launch/sounds.launch"/>
 </launch>
