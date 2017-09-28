@@ -45,6 +45,9 @@
   ## Launch map server
   <node name="mesh_map_server" pkg="mesh_map_server" type="mesh_map_server" output="screen"/>
 
+  ## Launch point cloud server
+  <node name="pointcloud_server" pkg="pointcloud_server" type="pointcloud_server" output="screen"/>
+
   ## Launch teleop
   <!-- <include file="$(find pluto_bringup)/launch/ps3joy.launch"/> -->
 
