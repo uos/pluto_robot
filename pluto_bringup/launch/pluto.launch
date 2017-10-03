@@ -61,6 +61,9 @@
   ## Launch map server
   <node name="mesh_map_server" pkg="mesh_map_server" type="mesh_map_server" output="screen"/>
 
+  ## Launch exploration
+  <node name="exploration" pkg="exploration" type="exploration" output="screen"/>
+
   ## Launch move_base_flex
   <include file="$(find mesh_navigation)/launch/navigation.launch"/>
 
