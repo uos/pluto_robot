@@ -42,24 +42,43 @@
     <arg name="address" value="192.168.178.35"/>
   </include>
 
+  ## Launch hyperspectral camera
+  <!--
+  <include file="$(find hyperspectral_calibration)/launch/colorize_cloud.launch">
+    <arg name="use_rgb_only" value="false"/>
+  </include>
+  -->
+
   ## Launch robot localization
   <include file="$(find pluto_bringup)/launch/ekf_rl.launch"/>
-
-  ## Launch move_base_flex
-  <include file="$(find mesh_navigation)/launch/navigation.launch"/>
 
   ## Launch reconstruction
   <include file="$(find lvr_ros)/launch/reconstruction.launch"/>
 
+  ## Launch costmap calculation
+  <include file="$(find mesh_navigation)/launch/cost_calculation.launch"/>
+
   ## Launch map server
   <node name="mesh_map_server" pkg="mesh_map_server" type="mesh_map_server" output="screen"/>
 
+  ## Launch exploration
+  <node name="exploration" pkg="exploration" type="exploration" output="screen"/>
+
+  ## Launch move_base_flex
+  <include file="$(find mesh_navigation)/launch/navigation.launch"/>
+
+  ## Launch point cloud server
+  <include file="$(find pluto_bringup)/launch/pc_server.launch"/>
+
   ## Launch teleop
-  <!--<include file="$(find pluto_bringup)/launch/ps3joy.launch"/>-->
+  <!-- <include file="$(find pluto_bringup)/launch/ps3joy.launch"/> -->
 
   ## Launch battery life
   <!-- <include file="$(find battery_life)/launch/battery_life.launch"/> -->
 
   ## Launch levers
   <include file="$(find pluto_levers)/launch/lever.launch"/>
+
+  ## Launch sounds
+  <include file="$(find pluto_bringup)/launch/sounds.launch"/>
 </launch>
