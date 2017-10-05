@@ -156,14 +156,15 @@
 
 
     <joint name="virtual_${side}_to_base_joint" type="revolute">
-      <origin xyz="${xyz}"/>
+      <origin xyz="${xyz}"
+        rpy="0 ${-footprint_to_base_rpy_p} 0" />
       <axis xyz="0 1 0"/>
       <limit effort="1000" lower="-0.4" upper="0.4" velocity="10"/>
       <parent link="base_link"/>
       <child link="virtual_axis_${side}"/>
     </joint>
   </xacro:macro>
-
+  <!-- set initial rot to  footprint_to_base_rpy_p -->
   <xacro:virtual_axis
     side="left"
     xyz=" ${virtual_axis_left_offset_x}
@@ -176,7 +177,6 @@
     xyz=" ${virtual_axis_right_offset_x}
           ${virtual_axis_right_offset_y}
           ${virtual_axis_right_offset_z}"
-
     rot="0"/>
 
   <!--Wheel Macro-->
@@ -326,8 +326,6 @@
 
   <!-- inertial measurement unit for gazebo -->
   <xacro:imu_gazebo link="imu" imu_topic="imu/data" update_rate="100.0" stdev="${imu_stdev}" />
-
-
 
 
   <link name="velodyne">
