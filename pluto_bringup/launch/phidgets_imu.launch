@@ -31,8 +31,8 @@
 
     # supported data rates: 4 8 16 24 32 40 ... 1000 (in ms)
     <param name="period" value="4"/>
-
-    <param name="serial_number" value="369774"/>
+    <param name="serial_number" value="415954" />
+    <!--<param name="serial_number" value="369774"/>-->
 
     # The name of the frame attached to the published messages (default: imu)
     <param name="frame_id" value="imu_left" />
@@ -51,8 +51,9 @@
 
       # supported data rates: 4 8 16 24 32 40 ... 1000 (in ms)
       <param name="period" value="4"/>
-
-      <param name="serial_number" value="415954"/>
+      
+      <param name="serial_number" value="369774" />
+      <!--<param name="serial_number" value="415954"/>-->
 
       # The name of the frame attached to the published messages (default: imu)
       <param name="frame_id" value="imu_right" />
