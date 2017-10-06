@@ -291,13 +291,11 @@
   <!-- phidgets driver solution for left to right handed coordinates : multiply a -1 to every axis -->
 
   <joint name="imu_left_to_base_joint" type="fixed">
-    <parent link="base_link" />
+    <parent link="virtual_axis_left" />
     <child link="imu_left" />
     <origin
-      xyz=" ${imu_left_offset_x}
-            ${imu_left_offset_y}
-            ${imu_left_offset_z}"
-            rpy="0 ${M_PI/2.0} ${-M_PI/2.0}" />
+      xyz="0 0 0.2"
+      rpy="0 0 0" />
   </joint>
 
   <link name="imu_right">
@@ -314,15 +312,12 @@
   </link>
 
   <joint name="imu_right_to_base_joint" type="fixed">
-    <parent link="base_link" />
+    <parent link="virtual_axis_right" />
     <child link="imu_right" />
     <origin
-      xyz=" ${imu_right_offset_x}
-            ${imu_right_offset_y}
-            ${imu_right_offset_z}"
-            rpy="0 ${-M_PI/2.0} ${-M_PI/2.0}" />
+      xyz="0 0 0.2"
+      rpy="0 0 0" />
   </joint>
-
 
   <!-- inertial measurement unit for gazebo -->
   <xacro:imu_gazebo link="imu" imu_topic="imu/data" update_rate="100.0" stdev="${imu_stdev}" />
