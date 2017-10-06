@@ -126,6 +126,7 @@ ekf_se_odom:
     imu0: imu/center/data
     imu0_config: [ false, false, false,
                    true, true, true,
+       #true, true, true,
                    false, false, false,
                    false, false, false,
                    false, false, false]
@@ -141,10 +142,11 @@ ekf_se_odom:
     
     imu1: imu/left/data
     imu1_config: [ false, false, false,
-                   true, true, true,
+                   false, false, true,
+                   #true, true, true,
                    false, false, false,
-                   false, false, false,
-                   false, false, false]
+                  false, false, false,
+                  false, false, false]
     imu1_nodelay: true
     imu1_differential: false
     imu1_relative: true
@@ -153,10 +155,11 @@ ekf_se_odom:
     imu1_twist_rejection_threshold: 0.1                #
     imu1_linear_acceleration_rejection_threshold: 0.8  #
     imu1_remove_gravitational_acceleration: true
-    
+
     imu2: imu/right/data
     imu2_config: [ false, false, false,
-                   true, true, true,
+                   false, false, true,
+                   #true, true, true,
                    false, false, false,
                    false, false, false,
                    false, false, false]
@@ -199,8 +202,8 @@ ekf_se_odom:
     process_noise_covariance: [0.05, 0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0.05, 0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0,    0.06, 0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
-                               0,    0,    0,    0.17, 0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
-                               0,    0,    0,    0,    0.17, 0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                               0,    0,    0,    700.007, 0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                               0,    0,    0,    0,    700.007, 0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0,    0,    0,    0,    0.17, 0,     0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0,    0,    0,    0,    0,    0.025, 0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0,    0,    0,    0,    0,    0,     0.025, 0,    0,    0,    0,    0,    0,    0,
@@ -220,8 +223,8 @@ ekf_se_odom:
     initial_estimate_covariance: [1e-9, 0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
                                   0,    1e-9, 0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
                                   0,    0,    1e-9, 0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
-                                  0,    0,    0,    1e-9, 0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
-                                  0,    0,    0,    0,    1e-9, 0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                                  0,    0,    0,    700, 0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                                  0,    0,    0,    0,    700, 0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
                                   0,    0,    0,    0,    0,    1e-9, 0,    0,    0,    0,     0,     0,     0,    0,    0,
                                   0,    0,    0,    0,    0,    0,    1e-9, 0,    0,    0,     0,     0,     0,    0,    0,
                                   0,    0,    0,    0,    0,    0,    0,    1e-9, 0,    0,     0,     0,     0,    0,    0,
