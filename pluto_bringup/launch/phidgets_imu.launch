@@ -51,7 +51,7 @@
 
       # supported data rates: 4 8 16 24 32 40 ... 1000 (in ms)
       <param name="period" value="4"/>
-      
+
       <param name="serial_number" value="369774" />
       <!--<param name="serial_number" value="415954"/>-->
 
