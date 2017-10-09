@@ -138,37 +138,6 @@ ekf_se_odom:
     imu0_linear_acceleration_rejection_threshold: 0.8  #
     imu0_remove_gravitational_acceleration: true
 
-
-    imu1: imu/left/data
-    imu1_config: [ false, false, false,
-                   false, false, true,
-                   false, false, false,
-                   false, false, false,
-                   false, false, false]
-    imu1_nodelay: true
-    imu1_differential: false
-    imu1_relative: true
-    imu1_queue_size: 300
-    imu1_pose_rejection_threshold: 1                # Note the difference in parameter names
-    imu1_twist_rejection_threshold: 0.1                #
-    imu1_linear_acceleration_rejection_threshold: 0.8  #
-    imu1_remove_gravitational_acceleration: true
-
-    imu2: imu/right/data
-    imu2_config: [ false, false, false,
-                   false, false, true,
-                   false, false, false,
-                   false, false, false,
-                   false, false, false]
-    imu2_nodelay: true
-    imu2_differential: false
-    imu2_relative: true
-    imu2_queue_size: 300
-    imu2_pose_rejection_threshold: 1                # Note the difference in parameter names
-    imu2_twist_rejection_threshold: 0.1                #
-    imu2_linear_acceleration_rejection_threshold: 0.8  #
-    imu2_remove_gravitational_acceleration: true
-
     use_control: true
     # Whether the input (assumed to be cmd_vel) is a geometry_msgs/Twist or geometry_msgs/TwistStamped message. Defaults to
     # false.
@@ -199,8 +168,8 @@ ekf_se_odom:
     process_noise_covariance: [0.05, 0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0.05, 0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0,    0.06, 0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
-                               0,    0,    0,    700.007, 0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
-                               0,    0,    0,    0,    700.007, 0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                               0,    0,    0,    0.17, 0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                               0,    0,    0,    0,    0.17, 0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0,    0,    0,    0,    0.17, 0,     0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0,    0,    0,    0,    0,    0.025, 0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0,    0,    0,    0,    0,    0,     0.025, 0,    0,    0,    0,    0,    0,    0,
@@ -220,8 +189,8 @@ ekf_se_odom:
     initial_estimate_covariance: [1e-9, 0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
                                   0,    1e-9, 0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
                                   0,    0,    1e-9, 0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
-                                  0,    0,    0,    700, 0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
-                                  0,    0,    0,    0,    700, 0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                                  0,    0,    0,    1e-9, 0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                                  0,    0,    0,    0,    1e-9, 0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
                                   0,    0,    0,    0,    0,    1e-9, 0,    0,    0,    0,     0,     0,     0,    0,    0,
                                   0,    0,    0,    0,    0,    0,    1e-9, 0,    0,    0,     0,     0,     0,    0,    0,
                                   0,    0,    0,    0,    0,    0,    0,    1e-9, 0,    0,     0,     0,     0,    0,    0,
@@ -235,6 +204,9 @@ ekf_se_odom:
 
 
 ekf_se_map:
+
+
+
 
     #frequency specified here, regardless of whether it receives more measurements. Defaults to 30 if unspecified.
     frequency: 50
@@ -383,37 +355,6 @@ ekf_se_map:
     imu0_linear_acceleration_rejection_threshold: 0.8  #
     imu0_remove_gravitational_acceleration: true
 
-
-    imu1: imu/left/data
-    imu1_config: [ false, false, false,
-                   false, false, true,
-                   false, false, false,
-                   false, false, false,
-                   false, false, false]
-    imu1_nodelay: true
-    imu1_differential: false
-    imu1_relative: true
-    imu1_queue_size: 300
-    imu1_pose_rejection_threshold: 1                # Note the difference in parameter names
-    imu1_twist_rejection_threshold: 0.1                #
-    imu1_linear_acceleration_rejection_threshold: 0.8  #
-    imu1_remove_gravitational_acceleration: true
-
-    imu2: imu/right/data
-    imu2_config: [ false, false, false,
-                   false, false, true,
-                   false, false, false,
-                   false, false, false,
-                   false, false, false]
-    imu2_nodelay: true
-    imu2_differential: false
-    imu2_relative: true
-    imu2_queue_size: 300
-    imu2_pose_rejection_threshold: 1                # Note the difference in parameter names
-    imu2_twist_rejection_threshold: 0.1                #
-    imu2_linear_acceleration_rejection_threshold: 0.8  #
-    imu2_remove_gravitational_acceleration: true
-
     use_control: true
     # Whether the input (assumed to be cmd_vel) is a geometry_msgs/Twist or geometry_msgs/TwistStamped message. Defaults to
     # false.
@@ -444,8 +385,8 @@ ekf_se_map:
     process_noise_covariance: [0.05, 0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0.05, 0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0,    0.06, 0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
-                               0,    0,    0,    700.17, 0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
-                               0,    0,    0,    0,    700.17, 0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                               0,    0,    0,    0.17, 0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                               0,    0,    0,    0,    0.17, 0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0,    0,    0,    0,    0.17, 0,     0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0,    0,    0,    0,    0,    0.025, 0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0,    0,    0,    0,    0,    0,     0.025, 0,    0,    0,    0,    0,    0,    0,
@@ -465,8 +406,8 @@ ekf_se_map:
     initial_estimate_covariance: [1e-9, 0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
                                   0,    1e-9, 0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
                                   0,    0,    1e-9, 0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
-                                  0,    0,    0,    700, 0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
-                                  0,    0,    0,    0,    700, 0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                                  0,    0,    0,    1e-9, 0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
+                                  0,    0,    0,    0,    1e-9, 0,    0,    0,    0,    0,     0,     0,     0,    0,    0,
                                   0,    0,    0,    0,    0,    1e-9, 0,    0,    0,    0,     0,     0,     0,    0,    0,
                                   0,    0,    0,    0,    0,    0,    1e-9, 0,    0,    0,     0,     0,     0,    0,    0,
                                   0,    0,    0,    0,    0,    0,    0,    1e-9, 0,    0,     0,     0,     0,    0,    0,
