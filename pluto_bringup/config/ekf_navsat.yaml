@@ -2,7 +2,7 @@
 
 ekf_se_odom:
     #frequency specified here, regardless of whether it receives more measurements. Defaults to 30 if unspecified.
-    frequency: 50
+    frequency: 80
 
     # The period, in seconds, after which we consider a sensor to have timed out. In this event, we carry out a predict
     # cycle on the EKF without correcting it. This parameter can be thought of as the minimum frequency with which the
@@ -125,16 +125,16 @@ ekf_se_odom:
 
     imu0: imu/center/data
     imu0_config: [ false, false, false,
-                   true, true, true,
+                   true, true, false,
                    false, false, false,
                    false, false, false,
                    false, false, false]
     imu0_nodelay: true
     imu0_differential: false
     imu0_relative: true
-    imu0_queue_size: 300
+    imu0_queue_size: 50
     imu0_pose_rejection_threshold: 1                # Note the difference in parameter names
-    imu0_twist_rejection_threshold: 0.1                #
+    imu0_twist_rejection_threshold: 0.05                #
     imu0_linear_acceleration_rejection_threshold: 0.8  #
     imu0_remove_gravitational_acceleration: true
 
@@ -148,9 +148,9 @@ ekf_se_odom:
     imu1_nodelay: true
     imu1_differential: false
     imu1_relative: true
-    imu1_queue_size: 300
-    imu1_pose_rejection_threshold: 1                # Note the difference in parameter names
-    imu1_twist_rejection_threshold: 0.1                #
+    imu1_queue_size: 50
+    imu1_pose_rejection_threshold: 0.1                # Note the difference in parameter names
+    imu1_twist_rejection_threshold: 0.05                #
     imu1_linear_acceleration_rejection_threshold: 0.8  #
     imu1_remove_gravitational_acceleration: true
 
@@ -163,9 +163,9 @@ ekf_se_odom:
     imu2_nodelay: true
     imu2_differential: false
     imu2_relative: true
-    imu2_queue_size: 300
+    imu2_queue_size: 50
     imu2_pose_rejection_threshold: 1                # Note the difference in parameter names
-    imu2_twist_rejection_threshold: 0.1                #
+    imu2_twist_rejection_threshold: 0.05                #
     imu2_linear_acceleration_rejection_threshold: 0.8  #
     imu2_remove_gravitational_acceleration: true
 
@@ -176,7 +176,7 @@ ekf_se_odom:
     # The last issued control command will be used in prediction for this period. Defaults to 0.2.
     control_timeout: 0.2
     # Which velocities are being controlled. Order is vx, vy, vz, vroll, vpitch, vyaw.
-    control_config: [true, false, false, false, false, true]
+    control_config: [true, false, false, false, false, false]
     # Places limits on how large the acceleration term will be. Should match your robot's kinematics.
     acceleration_limits: [2.0, 0.0, 0.0, 0.0, 0.0, 3.4]
     # Acceleration and deceleration limits are not always the same for robots.
@@ -237,7 +237,7 @@ ekf_se_odom:
 ekf_se_map:
 
     #frequency specified here, regardless of whether it receives more measurements. Defaults to 30 if unspecified.
-    frequency: 50
+    frequency: 80
 
     # The period, in seconds, after which we consider a sensor to have timed out. In this event, we carry out a predict
     # cycle on the EKF without correcting it. This parameter can be thought of as the minimum frequency with which the
@@ -368,18 +368,19 @@ ekf_se_map:
     odom1_differential: false
     odom1_relative: false
 
+
     imu0: imu/center/data
     imu0_config: [ false, false, false,
-                   true, true, true,
+                   true, true, false,
                    false, false, false,
                    false, false, false,
                    false, false, false]
     imu0_nodelay: true
     imu0_differential: false
     imu0_relative: true
-    imu0_queue_size: 300
+    imu0_queue_size: 50
     imu0_pose_rejection_threshold: 1                # Note the difference in parameter names
-    imu0_twist_rejection_threshold: 0.1                #
+    imu0_twist_rejection_threshold: 0.05                #
     imu0_linear_acceleration_rejection_threshold: 0.8  #
     imu0_remove_gravitational_acceleration: true
 
@@ -393,9 +394,9 @@ ekf_se_map:
     imu1_nodelay: true
     imu1_differential: false
     imu1_relative: true
-    imu1_queue_size: 300
-    imu1_pose_rejection_threshold: 1                # Note the difference in parameter names
-    imu1_twist_rejection_threshold: 0.1                #
+    imu1_queue_size: 50
+    imu1_pose_rejection_threshold: 0.1                # Note the difference in parameter names
+    imu1_twist_rejection_threshold: 0.05                #
     imu1_linear_acceleration_rejection_threshold: 0.8  #
     imu1_remove_gravitational_acceleration: true
 
@@ -408,9 +409,9 @@ ekf_se_map:
     imu2_nodelay: true
     imu2_differential: false
     imu2_relative: true
-    imu2_queue_size: 300
+    imu2_queue_size: 50
     imu2_pose_rejection_threshold: 1                # Note the difference in parameter names
-    imu2_twist_rejection_threshold: 0.1                #
+    imu2_twist_rejection_threshold: 0.05                #
     imu2_linear_acceleration_rejection_threshold: 0.8  #
     imu2_remove_gravitational_acceleration: true
 
@@ -421,7 +422,7 @@ ekf_se_map:
     # The last issued control command will be used in prediction for this period. Defaults to 0.2.
     control_timeout: 0.2
     # Which velocities are being controlled. Order is vx, vy, vz, vroll, vpitch, vyaw.
-    control_config: [true, false, false, false, false, true]
+    control_config: [true, false, false, false, false, false]
     # Places limits on how large the acceleration term will be. Should match your robot's kinematics.
     acceleration_limits: [2.0, 0.0, 0.0, 0.0, 0.0, 3.4]
     # Acceleration and deceleration limits are not always the same for robots.
@@ -444,8 +445,8 @@ ekf_se_map:
     process_noise_covariance: [0.05, 0,    0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0.05, 0,    0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0,    0.06, 0,    0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
-                               0,    0,    0,    700.17, 0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
-                               0,    0,    0,    0,    700.17, 0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                               0,    0,    0,    700.007, 0,    0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
+                               0,    0,    0,    0,    700.007, 0,    0,     0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0,    0,    0,    0,    0.17, 0,     0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0,    0,    0,    0,    0,    0.025, 0,     0,    0,    0,    0,    0,    0,    0,
                                0,    0,    0,    0,    0,    0,    0,     0.025, 0,    0,    0,    0,    0,    0,    0,
@@ -477,7 +478,6 @@ ekf_se_map:
                                   0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     1e-9, 0,    0,
                                   0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    1e-9, 0,
                                   0,    0,    0,    0,    0,    0,    0,    0,    0,    0,     0,     0,     0,    0,    1e-9]
-
 
 
 
