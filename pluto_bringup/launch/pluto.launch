@@ -77,7 +77,7 @@
   <!-- <include file="$(find battery_life)/launch/battery_life.launch"/> -->
 
   ## Launch levers
-  <!--  <include file="$(find pluto_levers)/launch/lever.launch"/> -->
+  <include file="$(find pluto_levers)/launch/lever.launch"/>
 
   ## Launch sounds
   <include file="$(find pluto_bringup)/launch/sounds.launch"/>
