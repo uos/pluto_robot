@@ -156,14 +156,15 @@
 
 
     <joint name="virtual_${side}_to_base_joint" type="revolute">
-      <origin xyz="${xyz}"/>
+      <origin xyz="${xyz}"
+        rpy="0 ${-footprint_to_base_rpy_p} 0" />
       <axis xyz="0 1 0"/>
       <limit effort="1000" lower="-0.4" upper="0.4" velocity="10"/>
       <parent link="base_link"/>
       <child link="virtual_axis_${side}"/>
     </joint>
   </xacro:macro>
-
+  <!-- set initial rot to  footprint_to_base_rpy_p -->
   <xacro:virtual_axis
     side="left"
     xyz=" ${virtual_axis_left_offset_x}
@@ -176,7 +177,6 @@
     xyz=" ${virtual_axis_right_offset_x}
           ${virtual_axis_right_offset_y}
           ${virtual_axis_right_offset_z}"
-
     rot="0"/>
 
   <!--Wheel Macro-->
@@ -291,13 +291,11 @@
   <!-- phidgets driver solution for left to right handed coordinates : multiply a -1 to every axis -->
 
   <joint name="imu_left_to_base_joint" type="fixed">
-    <parent link="base_link" />
+    <parent link="virtual_axis_left" />
     <child link="imu_left" />
     <origin
-      xyz=" ${imu_left_offset_x}
-            ${imu_left_offset_y}
-            ${imu_left_offset_z}"
-            rpy="0 ${M_PI/2.0} ${-M_PI/2.0}" />
+      xyz="0 0 0.2"
+      rpy="0 0 0" />
   </joint>
 
   <link name="imu_right">
@@ -314,20 +312,15 @@
   </link>
 
   <joint name="imu_right_to_base_joint" type="fixed">
-    <parent link="base_link" />
+    <parent link="virtual_axis_right" />
     <child link="imu_right" />
     <origin
-      xyz=" ${imu_right_offset_x}
-            ${imu_right_offset_y}
-            ${imu_right_offset_z}"
-            rpy="0 ${-M_PI/2.0} ${-M_PI/2.0}" />
+      xyz="0 0 0.2"
+      rpy="0 0 0" />
   </joint>
-
 
   <!-- inertial measurement unit for gazebo -->
   <xacro:imu_gazebo link="imu" imu_topic="imu/data" update_rate="100.0" stdev="${imu_stdev}" />
-
-
 
 
   <link name="velodyne">

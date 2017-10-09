@@ -5,9 +5,9 @@
     <node pkg="pluto_levers" type="pluto_levers_node" name="pluto_levers_node_left" output="screen">
         <param name="joint_state_name" value="virtual_left_to_base_joint" type="str"/>
 
-        <param name="vector_one_column" value="0" type="int"/>
+        <param name="vector_one_column" value="1" type="int"/>
         <param name="vector_two_column" value="2" type="int"/>
-        <param name="invert_vector_one" value="true" type="bool"/>
+        <param name="invert_vector_one" value="false" type="bool"/>
         <param name="invert_angle" value="true" type="bool"/>
 
         <remap from="lever" to="/levers_joint_states"/>
