@@ -12,7 +12,7 @@
 
   <xacro:property name="M_PI" value="3.14159265359"/>
 
-  <xacro:property name="footprint_to_base_rpy_p" value="-0.12"/>
+  <xacro:property name="footprint_to_base_rpy_p" value="-0.143"/>
 
   <xacro:property name="imu_stdev" value="0.00017" />
 
