@@ -122,6 +122,17 @@ ekf_se_odom:
     odom0_pose_rejection_threshold: 5
     odom0_twist_rejection_threshold: 5.0
 
+    twist0: mesh_map_localization/twist_corrected
+    twist0_config: [ false, false, false,
+                    false, false, false,
+                    false, false, true,
+                    false, false, false,
+                    false, false, false]
+
+    twist0_queue_size: 3
+    twist0_rejection_threshold: 2
+    twist0_nodelay: false
+
 
     imu0: imu/center/data
     imu0_config: [ false, false, false,
