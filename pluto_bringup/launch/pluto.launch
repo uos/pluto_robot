@@ -43,11 +43,11 @@
   </include>
 
   ## Launch hyperspectral camera
-  <!--
   <include file="$(find hyperspectral_calibration)/launch/colorize_cloud.launch">
-    <arg name="use_rgb_only" value="false"/>
+    <arg name="use_rgb_only"         value="false" />
+    <arg name="outdoor"              value="true"  />
+    <arg name="use_independent_mode" value="false" />
   </include>
-  -->
 
   ## Launch robot localization
   <include file="$(find pluto_bringup)/launch/ekf_rl.launch"/>
@@ -77,7 +77,7 @@
   <!-- <include file="$(find battery_life)/launch/battery_life.launch"/> -->
 
   ## Launch levers
-  <!--  <include file="$(find pluto_levers)/launch/lever.launch"/> -->
+  <include file="$(find pluto_levers)/launch/lever.launch"/>
 
   ## Launch sounds
   <include file="$(find pluto_bringup)/launch/sounds.launch"/>
