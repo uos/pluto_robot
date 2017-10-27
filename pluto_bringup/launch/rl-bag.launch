@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="input" default="/home/amock/pluto_bagfiles/labor_really_no_tf.bag" />
+  <rosparam param="use_sim_time">true</rosparam>
+
+  <include file="$(find pluto_description)/launch/upload_pluto.launch"/>
+  <rosparam file="$(find pluto_bringup)/config/joint_state_publisher.yaml" command="load" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen" />
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen" />
+  <node pkg="rosbag" type="play" name="player" output="screen" args=" --clock  -r 1  $(arg input)"/>
+
+</launch>
+
