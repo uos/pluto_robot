@@ -2,6 +2,8 @@
 <launch>
 
   <rosparam command="load" file="$(find pluto_bringup)/config/ekf_navsat.yaml" />
+  <!-- Localization with velodyne Pointclouds -->
+  <include file="$(find loam_velodyne)/launch/hector_loam_velodyne.launch" />
 
   <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_odom" clear_params="true">
     <remap from="odometry/filtered" to="odometry/filtered_odom"/>
