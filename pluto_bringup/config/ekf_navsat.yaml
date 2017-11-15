@@ -122,7 +122,7 @@ ekf_se_odom:
     odom0_pose_rejection_threshold: 5
     odom0_twist_rejection_threshold: 5.0
 
-    odom1: integrated_to_init
+    odom1: laser_odom/integrated
 
     # Each sensor reading updates some or all of the filter's state. These options give you greater control over which
     # values from each measurement are fed to the filter. For example, if you have an odometry message as input, but only
@@ -418,7 +418,7 @@ ekf_se_map:
     odom0_pose_rejection_threshold: 5
     odom0_twist_rejection_threshold: 5.0
 
-    odom1: integrated_to_init
+    odom1: laser_odom/integrated
 
     # Each sensor reading updates some or all of the filter's state. These options give you greater control over which
     # values from each measurement are fed to the filter. For example, if you have an odometry message as input, but only
