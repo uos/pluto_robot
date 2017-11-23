@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <launch>
-  ## Upload robot description
+  <!-- Upload robot description -->
   <include file="$(find pluto_description)/launch/upload_pluto.launch"/>
 
-  ## Launch state publisher
+  <!-- Launch state publisher -->
   <rosparam file="$(find pluto_bringup)/config/joint_state_publisher.yaml" command="load"/>
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen"/>
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen"/>
 
-  ## Launch Volksbot driver
+  <!-- Launch Volksbot driver -->
   <node name="volksbot" pkg="volksbot_driver" type="volksbot" respawn="false" output="screen">
       <remap from="joint_states" to="volksbot_joint_states" />
       <param name="wheel_radius" type="double" value="0.103" />
@@ -30,56 +30,62 @@
       -->
    </node>
 
-  ## Launch IMU
+  <!-- Launch IMU -->
   <include file="$(find pluto_bringup)/launch/phidgets_imu.launch"/>
 
-  ## Launch Velodyne
+  <!-- Launch Velodyne -->
   <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch"/>
 
-  ## Launch Riegl driver
+  <!-- Launch Riegl driver -->
+  <arg   name="use_dfki_riegl"        default="false" />
+  <arg     if="$(arg use_dfki_riegl)"    name="riegl_hostname" value="rieglvz400i-dfki" />
+  <arg unless="$(arg use_dfki_riegl)"    name="riegl_hostname" value="rieglvz400i" />
+  <arg   name="use_plutonet"          default="true" />
+  <arg     if="$(arg use_plutonet)"      name="riegl_suffix" value=".plutonet" />
+  <arg unless="$(arg use_plutonet)"      name="riegl_suffix" value=".informatik.uos.de" />
+
   <include file="$(find riegl_driver)/launch/riegl_vz400i.launch">
-    <arg name="min_range"      value="1.0"   />
-    <arg name="use_dfki_riegl" value="false" />
-    <arg name="use_plutonet"   value="true"  />
+    <arg name="min_range" value="1.0" />
+    <arg name="address"   value="$(arg riegl_hostname)$(arg riegl_suffix)" />
   </include>
 
-  ## Launch hyperspectral camera
+  <!-- Launch hyperspectral camera -->
   <!--
   <include file="$(find hyperspectral_calibration)/launch/colorize_cloud.launch">
     <arg name="use_rgb_only" value="false"/>
   </include>
   -->
 
-  ## Launch robot localization
+  <!-- Launch robot localization -->
   <include file="$(find pluto_bringup)/launch/ekf_rl.launch"/>
 
-  ## Launch reconstruction
+  <!-- Launch reconstruction -->
   <include file="$(find lvr_ros)/launch/reconstruction.launch"/>
 
-  ## Launch costmap calculation
+  <!-- Launch costmap calculation -->
   <include file="$(find mesh_navigation)/launch/cost_calculation.launch"/>
 
-  ## Launch map server
+  <!-- Launch map server -->
   <node name="mesh_map_server" pkg="mesh_map_server" type="mesh_map_server" output="screen"/>
 
-  ## Launch exploration
+  <!-- Launch exploration -->
   <node name="exploration" pkg="exploration" type="exploration" output="screen"/>
 
-  ## Launch move_base_flex
+  <!-- Launch move_base_flex -->
   <include file="$(find mesh_navigation)/launch/navigation.launch"/>
 
-  ## Launch point cloud server
+  <!-- Launch point cloud server -->
   <include file="$(find pluto_bringup)/launch/pc_server.launch"/>
 
-  ## Launch teleop
+  <!-- Launch teleop -->
   <!-- <include file="$(find pluto_bringup)/launch/ps3joy.launch"/> -->
 
-  ## Launch battery life
+  <!-- Launch battery life -->
   <!-- <include file="$(find battery_life)/launch/battery_life.launch"/> -->
 
-  ## Launch levers
+  <!-- Launch levers -->
   <!--  <include file="$(find pluto_levers)/launch/lever.launch"/> -->
 
-  ## Launch sounds
+  <!-- Launch sounds -->
   <include file="$(find pluto_bringup)/launch/sounds.launch"/>
 </launch>
