@@ -38,7 +38,6 @@
 
   ## Launch Riegl driver
   <include file="$(find riegl_driver)/launch/riegl_vz400i.launch">
-    <!-- <arg name="address" value="192.168.178.35"/> -->
     <arg name="min_range"      value="1.0"   />
     <arg name="use_dfki_riegl" value="false" />
     <arg name="use_plutonet"   value="true"  />
