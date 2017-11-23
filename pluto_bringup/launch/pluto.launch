@@ -37,10 +37,19 @@
   <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch"/>
 
   ## Launch Riegl driver
+  <!-- Set address of either DFKI or UOS RIEGL  -->
+  <arg name="use_dfki_riegl" default="false" />
+  <arg     if="$(arg use_dfki_riegl)" name="riegl_hostname" value="rieglvz400i-dfki" />
+  <arg unless="$(arg use_dfki_riegl)" name="riegl_hostname" value="rieglvz400i" />
+
+  <!-- Set suffix for the hostname -->
+  <arg name="use_plutonet" default="true" />
+  <arg     if="$(arg use_plutonet)" name="riegl_suffix" value=".plutonet" />
+  <arg unless="$(arg use_plutonet)" name="riegl_suffix" value=".informatik.uos.de" />
+
   <include file="$(find riegl_driver)/launch/riegl_vz400i.launch">
-    <arg name="min_range"      value="1.0"   />
-    <arg name="use_dfki_riegl" value="false" />
-    <arg name="use_plutonet"   value="true"  />
+    <arg name="min_range" value="1.0" />
+    <arg name="address"   value="$(arg riegl_hostname)$(arg riegl_suffix)" />
   </include>
 
   ## Launch hyperspectral camera
