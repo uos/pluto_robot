@@ -1,7 +1,0 @@
-rotunit_controller:
-  type: effort_controllers/JointVelocityController
-  joint: laser_rot_joint
-  pid:
-    p: 1.0
-    i: 0.0
-    d: 0.0
