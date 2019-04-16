@@ -1,4 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-   <include file="$(find mitschmock_sounds)/launch/go_away.launch"/>
-</launch>
