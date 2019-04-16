@@ -1,0 +1,7 @@
+planners:
+  - name: 'mesh_planner'
+    type: 'mesh_planner/MeshPlanner'
+
+planner_patience: 3.0
+planner_max_retries: -1
+

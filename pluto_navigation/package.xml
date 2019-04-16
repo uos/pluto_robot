@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>pluto_navigation</name>
+  <version>0.0.1</version>
+  <description>The pluto_navigation package</description>
+
+  <maintainer email="spuetz@uos.de">Sebastian Pütz</maintainer>
+  <maintainer email="spuetz@uos.de">Sebastian Pütz</maintainer>
+  <license>BSD</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>lvr_ros</exec_depend>
+  <exec_depend>mbf_mesh_nav</exec_depend>
+  <exec_depend>mesh_planner</exec_depend>
+  <exec_depend>pluto_bringup</exec_depend>
+  <exec_depend>pluto_gazebo</exec_depend>
+
+</package>
