@@ -8,7 +8,7 @@
 
   <xacro:include filename="$(find uos_common_urdf)/common.xacro" />
   <xacro:include filename="$(find uos_common_urdf)/urdf/imu.gazebo.urdf.xacro" />
-  <xacro:include filename="$(find riegl_driver)/urdf/riegl_vz400i_mount.urdf.xacro" />
+  <!--xacro:include filename="$(find riegl_driver)/urdf/riegl_vz400i_mount.urdf.xacro" /-->
 
   <xacro:property name="M_PI" value="3.14159265359"/>
 
@@ -76,7 +76,6 @@
     value="${body_height/2 -(vertical_lever_height + 0.03
       - bearing_width/2)}"/>
 
-  <xacro:property name="wheel_radius" value="0.103" />
   <xacro:property name="axis_length" value="0.47" />
   <xacro:property name="turning_adaptation" value="0.95" />
 
@@ -113,6 +112,9 @@
       <geometry>
         <mesh filename="package://pluto_description/meshes/pluto_base_collision.stl"/>
       </geometry>
+      <material name="silver" >
+        <color rgba="0.5 0.5 0.5 1" />
+      </material>
     </collision>
     <xacro:box_inertial
       x="${body_length}"
@@ -127,6 +129,10 @@
     <parent link="base_footprint"/>
     <child link="base_link" />
   </joint>
+
+  <gazebo reference="base_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
 
   <!--Virtual Axis Macro-->
 
@@ -320,7 +326,7 @@
   </joint>
 
   <!-- inertial measurement unit for gazebo -->
-  <xacro:imu_gazebo link="imu" imu_topic="imu/data" update_rate="100.0" stdev="${imu_stdev}" />
+  <xacro:imu_gazebo link="imu_center" imu_topic="imu/data" update_rate="100.0" stdev="${imu_stdev}" />
 
 
   <link name="velodyne">
@@ -348,7 +354,7 @@
   </joint>
 
 
-  <joint name="riegl_vz400i_to_base_joint" type="fixed">
+  <!--joint name="riegl_vz400i_to_base_joint" type="fixed">
     <child link="riegl_mount_base" />
     <parent link="base_link" />
     <origin
@@ -356,7 +362,7 @@
             ${riegl_vz400i_offset_y}
             ${riegl_vz400i_offset_z}"
       rpy="0 0 0" />
-  </joint>
+  </joint-->
   <!-- GPS Sensor -->
 
 
@@ -409,25 +415,22 @@
       <velocityDrift>0 0 0</velocityDrift>
       <velocityGaussianNoise>0.1 0.1 0.1</velocityGaussianNoise>
     </plugin>
-   </gazebo>
+  </gazebo>
+  
   <gazebo>
-    <plugin name="volksbot_diffdrive" filename="libgazebo_ros_diffdrive_uos.so">
-      <alwaysOn>true</alwaysOn>
-      <cmd_vel_topic_name>cmd_vel</cmd_vel_topic_name>
-      <odom_topic_name>odom</odom_topic_name>
-      <joint_states_topic_name>joint_states</joint_states_topic_name>
-      <left_front_wheel_joint>left_front_wheel_joint</left_front_wheel_joint>
-      <left_middle_wheel_joint>left_middle_wheel_joint</left_middle_wheel_joint>
-      <left_rear_wheel_joint>left_rear_wheel_joint</left_rear_wheel_joint>
-      <right_front_wheel_joint>right_front_wheel_joint</right_front_wheel_joint>
-      <right_middle_wheel_joint>right_middle_wheel_joint</right_middle_wheel_joint>
-      <right_rear_wheel_joint>right_rear_wheel_joint</right_rear_wheel_joint>
-      <wheel_separation>${axis_length}</wheel_separation>
-      <wheel_diameter>${2*wheel_radius}</wheel_diameter>
-      <turning_adaptation>${turning_adaptation}</turning_adaptation>
-      <torque>4.0</torque>
-      <max_velocity>1.0</max_velocity>
-      <updateRate>40.0</updateRate>
+    <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+      <updateRate>100.0</updateRate>
+      <robotNamespace>/</robotNamespace>
+      <leftFrontJoint>left_front_wheel_joint</leftFrontJoint>
+      <rightFrontJoint>right_front_wheel_joint</rightFrontJoint>
+      <leftRearJoint>left_rear_wheel_joint</leftRearJoint>
+      <rightRearJoint>right_rear_wheel_joint</rightRearJoint>
+      <wheelSeparation>${axis_length}</wheelSeparation>
+      <wheelDiameter>${2*wheel_radius}</wheelDiameter>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <torque>20</torque>
+      <topicName>cmd_vel</topicName>
+      <broadcastTF>false</broadcastTF>
     </plugin>
   </gazebo>
 
