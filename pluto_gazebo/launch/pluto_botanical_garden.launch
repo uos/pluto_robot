@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find pluto_gazebo)/launch/botanical_garden.launch" />
+  <include file="$(find pluto_gazebo)/launch/pluto_gazebo_common.launch" />
+</launch>

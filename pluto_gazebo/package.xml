@@ -15,4 +15,9 @@
   <run_depend>robot_state_publisher</run_depend>
   <run_depend>joint_state_publisher</run_depend>
 
+  <run_depend>gazebo_ros</run_depend>
+  <export>
+    <gazebo_ros gazebo_model_path="${prefix}/models"/>
+    <gazebo_ros gazebo_media_path="${prefix}/models"/>
+  </export>
 </package>
