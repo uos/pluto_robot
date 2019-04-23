@@ -13,9 +13,5 @@
           -x $(arg x) -y $(arg y) -z $(arg z)
           -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"
     respawn="false" output="screen"/>
-
-  <rosparam file="$(find pluto_description)/config/diff_drive.yaml" command="load" />
-  <node name="pluto_controller_manager" pkg="controller_manager" type="spawner"
-          respawn="false" output="screen" args="mobile_base_controller" />
             
 </launch>
