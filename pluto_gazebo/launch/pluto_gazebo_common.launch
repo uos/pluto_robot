@@ -1,10 +1,25 @@
 <?xml version="1.0"?>
 <launch>
+  <!-- Robot pose -->
+  <arg name="x" default="0"/>
+  <arg name="y" default="0"/>
+  <arg name="z" default="0"/>
+  <arg name="roll" default="0"/>
+  <arg name="pitch" default="0"/>
+  <arg name="yaw" default="0"/>
+  
   <!-- Upload Pluto urdf to parameter server -->
   <include file="$(find pluto_description)/launch/upload_pluto.launch"/>
 
   <!-- Push robot_description to factory and spawn robot in gazebo -->
-  <include file="$(find pluto_gazebo)/launch/spawn_pluto.launch" />
+  <include file="$(find pluto_gazebo)/launch/spawn_pluto.launch">
+    <arg name="x" value="$(arg x)"/>
+    <arg name="y" value="$(arg y)"/>
+    <arg name="z" value="$(arg z)"/>
+    <arg name="roll" value="$(arg roll)"/>
+    <arg name="pitch" value="$(arg pitch)"/>
+    <arg name="yaw" value="$(arg yaw)"/>
+  </include>
 
   <!-- EKF -->
   <!--include file="$(find pluto_bringup)/launch/ekf_r.launch"/-->
