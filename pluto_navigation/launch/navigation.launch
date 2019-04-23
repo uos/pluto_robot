@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <launch>
-   <node name="move_base_flex" pkg="mbf_mesh_nav" type="mbf_mesh_nav" output="screen" launch-prefix="xterm -e gdb --args">
+  <arg name="rviz" default="false" />
+
+  <node name="move_base_flex" pkg="mbf_mesh_nav" type="mbf_mesh_nav" output="screen" launch-prefix="xterm -e gdb --args">
     <rosparam command="load" file="$(find pluto_navigation)/config/mesh_navigation.yaml"/>
     <rosparam command="load" ns="mesh_map" file="$(find pluto_navigation)/config/mesh_map.yaml"/>
     <param name="mesh_map/mesh_file" value="$(find pluto_navigation)/maps/mesh_small_ec6.h5" />
@@ -8,4 +10,8 @@
 
   <!-- SMACH Navigation State Machine -->
   <node pkg="pluto_navigation" type="navigation_sm.py" name="navigation_smach" output="screen"/>
+  
+  <!-- RViz with config -->
+  <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(find pluto_navigation)/rviz/mesh_navigation.rviz" />
+
 </launch>

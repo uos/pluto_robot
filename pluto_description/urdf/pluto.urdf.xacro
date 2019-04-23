@@ -201,8 +201,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh
-          filename="package://pluto_description/meshes/pluto_wheel_collision.stl"/>
+          <mesh filename="package://pluto_description/meshes/pluto_wheel.stl"/>
         </geometry>
       </collision>
       <xacro:cylinder_inertial
@@ -219,11 +218,11 @@
     </joint>
 
     <gazebo reference="${name}_link">
-      <mu1>1</mu1>
-      <mu2>1</mu2>
+      <mu1>0.7</mu1>
+      <mu2>0.7</mu2>
       <material>Gazebo/Black</material>
-      <kp>10000000</kp>
-      <kd>10</kd>
+      <kp>10000000.0</kp>
+      <kd>1.0</kd>
       <selfCollide>false</selfCollide>
     </gazebo>
   </xacro:macro>
@@ -440,8 +439,8 @@
       <alwaysOn>true</alwaysOn>
       <updateRate>30.0</updateRate>
       <bodyName>base_footprint</bodyName>
-      <topicName>base_footprint_pose_ground_truth</topicName>
-      <gaussianNoise>0.0</gaussianNoise>
+      <topicName>gazebo_odom</topicName>
+      <gaussianNoise>0.01</gaussianNoise>
       <frameName>map</frameName>
       <interface:position name="base_footprint_p3d_position_iface" />
     </plugin>

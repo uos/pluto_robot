@@ -22,19 +22,21 @@
   </include>
 
   <!-- EKF -->
-  <!--include file="$(find pluto_bringup)/launch/ekf_r.launch"/-->
+  <include file="$(find pluto_gazebo)/launch/robot_pose_ekf.launch"/>
+
   <!-- GPS -->
   <!-- <include file="$(find pluto_bringup)/launch/gps_rl.launch"/> -->
-
-
-  <!-- Default Controllers -->
-  <rosparam command="load" file="$(find pluto_gazebo)/config/joint_state_controller.yaml" />
 
   <!-- Robot state publisher -->
   <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher">
     <param name="publish_frequency" type="double" value="100.0" />
     <param name="tf_prefix" type="string" value="" />
   </node>
+
+  <!-- Default Controllers -->
+  <rosparam command="load" file="$(find pluto_gazebo)/config/joint_state_controller.yaml" />
+  <!-- Joint State Publisher -->
+  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher"/>
 
   <!-- Fake calibration -->
   <node pkg="rostopic" type="rostopic" name="fake_joint_calibration"
