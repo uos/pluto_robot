@@ -2,6 +2,10 @@ planners:
   - name: 'mesh_planner'
     type: 'mesh_planner/MeshPlanner'
 
+controllers:
+  - name: 'mesh_controller'
+    type: 'mesh_controller/MeshController'
+
 planner_patience: 3.0
 planner_max_retries: -1
 
