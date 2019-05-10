@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
-  <include file="$(find pluto_gazebo)/launch/botanical_garden.launch"/>
-  <include file="$(find pluto_gazebo)/launch/pluto_gazebo_common.launch">
+  <include file="$(find pluto_gazebo)/launch/pluto_gazebo.launch">
+    <arg name="world_name" value="$(find pluto_gazebo)/worlds/botanical_garden.world"/>
     <arg name="x" value="-2.5"/>
     <arg name="y" value="0.34"/>
     <arg name="z" value="-1.25"/>
