@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-  <include file="$(find pluto_gazebo)/launch/sick2016_world.launch" />
-  <include file="$(find pluto_gazebo)/launch/pluto_gazebo_common.launch" />
-</launch>

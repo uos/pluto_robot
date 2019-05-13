@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-  <!-- start uos avz world -->
-  <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find pluto_gazebo)/maps/sick2016.world"/>
-  </include>
-
-</launch>

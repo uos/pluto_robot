@@ -9,9 +9,10 @@
   <arg name="yaw" default="0"/>
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="spawn_pluto_model" pkg="gazebo_ros" type="spawn_model"
-    args="-unpause -urdf -param robot_description -model pluto 
+    args="-urdf -param robot_description -model pluto
           -x $(arg x) -y $(arg y) -z $(arg z)
           -R $(arg roll) -P $(arg pitch) -Y $(arg yaw)"
-    respawn="false" output="screen"/>
-            
+    respawn="false" output="screen">
+
+  </node>
 </launch>
