@@ -44,7 +44,7 @@ class Control(smach.StateMachine):
     @smach.cb_interface(input_keys=['path'])
     def controller_goal_cb(user_data, goal):
         goal.path = user_data.path
-        goal.controller = 'dwa'
+        goal.controller = 'mesh_controller'
 
     @staticmethod
     @smach.cb_interface(
@@ -367,9 +367,20 @@ def main():
             'PLANNING',
             Planning(),
             transitions={
+                'succeeded': 'CONTROL',
+                'preempted': 'preempted',
+                'aborted': 'WAIT_FOR_GOAL',
+            }
+        )
+
+        smach.StateMachine.add(
+            'CONTROL',
+            Control(),
+            transitions={
                 'succeeded': 'WAIT_FOR_GOAL',
                 'preempted': 'preempted',
                 'aborted': 'WAIT_FOR_GOAL',
+                'failed': 'WAIT_FOR_GOAL',
             }
         )
 
