@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="octomap_server" type="octomap_server_node" name="octomap_server" output="screen">
+    <param name="resolution" value="0.05" />
+    <!-- fixed map frame (set to 'map' if SLAM or localization running!) -->
+    <param name="frame_id" type="string" value="map" />
+
+    <!-- maximum range to integrate (speedup!) -->
+    <param name="sensor_model/max_range" value="30.0" />
+    
+    <param name="pointcloud_min_z" value="-0.3" />
+    <param name="pointcloud_max_z" value="0.5" />
+
+    <!-- data source to integrate (PointCloud2) -->
+    <remap from="cloud_in" to="/read/cloud" />
+
+  </node>
+  <node pkg="costmap_2d" type="costmap_2d_markers" name="voxel_visualizer">
+    <remap from="voxel_grid" to="costmap/voxel_grid"/>
+  </node>
+
+  <node name="move_base_flex" pkg="mbf_costmap_nav" respawn="false" type="mbf_costmap_nav" output="screen">
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
+
+    <rosparam file="$(find pluto_navigation)/config/2d_nav/dem_navigation.yaml" command="load"/>
+    <rosparam file="$(find pluto_navigation)/config/2d_nav/move_base_params.yaml" command="load"/>
+    
+    <rosparam file="$(find pluto_navigation)/config/2d_nav/dwa_local_planner_params.yaml" command="load"/>
+    
+    <rosparam file="$(find pluto_navigation)/config/2d_nav/local_costmap_params.yaml" command="load" ns="global_costmap"/>
+    <rosparam file="$(find pluto_navigation)/config/2d_nav/global_costmap_params.yaml" command="load" ns="local_costmap"/>
+    
+    <rosparam file="$(find pluto_navigation)/config/2d_nav/costmap_params.yaml" command="load" ns="global_costmap"/>
+    <rosparam file="$(find pluto_navigation)/config/2d_nav/costmap_params.yaml" command="load" ns="local_costmap"/>
+  </node>
+  
+<!-- SMACH Navigation State Machine -->
+  <node pkg="pluto_navigation" type="navigation_sm_2d.py" name="navigation_smach" output="screen">
+    <remap from="/goal" to="/move_base_simple/goal"/>
+  </node>
+</launch>

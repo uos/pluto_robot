@@ -1,0 +1,8 @@
+plugins:
+  - {name: dem_costmap, type: "dem_costmap_2d::DEMCostmap2D"}
+  - {name: inflation, type: "costmap_2d::InflationLayer"}
+footprint: [[0.36, -0.31], [0.36, 0.31], [-0.05, 0.36], [-0.36, 0.22], [-0.36,
+-0.22], [-0.05, -0.36]]
+static_map: false
+inflation_radius: 0.2
+cost_scaling_factor: 4

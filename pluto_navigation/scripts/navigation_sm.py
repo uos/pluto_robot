@@ -160,6 +160,7 @@ class Planning(smach.StateMachine):
         user_data.cost = result.cost
         recovery_behavior = 'clear_costmap'
         if result.outcome == GetPathResult.SUCCESS:
+            rospy.loginfo("path costs %f", result.cost)
             return 'succeeded'
         elif result.outcome == GetPathResult.CANCELED:
             return 'preempted'

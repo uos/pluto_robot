@@ -1,6 +1,7 @@
 global_frame: map
 robot_frame: base_footprint
 robot_base_frame: base_link
+
 mesh_part: mesh
 layers:
   - name: 'height_diff'
@@ -12,9 +13,18 @@ layers:
 
 height_diff:
   factor: 0.3
+  threshold: 0.4
 
 roughness:
   factor: 0.3
+  threshold: 0.8
 
-infalation:
+inflation:
   factor: 1.0
+  inflation_radius: 0.4
+  inscribed_radius: 0.05
+  #inflation_radius: 1.0
+  #inscribed_radius: 0.05
+  lethal_value: 6
+  inscribed_value: 4
+

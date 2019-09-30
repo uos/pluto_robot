@@ -7,12 +7,12 @@
       <link name="body">
         <collision name=collision>
           <geometry>
-            <mesh><uri>model://botanical_garden_ros.dae</uri></mesh>
+            <mesh><uri>model://botanical_garden_gazebo.dae</uri></mesh>
           </geometry>
         </collision>
         <visual name="visual">
           <geometry>
-            <mesh><uri>model://botanical_garden_ros.dae</uri></mesh>
+            <mesh><uri>model://botanical_garden_gazebo.dae</uri></mesh>
           </geometry>
         </visual>
       </link>

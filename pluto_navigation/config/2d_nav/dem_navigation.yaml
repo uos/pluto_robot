@@ -1,0 +1,17 @@
+planners:
+  - name: 'global_planner'
+    type: 'global_planner/GlobalPlanner'
+controllers:
+  - name: 'dwa_local_planner'
+    type: 'dwa_local_planner/DWAPlannerROS'
+
+planner_patience: 10.0
+planner_max_retries: 2
+
+controller_patience: 5.0
+controller_max_retries: 2
+
+robot_frame: 'base_footprint'
+dist_tolerance: 0.2
+angle_tolerance: 0.8
+

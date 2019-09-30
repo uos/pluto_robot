@@ -51,6 +51,7 @@
   <node name="gazebo" pkg="gazebo_ros" type="$(arg script_type)" respawn="$(arg respawn_gazebo)" output="screen"
         args="$(arg command_arg1) $(arg command_arg2) $(arg command_arg3) -e $(arg physics) $(arg extra_gazebo_args) $(arg world_name)">
     <remap from="/pluto_velocity_controller/cmd_vel" to="/cmd_vel"/>
+    <param name="/pluto_velocity_controller/enable_odom_tf" value="true"/>
   </node>
 
   <!-- start gazebo client -->
@@ -88,6 +89,8 @@
 
   <!-- Spawn controllers -->
   <node name="base_controller_spawner" pkg="controller_manager" type="spawner"
-        args="pluto_joint_publisher pluto_velocity_controller"/>
+        args="pluto_joint_publisher pluto_velocity_controller">
+    <param name="enable_odom_tf" value="true"/>
+  </node>
 
 </launch>

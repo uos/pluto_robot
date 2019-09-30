@@ -1,0 +1,14 @@
+publish_frequency: 2.0
+update_frequency: 0.5
+footprint: [[0.36, -0.31], [0.36, 0.31], [-0.05, 0.36], [-0.36, 0.22], [-0.36,
+-0.22], [-0.05, -0.36]]
+global_frame: map
+robot_base_frame: base_link
+
+dem_costmap:
+  diff_range_x: 0.07
+  diff_range_y: 0.07
+  diff_range_z: 0.5
+  diff_max_z: 0.28
+  z_max: 1.0
+
