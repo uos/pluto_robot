@@ -368,7 +368,7 @@ def main():
             'PLANNING',
             Planning(),
             transitions={
-                'succeeded': 'CONTROL',
+                'succeeded': 'WAIT_FOR_GOAL',
                 'preempted': 'preempted',
                 'aborted': 'WAIT_FOR_GOAL',
             }

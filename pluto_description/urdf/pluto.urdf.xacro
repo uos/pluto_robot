@@ -373,7 +373,7 @@
       <updateRate>30.0</updateRate>
       <bodyName>base_footprint</bodyName>
       <topicName>gazebo_odom</topicName>
-      <gaussianNoise>0.000000001</gaussianNoise>
+      <gaussianNoise>1.0e-40</gaussianNoise>
       <frameName>map</frameName>
       <interface:position name="base_footprint_p3d_position_iface" />
     </plugin>

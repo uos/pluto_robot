@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-   <node name="pointcloud_server" pkg="pointcloud_server" type="pointcloud_server"/>
-   <node name="velodyne_collision_filter_node" pkg="pointcloud_server" type="velodyne_collision_filter_node"/>
-</launch>

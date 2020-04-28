@@ -6,9 +6,10 @@ global_frame: map
 robot_base_frame: base_link
 
 dem_costmap:
-  diff_range_x: 0.07
-  diff_range_y: 0.07
+  diff_range_x: 0.4
+  diff_range_y: 0.4
   diff_range_z: 0.5
-  diff_max_z: 0.28
-  z_max: 1.0
+  diff_max_z: 0.25
+  diff_min_z: 0.07
+  z_max: 8.0
 

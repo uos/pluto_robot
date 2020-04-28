@@ -1,11 +1,13 @@
 <?xml version="1.0"?>
 <launch>
   <arg name="rviz" default="false" />
-
-  <node name="move_base_flex" pkg="mbf_mesh_nav" type="mbf_mesh_nav" output="screen">
+  <arg name="map_file" default="botanical_garden.h5" />
+  <node name="move_base_flex" pkg="mbf_mesh_nav" type="mbf_mesh_nav" output="screen" launch-prefix="gdb --ex run --args">
     <rosparam command="load" file="$(find pluto_navigation)/config/mesh_navigation.yaml"/>
     <rosparam command="load" ns="mesh_map" file="$(find pluto_navigation)/config/mesh_map.yaml"/>
-    <param name="mesh_map/mesh_file" value="$(find pluto_navigation)/maps/triangle_mesh_small_final_1.h5" />
+    <param name="planner_patience" value="20"/>
+    <param name="mesh_map/mesh_file" value="$(find pluto_navigation)/maps/$(arg map_file)" />
+    <param name="mesh_map/mesh_part" value="mesh"/>
   </node>
 
   <!-- SMACH Navigation State Machine -->

@@ -114,6 +114,8 @@ class Control(smach.StateMachine):
 
 
 class Planning(smach.StateMachine):
+    cnt = 0
+
     def __init__(self):
         smach.StateMachine.__init__(
             self,
@@ -121,6 +123,7 @@ class Planning(smach.StateMachine):
             input_keys=['target_pose'],
             output_keys=['outcome', 'message', 'path', 'cost', 'recovery_behavior']
         )
+
 
         with self:
 
@@ -147,7 +150,11 @@ class Planning(smach.StateMachine):
         goal.use_start_pose = False
         goal.tolerance = 0.2  # 20cm tolerance to the target
         goal.target_pose = user_data.target_pose
-        goal.planner = 'mesh_planner'  # name of the planner to call see move base flex planners.yaml config
+        if Planning.cnt % 2 == 0:
+            goal.planner = 'wave_front_planner'  # name of the planner to call see move base flex planners.yaml config
+        else:
+            goal.planner = 'dijkstra_mesh_planner'
+        Planning.cnt = Planning.cnt + 1
 
     @staticmethod
     @smach.cb_interface(
@@ -368,7 +375,7 @@ def main():
             'PLANNING',
             Planning(),
             transitions={
-                'succeeded': 'CONTROL',
+                'succeeded': 'WAIT_FOR_GOAL',
                 'preempted': 'preempted',
                 'aborted': 'WAIT_FOR_GOAL',
             }

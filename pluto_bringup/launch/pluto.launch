@@ -18,16 +18,6 @@
       <param name="cov_xrotation" type="double" value="0.0" />
       <param name="cov_yrotation" type="double" value="0.0" />
       <param name="rotation_stddev" type="double" value="0.2" />
-      <!-- default values: -->
-      <!--
-      <param name="turning_adaptation" type="double" value="0.95" />
-      <param name="x_stddev" type="double" value="0.002" />
-      <param name="rotation_stddev" type="double" value="0.017" />
-      <param name="cov_xy" type="double" value="0.0" />
-      <param name="cov_xrotation" type="double" value="0.0" />
-      <param name="cov_yrotation" type="double" value="0.0" />
-      <param name="publish_tf" type="bool" value="False" />
-      -->
    </node>
 
   <!-- Launch IMU -->
@@ -36,59 +26,10 @@
   <!-- Launch Velodyne -->
   <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch"/>
 
-  <!-- Launch Riegl driver -->
-  <arg   name="use_dfki_riegl"        default="false" />
-  <arg     if="$(arg use_dfki_riegl)"    name="riegl_hostname" value="rieglvz400i-dfki" />
-  <arg unless="$(arg use_dfki_riegl)"    name="riegl_hostname" value="rieglvz400i" />
-  <arg   name="use_plutonet"          default="true" />
-  <arg     if="$(arg use_plutonet)"      name="riegl_suffix" value=".plutonet" />
-  <arg unless="$(arg use_plutonet)"      name="riegl_suffix" value=".informatik.uos.de" />
-
-  <include file="$(find riegl_driver)/launch/riegl_vz400i.launch">
-    <arg name="min_range" value="1.0" />
-    <arg name="address"   value="$(arg riegl_hostname)$(arg riegl_suffix)" />
-  </include>
-
-  <!-- Launch hyperspectral camera -->
-  <include file="$(find hyperspectral_calibration)/launch/colorize_cloud.launch">
-     <arg name="use_rgb_only" value="false"/>
-     <arg name="pano_stretch_factor" value="1200"/>
-     <arg name="use_independent_mode" value="false"/>
-     <arg name="start_pylon_driver" value="true"/>
-     <arg name="info_path" value="$(find hyperspectral_calibration)/calibration_results/6mm/calibration_info.xml"/>
-  </include>
-
   <!-- Launch robot localization -->
-  <include file="$(find pluto_bringup)/launch/ekf_rl.launch"/>
+  <include file="$(find pluto_bringup)/launch/localization.launch"/>
 
   <!-- Launch reconstruction -->
   <include file="$(find lvr_ros)/launch/reconstruction.launch"/>
-
-  <!-- Launch costmap calculation -->
-  <include file="$(find mesh_navigation)/launch/cost_calculation.launch"/>
-
-  <!-- Launch map server -->
-  <node name="mesh_map_server" pkg="mesh_map_server" type="mesh_map_server" output="screen"/>
-
-  <!-- Launch exploration -->
-  <node name="exploration" pkg="exploration" type="exploration" output="screen"/>
-
-  <!-- Launch move_base_flex -->
-  <include file="$(find mesh_navigation)/launch/navigation.launch"/>
-
-  <!-- Launch point cloud server -->
-  <include file="$(find pluto_bringup)/launch/pc_server.launch"/>
-
-  <!-- Launch teleop -->
-  <!-- <include file="$(find pluto_bringup)/launch/ps3joy.launch"/> -->
-
-  <!-- Launch battery life -->
-  <!-- <include file="$(find battery_life)/launch/battery_life.launch"/> -->
-
-  <!-- Launch levers -->
-  <!--  <include file="$(find pluto_levers)/launch/lever.launch"/> -->
-
-  <!-- Launch sounds -->
-  <include file="$(find pluto_bringup)/launch/sounds.launch"/>
 
 </launch>

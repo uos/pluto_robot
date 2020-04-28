@@ -1,0 +1,9 @@
+<!-- Launch hyperspectral camera -->
+<include file="$(find hyperspectral_calibration)/launch/colorize_cloud.launch">
+    <arg name="use_rgb_only" value="false"/>
+    <arg name="pano_stretch_factor" value="1200"/>
+    <arg name="use_independent_mode" value="false"/>
+    <arg name="start_pylon_driver" value="true"/>
+    <arg name="info_path" value="$(find hyperspectral_calibration)/calibration_results/6mm/calibration_info.xml"/>
+</include>
+

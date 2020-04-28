@@ -8,21 +8,21 @@ layers:
     type: 'mesh_layers/HeightDiffLayer'
   - name: 'roughness'
     type: 'mesh_layers/RoughnessLayer'
-  - name: 'inflation'
-    type: 'mesh_layers/InflationLayer'
+#  - name: 'inflation'
+#    type: 'mesh_layers/InflationLayer'
 
 height_diff:
   factor: 0.3
-  threshold: 0.4
+  threshold: 0.2
 
 roughness:
   factor: 0.3
-  threshold: 0.8
+  threshold: 0.4
 
 inflation:
   factor: 1.0
-  inflation_radius: 0.4
-  inscribed_radius: 0.05
+  inflation_radius: 0.5
+  inscribed_radius: 0.10
   #inflation_radius: 1.0
   #inscribed_radius: 0.05
   lethal_value: 6
