@@ -1,17 +1,18 @@
 <?xml version="1.0"?>
-<package>
+<package format="2">
   <name>pluto_robot</name>
   <version>1.0.0</version>
   <description>The pluto_robot package</description>
   <maintainer email="spuetz@uos.de">Sebastian Pütz</maintainer>
-  <license>BSD</license>
+  <license>BSD-3</license>
   <url type="website">http://wiki.ros.org/pluto_robot</url>
   <author email="spuetz@uos.de">Sebastian Pütz</author>
 
-  <run_depend>pluto_description</run_depend>
-  <run_depend>pluto_bringup</run_depend>
-  <run_depend>pluto_gazebo</run_depend>
-  
+  <exec_depend>pluto_bringup</exec_depend>
+  <exec_depend>pluto_description</exec_depend>
+  <exec_depend>pluto_gazebo</exec_depend>
+  <exec_depend>pluto_navigation</exec_depend>
+
   <buildtool_depend>catkin</buildtool_depend>
   <export>
     <metapackage />  
