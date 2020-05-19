@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
-<package format="2.0">
+<package format="2">
   <name>pluto_bringup</name>
-  <license>BSD-1</license>
   <version>1.0.0</version>
-  <description>Collection of launch- and config files to bringup the robot Pluto</description>
+  <description>Collection of launch and config files to bring up the robot Pluto</description>
+  <maintainer email="spuetz@uos.de">Sebastian Pütz</maintainer>
+  <license>BSD-3</license>
+
   <url type="website">http://wiki.ros.org/pluto_robot/pluto_bringup</url>
 
-  <maintainer email="spuetz@uos.de">Sebastian Pütz</maintainer>
   <author email="spuetz@uos.de">Sebastian Pütz</author>
 
-  <buildtool_depend>catkin</buildtool_depend>
   <exec_depend>imu_filter_madgwick</exec_depend>
   <exec_depend>joint_state_publisher</exec_depend>
   <exec_depend>joy</exec_depend>
@@ -21,4 +21,6 @@
   <exec_depend>uos_diffdrive_teleop</exec_depend>
   <exec_depend>velodyne_pointcloud</exec_depend>
   <exec_depend>volksbot_driver</exec_depend>
+  <buildtool_depend>catkin</buildtool_depend>
+
 </package>
