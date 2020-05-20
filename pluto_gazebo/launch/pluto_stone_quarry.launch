@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find pluto_gazebo)/launch/pluto_gazebo.launch">
+    <arg name="world_name" value="$(find pluto_gazebo)/worlds/stone_quarry_brockum.world"/>
+    <arg name="x" value="6.08"/>
+    <arg name="y" value="20.88"/>
+    <arg name="z" value="1.9"/>
+    <arg name="yaw" value="-0.4"/>
+
+</include>
+</launch>
