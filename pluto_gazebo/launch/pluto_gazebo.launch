@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="world_name" defautl="$(find gazebo_ros)/worlds/empty.world"/>
+  <arg name="world_name" default="$(find gazebo_ros)/worlds/empty.world"/>
   <arg name="paused" default="false"/>
   <arg name="use_sim_time" default="true"/>
   <arg name="extra_gazebo_args" default=""/>
