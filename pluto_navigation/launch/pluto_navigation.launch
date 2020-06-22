@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="rviz" default="false" />
+  <arg name="map_file" default="botanical_garden.h5" />
+  <arg name="meshmap_config" default="mesh_map.yaml" />
+  <arg name="meshnav_config" default="mesh_navigation.yaml" />
+
+  <node name="move_base_flex" pkg="mbf_mesh_nav" type="mbf_mesh_nav" output="screen" launch-prefix="gdb --ex run --args">
+    <rosparam command="load" file="$(find pluto_navigation)/config/$(arg meshnav_config)"/>
+    <rosparam command="load" ns="mesh_map" file="$(find pluto_navigation)/config/$(arg meshmap_config)"/>
+    <param name="planner_patience" value="20"/>
+    <param name="mesh_map/mesh_file" value="$(find pluto_navigation)/maps/$(arg map_file)" />
+    <param name="mesh_map/mesh_part" value="mesh"/>
+  </node>
+
+  <!-- SMACH Navigation State Machine -->
+  <node pkg="pluto_navigation" type="navigation_sm.py" name="navigation_smach" output="screen"/>
+  
+  <!-- RViz with config -->
+  <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(find pluto_navigation)/rviz/mesh_navigation.rviz" />
+
+</launch>
