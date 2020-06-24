@@ -56,7 +56,4 @@ planners and controller to perform path planning and motion control in 3D (or mo
 See the Demo Video:
 [![Mesh Navigation with Pluto](http://img.youtube.com/vi/qAUWTiqdBM4/0.jpg)](http://www.youtube.com/watch?v=qAUWTiqdBM4)
 
-If you want to test the mesh navigation stack with Pluto please use the simulation setup described above and the
-corresponding launch files listed here:
-- Botanical Garden at Osnabrück University: `roslaunch pluto_navigation pluto_botanical_garden.launch`
-- Stone Pit in the Forest in Brockum: `roslaunch pluto_navigation pluto_stone_pit.launch`
+For more information take a look at [pluto_navigation](pluto_navigation).
