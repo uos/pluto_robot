@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find pluto_navigation)/launch/pluto_navigation.launch">
+    <arg name="rviz" value="true"/>
+    <arg name="map_file" value="botanical_garden.h5"/>
+    <arg name="meshmap_config" value="mesh_map.yaml"/>
+    <arg name="meshnav_config" value="mesh_navigation.yaml"/>
+  </include>
+</launch>

@@ -12,12 +12,12 @@ layers:
 #    type: 'mesh_layers/InflationLayer'
 
 height_diff:
-  factor: 0.3
-  threshold: 0.2
+  factor: 1.0
+  threshold: 0.1
 
 roughness:
-  factor: 0.3
-  threshold: 0.4
+  factor: 1.0
+  threshold: 0.6
 
 inflation:
   factor: 1.0

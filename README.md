@@ -40,7 +40,8 @@ You can use Pluto in an outdoor simulation environment. We provides several data
 for the Gazebo simulation. For navigation purposes the corresponding navigation launch file should be started, too. 
 The following simulation environments are currently available:
 - Botanical Garden at Osnabrück University: `roslaunch pluto_gazebo pluto_botanical_garden.launch`
-- Stone Pit in the Forest in Brockum: `roslaunch pluto_gazebo pluto_stone_pit.launch`
+- Stone Quarry in the Forest in Brockum: `roslaunch pluto_gazebo pluto_stone_quarry.launch`
+- Physics building at Osnabrück University: `roslaunch pluto_gazebo pluto_physics.launch`
 
 ## Pluto in Real Life
 After the `roscore` has been started a provided launchfile starts the general functionalities of the robot, e.g. driving, 
@@ -56,7 +57,4 @@ planners and controller to perform path planning and motion control in 3D (or mo
 See the Demo Video:
 [![Mesh Navigation with Pluto](http://img.youtube.com/vi/qAUWTiqdBM4/0.jpg)](http://www.youtube.com/watch?v=qAUWTiqdBM4)
 
-If you want to test the mesh navigation stack with Pluto please use the simulation setup described above and the
-corresponding launch files listed here:
-- Botanical Garden at Osnabrück University: `roslaunch pluto_navigation pluto_botanical_garden.launch`
-- Stone Pit in the Forest in Brockum: `roslaunch pluto_navigation pluto_stone_pit.launch`
+For more information take a look at [pluto_navigation](pluto_navigation).
