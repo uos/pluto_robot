@@ -1,16 +1,20 @@
 <?xml version="1.0"?>
 <launch>
   <arg name="rviz" default="false" />
-  <arg name="map_file" default="botanical_garden.h5" />
-  <arg name="meshmap_config" default="mesh_map.yaml" />
-  <arg name="meshnav_config" default="mesh_navigation.yaml" />
+  <arg name="dataset" default="physics_campus_westerberg" />
+  <arg name="dir" default="maps/$(arg dataset)" />
+  <arg name="map_file" default="$(arg dir)/$(arg dataset).h5" />
+  <arg name="map_config" default="$(arg dir)/$(arg dataset)_map.yaml" />
+  <arg name="nav_config" default="$(arg dir)/$(arg dataset)_nav.yaml" />
+  <arg name="part" default="mesh" />
+  <arg name="planner_patience" default="10"/>
 
-  <node name="move_base_flex" pkg="mbf_mesh_nav" type="mbf_mesh_nav" output="screen" launch-prefix="gdb --ex run --args">
-    <rosparam command="load" file="$(find pluto_navigation)/config/$(arg meshnav_config)"/>
-    <rosparam command="load" ns="mesh_map" file="$(find pluto_navigation)/config/$(arg meshmap_config)"/>
-    <param name="planner_patience" value="20"/>
-    <param name="mesh_map/mesh_file" value="$(find pluto_navigation)/maps/$(arg map_file)" />
-    <param name="mesh_map/mesh_part" value="mesh"/>
+  <node name="move_base_flex" pkg="mbf_mesh_nav" type="mbf_mesh_nav" output="screen">
+    <rosparam command="load" file="$(find pluto_navigation)/$(arg nav_config)"/>
+    <rosparam command="load" ns="mesh_map" file="$(find pluto_navigation)/$(arg map_config)"/>
+    <param name="planner_patience" value="$(arg planner_patience)"/>
+    <param name="mesh_map/mesh_file" value="$(find pluto_navigation)/$(arg map_file)" />
+    <param name="mesh_map/mesh_part" value="$(arg part)"/>
   </node>
 
   <!-- SMACH Navigation State Machine -->

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find pluto_navigation)/launch/pluto_navigation.launch">
+    <arg name="rviz" value="true"/>
+    <arg name="dataset" value="stone_quarry_brockum"/>
+  </include>
+</launch>

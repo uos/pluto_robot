@@ -2,11 +2,14 @@
 This package uses the [mesh_navigation](https://github.com/uos/mesh_navigation) stack for navigation.
 It provides a couple of launchfiles that start the navigation for a given set of environments and one launchfile that publishes a example goals for each environment.
 
-## Environments
-The following environments are available:
-- Botanical Garden at Osnabrück University: `roslaunch pluto_navigation pluto_botanical_garden.launch`
-- Stone Pit in the Forest in Brockum: `roslaunch pluto_navigation pluto_stone_quarry.launch`
-- Physics building at Osnabrück University: `roslaunch pluto_navigation pluto_physics.launch`
+## Environment Datasets
+The following environment dataset are available:
+- Botanical Garden at Osnabrück University:  
+`roslaunch pluto_navigation botanical_garden_osnabrueck.launch`
+- Stone Quarry in the forest in Brockum:  
+`roslaunch pluto_navigation stone_quarry_brockum.launch`
+- Physics building at Campus Westerberg, Osnabrück University:  
+`roslaunch pluto_navigation physics_campus_westerberg.launch`
 
 ## Example Goals
 The example goals can be set by using the `navigation_goals` launchfile.
