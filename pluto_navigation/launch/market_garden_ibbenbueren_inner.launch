@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+  <include file="$(find pluto_navigation)/launch/pluto_navigation.launch">
+    <arg name="rviz" value="true"/>
+    <arg name="dir" value="maps/market_garden_ibbenbueren"/>
+    <arg name="dataset" value="market_garden_ibbenbueren_inner"/>
+  </include>
+</launch>
