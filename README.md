@@ -54,7 +54,7 @@ The [mesh_navigation](https://github.com/uos/mesh_navigation) stack provides a n
 files to start the navigation server with the configured layer plugins for the layered mesh map, and the configured
 planners and controller to perform path planning and motion control in 3D (or more specifically on 2D-manifold). 
 
-See the Demo Video:
+See the Demo Video:  
 [![Mesh Navigation with Pluto](http://img.youtube.com/vi/qAUWTiqdBM4/0.jpg)](http://www.youtube.com/watch?v=qAUWTiqdBM4)
 
-For more information take a look at [pluto_navigation](pluto_navigation).
+For more information take a look at the package [pluto_navigation](pluto_navigation).
