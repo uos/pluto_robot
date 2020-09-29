@@ -9,14 +9,13 @@ Panels:
         - /TexturedMesh1/Display Type1/Use Custom limits1
         - /TexturedMesh1/Show Wireframe1
         - /TexturedMesh1/Show Normals1
-        - /Path1
         - /Path1/Offset1
         - /MarkerArray1/Namespaces1
         - /Marker1/Namespaces1
         - /Marker2/Namespaces1
         - /Path2/Offset1
       Splitter Ratio: 0.49900200963020325
-    Tree Height: 620
+    Tree Height: 1386
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -28,7 +27,7 @@ Panels:
     Expanded:
       - /Current View1
     Name: Views
-    Splitter Ratio: 0.5
+    Splitter Ratio: 0.7344064116477966
   - Class: rviz/Time
     Experimental: false
     Name: Time
@@ -63,7 +62,7 @@ Visualization Manager:
       Display Type:
         Color Scale: Rainbow
         Faces Alpha: 0.10000000149011612
-        Faces Color: 238; 238; 236
+        Faces Color: 0; 0; 0
         Material Service Name: get_materials
         Show textured faces only: false
         Texture Service Name: get_texture
@@ -71,7 +70,7 @@ Visualization Manager:
           Value: true
           Vertex Costs Lower Limit: 0
           Vertex Costs Upper Limit: 0.4000000059604645
-        Value: Vertex Costs
+        Value: Fixed Color
         Vertex Color Service Name: get_vertex_colors
         Vertex Colors Topic: /move_base_flex/mesh_map/vertex_colors
         Vertex Costs Topic: /move_base_flex/mesh_map/vertex_costs
@@ -199,13 +198,13 @@ Visualization Manager:
       Unreliable: false
       Value: true
     - Class: rviz/MarkerArray
-      Enabled: false
+      Enabled: true
       Marker Topic: /move_base_flex/mesh_map/vector_field
       Name: MarkerArray
       Namespaces:
         {}
       Queue Size: 1
-      Value: false
+      Value: true
     - Alpha: 1
       Class: rviz/PointStamped
       Color: 255; 255; 255
@@ -224,13 +223,13 @@ Visualization Manager:
       Reference Frame: base_footprint
       Value: false
     - Class: rviz/Marker
-      Enabled: true
+      Enabled: false
       Marker Topic: /move_base_flex/mesh_map/vector_field
       Name: Marker
       Namespaces:
-        vector_field: true
+        {}
       Queue Size: 10000
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -344,173 +343,193 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 15.47091007232666
+      Distance: 65.04624938964844
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 6.784897804260254
-        Y: 12.865493774414062
-        Z: 0.4619828462600708
+        X: -0.4065307378768921
+        Y: 3.100226879119873
+        Z: -4.829988479614258
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.5047959089279175
+      Pitch: 0.5647967457771301
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.526210308074951
+      Yaw: 4.279393672943115
     Saved:
       - Class: rviz/Orbit
-        Distance: 13.513463973999023
+        Distance: 11.915940284729004
         Enable Stereo Rendering:
           Stereo Eye Separation: 0.05999999865889549
           Stereo Focal Distance: 1
           Swap Stereo Eyes: false
           Value: false
         Focal Point:
-          X: -0.6666569113731384
-          Y: -8.300365447998047
-          Z: 0.752140462398529
+          X: 7.063137531280518
+          Y: -3.9486100673675537
+          Z: -6.500202178955078
         Focal Shape Fixed Size: false
         Focal Shape Size: 0.05000000074505806
         Invert Z Axis: false
-        Name: Orbit
+        Name: physics_tunnel
         Near Clip Distance: 0.009999999776482582
-        Pitch: 1.5203979015350342
+        Pitch: 0.2447965443134308
         Target Frame: <Fixed Frame>
         Value: Orbit (rviz)
-        Yaw: 3.1154165267944336
+        Yaw: 3.001213312149048
       - Class: rviz/Orbit
-        Distance: 23.76374053955078
+        Distance: 81.81532287597656
         Enable Stereo Rendering:
           Stereo Eye Separation: 0.05999999865889549
           Stereo Focal Distance: 1
           Swap Stereo Eyes: false
           Value: false
         Focal Point:
-          X: 19.218408584594727
-          Y: 29.21807861328125
-          Z: 1.9810234308242798
+          X: 24.680192947387695
+          Y: -9.706969261169434
+          Z: -3.0655651092529297
         Focal Shape Fixed Size: false
         Focal Shape Size: 0.05000000074505806
         Invert Z Axis: false
-        Name: Orbit
+        Name: physics_goal1_birds_view
         Near Clip Distance: 0.009999999776482582
-        Pitch: 0.3903982639312744
+        Pitch: 1.5547963380813599
         Target Frame: <Fixed Frame>
         Value: Orbit (rviz)
-        Yaw: 3.6580562591552734
+        Yaw: 4.691219329833984
       - Class: rviz/Orbit
-        Distance: 40.68236541748047
+        Distance: 81.81532287597656
         Enable Stereo Rendering:
           Stereo Eye Separation: 0.05999999865889549
           Stereo Focal Distance: 1
           Swap Stereo Eyes: false
           Value: false
         Focal Point:
-          X: 20.160640716552734
-          Y: 22.288618087768555
-          Z: -2.4156806468963623
+          X: 24.680192947387695
+          Y: -9.706969261169434
+          Z: -3.0655651092529297
         Focal Shape Fixed Size: false
         Focal Shape Size: 0.05000000074505806
         Invert Z Axis: false
-        Name: Orbit
+        Name: physics_goal1_birds_view1
         Near Clip Distance: 0.009999999776482582
-        Pitch: 0.390398234128952
+        Pitch: 0.9147969484329224
         Target Frame: <Fixed Frame>
         Value: Orbit (rviz)
-        Yaw: 3.9380548000335693
+        Yaw: 4.631217956542969
       - Class: rviz/Orbit
-        Distance: 40.68236541748047
+        Distance: 42.55481719970703
         Enable Stereo Rendering:
           Stereo Eye Separation: 0.05999999865889549
           Stereo Focal Distance: 1
           Swap Stereo Eyes: false
           Value: false
         Focal Point:
-          X: 20.160640716552734
-          Y: 22.288618087768555
-          Z: -2.4156806468963623
+          X: -0.5751736164093018
+          Y: -12.858388900756836
+          Z: -14.27863597869873
         Focal Shape Fixed Size: false
         Focal Shape Size: 0.05000000074505806
         Invert Z Axis: false
-        Name: Orbit
+        Name: physics_goal1_side_view
         Near Clip Distance: 0.009999999776482582
-        Pitch: 0.390398234128952
+        Pitch: 0.4497973620891571
         Target Frame: <Fixed Frame>
         Value: Orbit (rviz)
-        Yaw: 3.9380548000335693
+        Yaw: 2.0212182998657227
       - Class: rviz/Orbit
-        Distance: 18.520389556884766
+        Distance: 32.47990798950195
         Enable Stereo Rendering:
           Stereo Eye Separation: 0.05999999865889549
           Stereo Focal Distance: 1
           Swap Stereo Eyes: false
           Value: false
         Focal Point:
-          X: 11.214893341064453
-          Y: 24.697586059570312
-          Z: 0.6561442613601685
+          X: -0.9168626666069031
+          Y: -8.860661506652832
+          Z: -8.058618545532227
         Focal Shape Fixed Size: false
         Focal Shape Size: 0.05000000074505806
         Invert Z Axis: false
-        Name: Orbit
+        Name: physics_goal1_side_view1
         Near Clip Distance: 0.009999999776482582
-        Pitch: 0.9353979825973511
+        Pitch: 0.38979730010032654
         Target Frame: <Fixed Frame>
         Value: Orbit (rviz)
-        Yaw: 2.4980478286743164
+        Yaw: 1.5862218141555786
       - Class: rviz/Orbit
-        Distance: 12.621127128601074
+        Distance: 74.18791961669922
         Enable Stereo Rendering:
           Stereo Eye Separation: 0.05999999865889549
           Stereo Focal Distance: 1
           Swap Stereo Eyes: false
           Value: false
         Focal Point:
-          X: 9.296395301818848
-          Y: 26.856693267822266
-          Z: 1.889664649963379
+          X: -14.771940231323242
+          Y: 0.03673166409134865
+          Z: -5.008959770202637
         Focal Shape Fixed Size: false
         Focal Shape Size: 0.05000000074505806
         Invert Z Axis: false
-        Name: Orbit
+        Name: physics_goal2_birds_view
         Near Clip Distance: 0.009999999776482582
-        Pitch: 0.2303985208272934
+        Pitch: 1.5697963237762451
         Target Frame: <Fixed Frame>
         Value: Orbit (rviz)
-        Yaw: 4.178050994873047
+        Yaw: 4.381217002868652
       - Class: rviz/Orbit
-        Distance: 15.47091007232666
+        Distance: 81.89396667480469
         Enable Stereo Rendering:
           Stereo Eye Separation: 0.05999999865889549
           Stereo Focal Distance: 1
           Swap Stereo Eyes: false
           Value: false
         Focal Point:
-          X: 6.784897804260254
-          Y: 12.865493774414062
-          Z: 0.4619828462600708
+          X: -12.324387550354004
+          Y: -2.642261505126953
+          Z: -10.938681602478027
         Focal Shape Fixed Size: false
         Focal Shape Size: 0.05000000074505806
         Invert Z Axis: false
-        Name: Orbit
+        Name: physics_goal2_birds_view1
         Near Clip Distance: 0.009999999776482582
-        Pitch: 1.5047959089279175
+        Pitch: 0.6847962141036987
         Target Frame: <Fixed Frame>
         Value: Orbit (rviz)
-        Yaw: 3.526210308074951
+        Yaw: 2.8212156295776367
+      - Class: rviz/Orbit
+        Distance: 43.10115432739258
+        Enable Stereo Rendering:
+          Stereo Eye Separation: 0.05999999865889549
+          Stereo Focal Distance: 1
+          Swap Stereo Eyes: false
+          Value: false
+        Focal Point:
+          X: -32.92716598510742
+          Y: 2.326624870300293
+          Z: -1.7628610134124756
+        Focal Shape Fixed Size: false
+        Focal Shape Size: 0.05000000074505806
+        Invert Z Axis: false
+        Name: physics_goal2_ramp
+        Near Clip Distance: 0.009999999776482582
+        Pitch: 0.25979629158973694
+        Target Frame: <Fixed Frame>
+        Value: Orbit (rviz)
+        Yaw: 0.2712164521217346
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1172
+  Height: 2128
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd0000000400000000000001f3000003dafc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005c00fffffffb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000001e0054006f006f006c002000500072006f0070006500720074006900650073010000003d000000a10000005c00fffffffb000000100044006900730070006c00610079007301000000e400000333000000c900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000015f000003dafc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003d000003da000000a400fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000007800000005afc0100000002fb0000000800540069006d0065010000000000000780000002eb00fffffffb0000000800540069006d0065010000000000000450000000000000000000000422000003da00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000400000000000001f300000780fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000007000fffffffb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000001e0054006f006f006c002000500072006f0070006500720074006900650073010000004b0000013a0000007000fffffffb000000100044006900730070006c006100790073010000018c0000063f000000f900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000016900000780fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000004b00000780000000ca00fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e1000001970000000300000f000000005afc0100000002fb0000000800540069006d0065010000000000000f00000002cc00fffffffb0000000800540069006d0065010000000000000450000000000000000000000b960000078000000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -519,6 +538,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: false
-  Width: 1920
+  Width: 3840
   X: 0
-  Y: 0
+  Y: 32
