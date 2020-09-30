@@ -2,6 +2,28 @@
 This package uses the [mesh_navigation](https://github.com/uos/mesh_navigation) stack for navigation.
 It provides a couple of launch files that start the navigation for a given set of environments and one launch file that publishes a example goals for each environment.
 
+## How to get our datasets
+To manage our datasets we use a git extension called "Git Large File Storage" or for short git LFS.
+This allows us to keep this repository small while also embedding our datasets inside this repository.
+
+
+To download our datasets you first need to install [git LFS](https://git-lfs.github.com) on your system.
+After installing the git extension you will be able to clone this repository like any other git repository and the datasets will be downloaded.
+
+
+If you already cloned this repository without having git LFS installed, the dataset files will just be placeholders on your local copy.
+To download the datasets you again need to install git LFS on your system.
+After installing the Extension you need to install the git LFS configuration locally.
+This needs to be ran just once per system and repository inside the directory of your local copy of this repository.
+```
+git lfs install
+```
+Now simply fetch all available git LFS resources for your local copy of this repository.
+This will download all datasets and make them available locally.
+```
+git lfs fetch --all
+```
+
 ## Environment Datasets
 The following environment dataset are available:
 - Botanical Garden at Osnabrück University:  
