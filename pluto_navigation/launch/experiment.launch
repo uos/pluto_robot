@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="experiment"/>
+  <node name="publish_start_and_goal" pkg="rostopic" type="rostopic" args="pub -1 /move_base_flex/get_path/goal mbf_msgs/GetPathActionGoal -f $(find pluto_navigation)/experiments/$(arg experiment).bagy -s -v" output="screen"/>
+</launch>
