@@ -18,7 +18,7 @@ The following environment dataset are available:
 `roslaunch pluto_navigation market_garden_ibbenbueren_inner.launch`
 
 |Dataset                                                      | # Vertices | # Triangles | BB x[m] | BB y[m] | BB z[m] |
-|:------------------------------------------------------------|:-----------|------------:|--------:|--------:|--------:|
+|:------------------------------------------------------------|-----------:|------------:|--------:|--------:|--------:|
 | [Botanical Garden Osnabrück](#botanical-garden-osnabrück)   |   714 760  |  1 430 188  |   39.05 |   49.25 |    6.67 |
 | [Stone Quarry Brockum](#stone-quarry-brockum)               |   992 879  |  1 904 178  |  100.58 |  100.58 |   23.94 |
 | [Physics Campus Westerberg](#physics-campus-westerberg)     |   719 080  |  1 617 772  |  166.02 |   83.61 |   26.33 |
