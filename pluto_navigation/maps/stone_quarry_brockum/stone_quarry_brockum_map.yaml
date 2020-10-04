@@ -8,16 +8,22 @@ layers:
     type: 'mesh_layers/HeightDiffLayer'
   - name: 'roughness'
     type: 'mesh_layers/RoughnessLayer'
+  - name: 'steepness'
+    type: 'mesh_layers/SteepnessLayer'
 #  - name: 'inflation'
 #    type: 'mesh_layers/InflationLayer'
 
 height_diff:
   factor: 1.0
-  threshold: 0.1
+  threshold: 0.2
 
 roughness:
   factor: 1.0
   threshold: 0.6
+
+steepness:
+  factor: 1.0
+  threshold: 0.4
 
 inflation:
   factor: 1.0
