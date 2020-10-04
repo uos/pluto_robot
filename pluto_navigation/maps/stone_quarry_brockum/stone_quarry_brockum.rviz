@@ -5,7 +5,6 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /TexturedMesh1
-        - /TexturedMesh1/Status1
         - /TexturedMesh1/Display Type1
         - /TexturedMesh1/Display Type1/Use Custom limits1
         - /TexturedMesh1/Show Wireframe1
@@ -269,186 +268,26 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 81.5940170288086
+      Distance: 15.913748741149902
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 45.748252868652344
-        Y: 2.039792060852051
-        Z: -15.383103370666504
+        X: 5.5891218185424805
+        Y: 7.25277853012085
+        Z: -0.6388452053070068
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6397966742515564
+      Pitch: 0.05479603633284569
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.669395446777344
-    Saved:
-      - Class: rviz/Orbit
-        Distance: 11.915940284729004
-        Enable Stereo Rendering:
-          Stereo Eye Separation: 0.05999999865889549
-          Stereo Focal Distance: 1
-          Swap Stereo Eyes: false
-          Value: false
-        Focal Point:
-          X: 7.063137531280518
-          Y: -3.9486100673675537
-          Z: -6.500202178955078
-        Focal Shape Fixed Size: false
-        Focal Shape Size: 0.05000000074505806
-        Invert Z Axis: false
-        Name: physics_tunnel
-        Near Clip Distance: 0.009999999776482582
-        Pitch: 0.2447965443134308
-        Target Frame: <Fixed Frame>
-        Value: Orbit (rviz)
-        Yaw: 3.001213312149048
-      - Class: rviz/Orbit
-        Distance: 81.81532287597656
-        Enable Stereo Rendering:
-          Stereo Eye Separation: 0.05999999865889549
-          Stereo Focal Distance: 1
-          Swap Stereo Eyes: false
-          Value: false
-        Focal Point:
-          X: 24.680192947387695
-          Y: -9.706969261169434
-          Z: -3.0655651092529297
-        Focal Shape Fixed Size: false
-        Focal Shape Size: 0.05000000074505806
-        Invert Z Axis: false
-        Name: physics_goal1_birds_view
-        Near Clip Distance: 0.009999999776482582
-        Pitch: 1.5547963380813599
-        Target Frame: <Fixed Frame>
-        Value: Orbit (rviz)
-        Yaw: 4.691219329833984
-      - Class: rviz/Orbit
-        Distance: 81.81532287597656
-        Enable Stereo Rendering:
-          Stereo Eye Separation: 0.05999999865889549
-          Stereo Focal Distance: 1
-          Swap Stereo Eyes: false
-          Value: false
-        Focal Point:
-          X: 24.680192947387695
-          Y: -9.706969261169434
-          Z: -3.0655651092529297
-        Focal Shape Fixed Size: false
-        Focal Shape Size: 0.05000000074505806
-        Invert Z Axis: false
-        Name: physics_goal1_birds_view1
-        Near Clip Distance: 0.009999999776482582
-        Pitch: 0.9147969484329224
-        Target Frame: <Fixed Frame>
-        Value: Orbit (rviz)
-        Yaw: 4.631217956542969
-      - Class: rviz/Orbit
-        Distance: 42.55481719970703
-        Enable Stereo Rendering:
-          Stereo Eye Separation: 0.05999999865889549
-          Stereo Focal Distance: 1
-          Swap Stereo Eyes: false
-          Value: false
-        Focal Point:
-          X: -0.5751736164093018
-          Y: -12.858388900756836
-          Z: -14.27863597869873
-        Focal Shape Fixed Size: false
-        Focal Shape Size: 0.05000000074505806
-        Invert Z Axis: false
-        Name: physics_goal1_side_view
-        Near Clip Distance: 0.009999999776482582
-        Pitch: 0.4497973620891571
-        Target Frame: <Fixed Frame>
-        Value: Orbit (rviz)
-        Yaw: 2.0212182998657227
-      - Class: rviz/Orbit
-        Distance: 32.47990798950195
-        Enable Stereo Rendering:
-          Stereo Eye Separation: 0.05999999865889549
-          Stereo Focal Distance: 1
-          Swap Stereo Eyes: false
-          Value: false
-        Focal Point:
-          X: -0.9168626666069031
-          Y: -8.860661506652832
-          Z: -8.058618545532227
-        Focal Shape Fixed Size: false
-        Focal Shape Size: 0.05000000074505806
-        Invert Z Axis: false
-        Name: physics_goal1_side_view1
-        Near Clip Distance: 0.009999999776482582
-        Pitch: 0.38979730010032654
-        Target Frame: <Fixed Frame>
-        Value: Orbit (rviz)
-        Yaw: 1.5862218141555786
-      - Class: rviz/Orbit
-        Distance: 74.18791961669922
-        Enable Stereo Rendering:
-          Stereo Eye Separation: 0.05999999865889549
-          Stereo Focal Distance: 1
-          Swap Stereo Eyes: false
-          Value: false
-        Focal Point:
-          X: -14.771940231323242
-          Y: 0.03673166409134865
-          Z: -5.008959770202637
-        Focal Shape Fixed Size: false
-        Focal Shape Size: 0.05000000074505806
-        Invert Z Axis: false
-        Name: physics_goal2_birds_view
-        Near Clip Distance: 0.009999999776482582
-        Pitch: 1.5697963237762451
-        Target Frame: <Fixed Frame>
-        Value: Orbit (rviz)
-        Yaw: 4.381217002868652
-      - Class: rviz/Orbit
-        Distance: 81.89396667480469
-        Enable Stereo Rendering:
-          Stereo Eye Separation: 0.05999999865889549
-          Stereo Focal Distance: 1
-          Swap Stereo Eyes: false
-          Value: false
-        Focal Point:
-          X: -12.324387550354004
-          Y: -2.642261505126953
-          Z: -10.938681602478027
-        Focal Shape Fixed Size: false
-        Focal Shape Size: 0.05000000074505806
-        Invert Z Axis: false
-        Name: physics_goal2_birds_view1
-        Near Clip Distance: 0.009999999776482582
-        Pitch: 0.6847962141036987
-        Target Frame: <Fixed Frame>
-        Value: Orbit (rviz)
-        Yaw: 2.8212156295776367
-      - Class: rviz/Orbit
-        Distance: 43.10115432739258
-        Enable Stereo Rendering:
-          Stereo Eye Separation: 0.05999999865889549
-          Stereo Focal Distance: 1
-          Swap Stereo Eyes: false
-          Value: false
-        Focal Point:
-          X: -32.92716598510742
-          Y: 2.326624870300293
-          Z: -1.7628610134124756
-        Focal Shape Fixed Size: false
-        Focal Shape Size: 0.05000000074505806
-        Invert Z Axis: false
-        Name: physics_goal2_ramp
-        Near Clip Distance: 0.009999999776482582
-        Pitch: 0.25979629158973694
-        Target Frame: <Fixed Frame>
-        Value: Orbit (rviz)
-        Yaw: 0.2712164521217346
+      Yaw: 4.009401798248291
+    Saved: ~
 Window Geometry:
   Displays:
     collapsed: false

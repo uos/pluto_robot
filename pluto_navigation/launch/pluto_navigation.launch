@@ -21,6 +21,6 @@
   <node pkg="pluto_navigation" type="navigation_sm.py" name="navigation_smach" output="screen"/>
   
   <!-- RViz with config -->
-  <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(find pluto_navigation)/rviz/mesh_navigation.rviz" />
+  <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(find pluto_navigation)/$(arg dir)/$(arg dataset).rviz" />
 
 </launch>
