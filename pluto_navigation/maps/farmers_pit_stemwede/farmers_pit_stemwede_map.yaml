@@ -10,8 +10,8 @@ layers:
     type: 'mesh_layers/RoughnessLayer'
   - name: 'steepness'
     type: 'mesh_layers/SteepnessLayer'
-#  - name: 'inflation'
-#    type: 'mesh_layers/InflationLayer'
+  - name: 'inflation'
+    type: 'mesh_layers/InflationLayer'
 
 height_diff:
   factor: 1.0
@@ -27,10 +27,8 @@ steepness:
 
 inflation:
   factor: 1.0
-  inflation_radius: 0.5
-  inscribed_radius: 0.10
-  #inflation_radius: 1.0
-  #inscribed_radius: 0.05
-  lethal_value: 6
+  inflation_radius: 0.8
+  inscribed_radius: 0.3
+  lethal_value: 1
   inscribed_value: 4
 
