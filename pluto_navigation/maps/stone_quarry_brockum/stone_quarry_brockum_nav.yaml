@@ -11,7 +11,7 @@ controllers:
 wave_front_planner:
   cost_limit: 1.0
   publish_vector_field: true
-  step_width: 0.1
+  step_width: 0.15
 
 mesh_controller:
   ang_vel_factor: 7.0

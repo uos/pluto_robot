@@ -25,4 +25,4 @@ inflation:
   inscribed_radius: 0.3
   lethal_value: 6
   inscribed_value: 4
-
+  repulsive_field: false
