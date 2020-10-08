@@ -23,12 +23,12 @@ roughness:
 
 steepness:
   factor: 1.0
-  threshold: 0.3
+  threshold: 0.5
 
 inflation:
   factor: 1.0
-  inflation_radius: 0.8
-  inscribed_radius: 0.3
+  inflation_radius: 1.5
+  inscribed_radius: 0.4
   lethal_value: 1
-  inscribed_value: 4
+  inscribed_value: 0.4
 

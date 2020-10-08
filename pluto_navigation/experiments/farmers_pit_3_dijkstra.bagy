@@ -1,0 +1,51 @@
+header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs: 0
+  frame_id: "map"
+goal_id:
+  stamp:
+    secs: 0
+    nsecs: 0
+  id: ""
+goal:
+  use_start_pose: true
+  start_pose:
+    header:
+      seq: 0
+      stamp:
+        secs: 0
+        nsecs: 0
+      frame_id: "map"
+    pose: 
+      position: 
+        x: 42.6632995605
+        y: 19.7625007629
+        z: -1.31443023682
+      orientation: 
+        x: 0.962713599205
+        y: 0.270234465599
+        z: 0.00331134046428
+        w: 0.0120468158275
+  target_pose:
+    header:
+      seq: 0
+      stamp: 
+        secs: 0
+        nsecs: 0
+      frame_id: "map"
+    pose:
+      position: 
+        x: 7.02787065506
+        y: -8.4929523468
+        z: -0.955176353455
+      orientation: 
+        x: 0.277925997972
+        y: 0.960150659084
+        z: -0.0244943164289
+        w: 0.0163536146283
+  tolerance: 0.0
+  planner: "dijkstra_mesh_planner"
+  concurrency_slot: 0
+---
