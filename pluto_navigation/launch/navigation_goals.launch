@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-  <arg name="goal" default="physics1"/>
-  <node name="example_goals" pkg="rostopic" type="rostopic" args="pub -1 /goal geometry_msgs/PoseStamped -f $(find pluto_navigation)/example_goals/$(arg goal).bagy" output="screen"/>
-</launch>
