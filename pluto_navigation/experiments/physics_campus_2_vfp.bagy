@@ -20,13 +20,13 @@ goal:
       frame_id: "map"
     pose:
       position: 
-        x: 0.324
-        y: 0.379
+        x: 0.307
+        y: 0.343
         z: -1.331
       orientation: 
-        x: 0.018
-        y: 0.011
-        z: 0.455
+        x: 0.024
+        y: 0.009
+        z: 0.454
         w: 0.890
   target_pose:
     header:
