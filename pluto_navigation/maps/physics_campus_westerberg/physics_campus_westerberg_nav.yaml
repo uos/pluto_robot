@@ -9,7 +9,7 @@ controllers:
     type: 'mesh_controller/MeshController'
 
 wave_front_planner:
-  cost_limit: 0.8
+  cost_limit: 1.0
   publish_vector_field: true
 
 mesh_controller:

@@ -22,8 +22,8 @@ steepness:
 
 inflation:
   factor: 1.0
-  inflation_radius: 1.5
-  inscribed_radius: 0.4
+  inflation_radius: 0.7
+  inscribed_radius: 0.2
   lethal_value: 1
-  inscribed_value: 0.4
-
+  inscribed_value: 4
+  repulsive_field: false
