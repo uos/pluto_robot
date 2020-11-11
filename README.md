@@ -1,49 +1,55 @@
-# Pluto
+# Pluto Robot
+|   |   |
+|---|---|
+|![pluto_robot_1](docs/images/pluto_botanical_garden1.jpg "Pluto in the Botanical Garden 1") |![pluto_robot_1](docs/images/pluto_botanical_garden2.jpg "Pluto in the Botanical Garden 2") |
 
-![pluto_robot](docs/images/pluto.jpg?raw=true "Pluto")
+Maintainer: [Sebastian Pütz](mailto:spuetz@uos.de)  
+Author: [Sebastian Pütz](mailto:spuetz@uos.de)
 
-## Maintainers
+* [Installation](#installation)
+* [Software Stack](#software-stack)
+* [Simulation](#simulation)
+* [Mesh Navigation](#mesh-navigation)
+  - [Experiments](#experiments)
+  - [How to get Out datasets](#how-to-get-our-datasets)
+  - [Environmental Datasets](#environment-datasets)
 
-* [Sebastian Pütz](mailto:spuetz@uos.de)
+## Installation
 
-## Installation from Repository
+Please use the official released ros package or install more recent versions from source.  
 
-If you want to install the robot with its configuration and launch files from the repository just follow the next steps.
-Otherwise use `sudo apt install ros-medlod-pluto-robot`
+`sudo apt install ros-melodic-pluto-robot`
 
-### 1. Install wstool
+**Installation from source**  
+All dependencies can be installed using rosdep  
+`rosdep install pluto_robot`
 
-```
-sudo apt install python-wstool
-mkdir -p ~/pluto_ws/src
-```
+As explicit dependencies for navigation we refer to the following ROS packages, which are also developed by us:
+* **[mesh_navigation](https://github.com/uos/mesh_navigation)**
+* **[mesh_tools](https://github.com/uos/mesh_tools/)**
+* **[move_base_flex](https://github.com/magazino/move_base_flex/)**
+* **[lvr2](https://github.com/uos/lvr2)**
 
-### 2. Use wstool to pull all required packages
+## Software Stack
+This **[pluto_robot](https://github.com/uos/pluto_robot)** software stack provides software to use the outdoor robot in
+simulation and in the real world. Furthermore, example HDF5 map datasets are provided to use *Pluto* with the 
+**[mesh_navigation](https://github.com/uos/mesh_navigation)** software stack. This package has been used to evaluate the
+mesh navigation stack. Thus, a couple of [experiments](#experiments) are provided.
+Additionally mesh navigation path planning and motion control with *Pluto* can be run in the provided 
+[Gazebo simulation](#simulation).
 
-```
-cd ~/pluto_ws
-wstool init src https://raw.githubusercontent.com/uos/uos_rosinstalls/master/pluto.rosinstall
-wstool update -t src
-```
+This [https://github.com/uos/pluto_robot](pluto_robot) software stack contains the following packages:
+* `pluto_bringup` contains a couple of launch and config files to start up the robot with its sensors and drivers.
+* `pluto_description` contains the Unified Robot Description Format (URDF) model to model the robot and its internal
+transformations
+* `pluto_gazebo` contains the *Gezebo* simulation worlds, configurations and launch files to start up the respective 
+environments with *Pluto*, see [Simulation](#simulation)
+* `pluto_navigation` contains dataset, map and navigation configurations to run the mesh navigation stack with *Pluto*
+Additionally, it contains mesh navigation experiments using developed planners from the mesh navigation stack.
+See [Mesh Navigation](#mesh-navigation) for more details.
+* `pluto_robots` is the corresponding meta package.
 
-### 3. Use rosdep to install all
-
-```
-sudo apt-get install python-rosdep
-sudo rosdep init
-rosdep update
-rosdep install --from-paths src --ignore-src -r -y
-```
-
-### 4. Build and source the workspace
-
-```
-catkin_make
-source devel/setup.bash
-```
-
-## Pluto in Simulation
-
+## Simulation
 You can use Pluto in an outdoor simulation environment. We provides several datasets and the corresponding environments
 for the Gazebo simulation. For navigation purposes the corresponding navigation launch file should be started, too. 
 The following simulation environments are currently available:
@@ -52,13 +58,7 @@ The following simulation environments are currently available:
 - Stone Quarry in the Forest in Brockum: `roslaunch pluto_gazebo pluto_stone_quarry.launch`
 - Physics building at Osnabrück University: `roslaunch pluto_gazebo pluto_physics.launch`
 
-## Pluto in Real Life
-
-After the `roscore` has been started a provided launchfile starts the general functionalities of the robot, e.g. driving, 
-Velodyne point scanning, reading IMU, etc:
-`roslaunch pluto_bringup pluto.launch`
-
-## Pluto Mesh Navigation
+## Mesh Navigation
 
 The [mesh_navigation](https://github.com/uos/mesh_navigation) stack provides a navigation server for 
 [Move Base Flex](https://github.com/magazino/move_base_flex). It provides a couple of configuration files and launch 
@@ -139,8 +139,8 @@ The following experiments are available for the physics campus dataset. For ever
 | Name                                                                | Description | Overview                                                                                                                                                                                                                                    |
 | ------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **botanical_garden_1_vfp**<br>or<br>**botanical_garden_1_dijkstra** |             | <img src="pluto_navigation/maps/botanical_garden_osnabrueck/botanical_garden_osnabrueck_experiment_1_vfp.png?raw=true" title="Botanical Garden Osnabrueck Experiment 1" alt="BotanicalGardenOsnabrueckExperiment1" width="200">             |
-| **botanical_garden_2_vfp**<br>or<br>**botanical_garden_2_dijkstra** |             | <img src="pluto_navigation/maps/botanical_garden_osnabrueck/botanical_garden_osnabrueck_experiment_2_vfp.png?raw=true" title="Botanical Garden Osnabrueck Experiment 2" width="200" alt="BotanicalGardenOsnabrueckExperiment2" width="200"> |
-| **botanical_garden_3_vfp**<br>or<br>**botanical_garden_3_dijkstra** |             | <img title="Botanical Garden Osnabrueck Experiment 3" src="pluto_navigation/maps/botanical_garden_osnabrueck/botanical_garden_osnabrueck_experiment_3_vfp.png?raw=true" alt="BotanicalGardenOsnabrueckExperiment3" width="200">             |
+| **botanical_garden_2_vfp**<br>or<br>**botanical_garden_2_dijkstra** |             | <img src="pluto_navigation/maps/botanical_garden_osnabrueck/botanical_garden_osnabrueck_experiment_2_vfp.png?raw=true" title="Botanical Garden Osnabrueck Experiment 2" alt="BotanicalGardenOsnabrueckExperiment2" width="200"> |
+| **botanical_garden_3_vfp**<br>or<br>**botanical_garden_3_dijkstra** |             | <img src="pluto_navigation/maps/botanical_garden_osnabrueck/botanical_garden_osnabrueck_experiment_3_vfp.png?raw=true" title="Botanical Garden Osnabrueck Experiment 3" alt="BotanicalGardenOsnabrueckExperiment3" width="200">             |
 | **botanical_garden_4_vfp**<br>or<br>**botanical_garden_4_dijkstra** |             | <img src="pluto_navigation/maps/botanical_garden_osnabrueck/botanical_garden_osnabrueck_experiment_4_vfp.png?raw=true" title="Botanical Garden Osnabrueck Experiment 4" alt="BotanicalGardenOsnabrueckExperiment4" width="200">             |
 
 #### Stone Quarry Brockum
@@ -166,11 +166,11 @@ in progress, description coming soon.
 
 The following experiments are available for the physics campus dataset. For every experiment there is one option to use the dijkstra planner and one option to use the vector field planner (vfp). To run the experiment, follow the instructions from [Experiments](#experiments).
 
-| Name                                                             | Description                                                                                             | Overview                                                                                                                                                                                                                |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **phyics_campus_1_vfp**<br/>or<br/>**physics_campus_1_dijkstra** | Plan from the entrance of the building through the tunnel to the parking lot below                      | <img src="pluto_navigation/maps/physics_campus_westerberg/physics_campus_westerberg_experiment_1_vfp.png?raw=true" title="Physics Campus Westerberg Experiment 1" alt="PhysicsCampusWesterbergExperiment1" width="300"> |
-| **phyics_campus_2_vfp**<br/>or<br/>**physics_campus_2_dijkstra** | Like *physics_campus_1* but with another goal which results in the shortest path not passing the tunnel | <img src="pluto_navigation/maps/physics_campus_westerberg/physics_campus_westerberg_experiment_2_vfp.png?raw=true" title="Physics Campus Westerberg Experiment 2" alt="PhysicsCampusWesterbergExperiment2" width="300"> |
-| **phyics_campus_3_vfp**<br/>or<br/>**physics_campus_3_dijkstra** | Uses the same starting position as the first examples but the goal is not at the bottom parking lot     | <img src="pluto_navigation/maps/physics_campus_westerberg/physics_campus_westerberg_experiment_3_vfp.png?raw=true" title="Physics Campus Westerberg Experiment 3" alt="PhysicsCampusWesterbergExperiment3" width="300"> |
+| Name                                                             | Description                                                                                                | Overview                                                                                                                                                                                                                |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **phyics_campus_1_vfp**<br/>or<br/>**physics_campus_1_dijkstra** | Plan from the entrance of the building through the tunnel to the parking lot below                         | <img src="pluto_navigation/maps/physics_campus_westerberg/physics_campus_westerberg_experiment_1_vfp.png?raw=true" title="Physics Campus Westerberg Experiment 1" alt="PhysicsCampusWesterbergExperiment1" width="300"> |
+| **phyics_campus_2_vfp**<br/>or<br/>**physics_campus_2_dijkstra** | Like *physics_campus_1*, but with another goal which results in the shortest path not passing the tunnel | <img src="pluto_navigation/maps/physics_campus_westerberg/physics_campus_westerberg_experiment_2_vfp.png?raw=true" title="Physics Campus Westerberg Experiment 2" alt="PhysicsCampusWesterbergExperiment2" width="300"> |
+| **phyics_campus_3_vfp**<br/>or<br/>**physics_campus_3_dijkstra** | Uses the same starting position as the first examples but the goal is not at the bottom parking lot        | <img src="pluto_navigation/maps/physics_campus_westerberg/physics_campus_westerberg_experiment_3_vfp.png?raw=true" title="Physics Campus Westerberg Experiment 3" alt="PhysicsCampusWesterbergExperiment3" width="300"> |
 
 #### Farmer's Pit Stemwede
 
