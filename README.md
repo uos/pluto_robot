@@ -132,9 +132,31 @@ The following environment dataset are available:
 
 in progress, description coming soon.
 
+##### Experiments
+
+The following experiments are available for the physics campus dataset. For every experiment there is one option to use the dijkstra planner and one option to use the vector field planner (vfp). To run the experiment, follow the instructions from [Experiments](#experiments).
+
+| Name                                                                | Description | Overview                                                                                                                                                                                        |
+| ------------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **botanical_garden_1_vfp**<br>or<br>**botanical_garden_1_dijkstra** |             | ![BotanicalGardenOsnabrueckExperiment1](pluto_navigation/maps/botanical_garden_osnabrueck/botanical_garden_osnabrueck_experiment_1_vfp.png?raw=true "Botanical Garden Osnabrueck Experiment 1") |
+| **botanical_garden_2_vfp**<br>or<br>**botanical_garden_2_dijkstra** |             | ![BotanicalGardenOsnabrueckExperiment2](pluto_navigation/maps/botanical_garden_osnabrueck/botanical_garden_osnabrueck_experiment_2_vfp.png?raw=true "Botanical Garden Osnabrueck Experiment 2") |
+| **botanical_garden_3_vfp**<br>or<br>**botanical_garden_3_dijkstra** |             | ![BotanicalGardenOsnabrueckExperiment3](pluto_navigation/maps/botanical_garden_osnabrueck/botanical_garden_osnabrueck_experiment_3_vfp.png?raw=true "Botanical Garden Osnabrueck Experiment 3") |
+| **botanical_garden_4_vfp**<br>or<br>**botanical_garden_4_dijkstra** |             | ![BotanicalGardenOsnabrueckExperiment4](pluto_navigation/maps/botanical_garden_osnabrueck/botanical_garden_osnabrueck_experiment_4_vfp.png?raw=true "Botanical Garden Osnabrueck Experiment 4") |
+
 #### Stone Quarry Brockum
 
 in progress, description coming soon.
+
+##### Experiments
+
+The following experiments are available for the physics campus dataset. For every experiment there is one option to use the dijkstra planner and one option to use the vector field planner (vfp). To run the experiment, follow the instructions from [Experiments](#experiments).
+
+| Name                                                         | Description | Overview                                                                                                                                                            |
+| ------------------------------------------------------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **stone_quarry__1_vfp**<br>or<br>**stone_quarry_1_dijkstra** |             | ![StoneQuarryBrockumExperiment1](pluto_navigation/maps/stone_quarry_brockum/stone_quarry_brockum_experiment_1_vfp.png?raw=true "Stone Quarry Brockum Experiment 1") |
+| **stone_quarry_2_vfp**<br>or<br>**stone_quarry_2_dijkstra**  |             | ![StoneQuarryBrockumExperiment2](pluto_navigation/maps/stone_quarry_brockum/stone_quarry_brockum_experiment_2_vfp.png?raw=true "Stone Quarry Brockum Experiment 2") |
+| **stone_quarry_3_vfp**<br>or<br>**stone_quarry_3_dijkstra**  |             | ![StoneQuarryBrockumExperiment3](pluto_navigation/maps/stone_quarry_brockum/stone_quarry_brockum_experiment_3_vfp.png?raw=true "Stone Quarry Brockum Experiment 3") |
+| **stone_quarry_4_vfp**<br>or<br>**stone_quarry_4_dijkstra**  |             | ![StoneQuarryBrockumExperiment4](pluto_navigation/maps/stone_quarry_brockum/stone_quarry_brockum_experiment_4_vfp.png?raw=true "Stone Quarry Brockum Experiment 4") |
 
 #### Physics Campus Westerberg
 
@@ -153,6 +175,17 @@ The following experiments are available for the physics campus dataset. For ever
 #### Farmer's Pit Stemwede
 
 in progress, description coming soon.
+
+##### Experiments
+
+The following experiments are available for the physics campus dataset. For every experiment there is one option to use the dijkstra planner and one option to use the vector field planner (vfp). To run the experiment, follow the instructions from [Experiments](#experiments).
+
+| Name                                                        | Description | Overview                                                                                                                                                            |
+| ----------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **farmers_pit_1_vfp**<br/>or<br/>**farmers_pit_1_dijkstra** |             | ![FarmersPitStemwedeExperiment1](pluto_navigation/maps/farmers_pit_stemwede/farmers_pit_stemwede_experiment_1_vfp.png?raw=true "Farmers Pit Stemwede Experiment 1") |
+| **farmers_pit_2_vfp**<br/>or<br/>**farmers_pit_2_dijkstra** |             | ![FarmersPitStemwedeExperiment2](pluto_navigation/maps/farmers_pit_stemwede/farmers_pit_stemwede_experiment_2_vfp.png?raw=true "Farmers Pit Stemwede Experiment 2") |
+| **farmers_pit_3_vfp**<br/>or<br/>**farmers_pit_3_dijkstra** |             | ![FarmersPitStemwedeExperiment3](pluto_navigation/maps/farmers_pit_stemwede/farmers_pit_stemwede_experiment_3_vfp.png?raw=true "Farmers Pit Stemwede Experiment 3") |
+| **farmers_pit_4_vfp**<br/>or<br/>**farmers_pit_4_dijkstra** |             | ![FarmersPitStemwedeExperiment4](pluto_navigation/maps/farmers_pit_stemwede/farmers_pit_stemwede_experiment_4_vfp.png?raw=true "Farmers Pit Stemwede Experiment 4") |
 
 #### Market Garden Ibbenbüren
 
