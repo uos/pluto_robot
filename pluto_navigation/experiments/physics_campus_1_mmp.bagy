@@ -1,0 +1,51 @@
+header:
+  seq: 0
+  stamp:
+    secs: 0
+    nsecs: 0
+  frame_id: "map"
+goal_id:
+  stamp:
+    secs: 0
+    nsecs: 0
+  id: ""
+goal:
+  use_start_pose: true
+  start_pose:
+    header:
+      seq: 0
+      stamp:
+        secs: 0
+        nsecs: 0
+      frame_id: "map"
+    pose:
+      position: 
+        x: -0.256593465805
+        y: -0.190680027008
+        z: -1.37984848022
+      orientation: 
+        x: 0.010587291792
+        y: 0.0161250121891
+        z: -0.148154497147
+        w: 0.988776087761
+  target_pose:
+    header:
+      seq: 0
+      stamp: 
+        secs: 0
+        nsecs: 0
+      frame_id: "map"
+    pose: 
+      position: 
+        x: -6.98089122772
+        y: 2.49703502655
+        z: -5.86995601654
+      orientation: 
+        x: 0.0173851083964
+        y: -0.0130581911653
+        z: 0.921899080276
+        w: 0.38681948185
+  tolerance: 0.0
+  planner: "mmp_planner"
+  concurrency_slot: 0
+---
