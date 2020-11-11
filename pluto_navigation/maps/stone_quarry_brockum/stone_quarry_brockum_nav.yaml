@@ -3,6 +3,8 @@ planners:
     type: 'wave_front_planner/WaveFrontPlanner'
   - name: 'dijkstra_mesh_planner'
     type: 'dijkstra_mesh_planner/DijkstraMeshPlanner'
+  - name: 'mmp_planner'
+    type: 'mmp_planner/MMPPlanner'
 
 controllers:
   - name: 'mesh_controller'
@@ -17,6 +19,7 @@ mesh_controller:
   ang_vel_factor: 7.0
   lin_vel_factor: 1.0
 
+
 planner_patience: -1.0
 planner_max_retries: 2
 
@@ -24,5 +27,5 @@ controller_patience: 2.0
 controller_max_retries: 4
 
 robot_frame: 'base_footprint'
-dist_tolerance: 0.2
-angle_tolerance: 0.8
+dist_tolerance: 0.3
+angle_tolerance: 3.1415

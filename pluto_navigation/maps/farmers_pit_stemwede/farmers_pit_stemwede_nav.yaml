@@ -3,6 +3,8 @@ planners:
     type: 'wave_front_planner/WaveFrontPlanner'
   - name: 'dijkstra_mesh_planner'
     type: 'dijkstra_mesh_planner/DijkstraMeshPlanner'
+  - name: 'mmp_planner'
+    type: 'mmp_planner/MMPPlanner'
 
 controllers:
   - name: 'mesh_controller'

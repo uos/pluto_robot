@@ -12,18 +12,19 @@ layers:
     type: 'mesh_layers/InflationLayer'
 
 height_diff:
-  factor: 0.7
-  threshold: 0.7
-  radius: 0.0
+  factor: 1.0
+  threshold: 0.12
 
 steepness:
   factor: 1.0
-  threshold: 0.3
+  threshold: 0.8
 
 inflation:
   factor: 1.0
-  inflation_radius: 1.5
-  inscribed_radius: 0.4
+  inflation_radius: 1.0
+  inscribed_radius: 1.0
   lethal_value: 1
   inscribed_value: 0.4
+  repulsive_field: false
+
 
