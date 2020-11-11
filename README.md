@@ -168,9 +168,9 @@ The following experiments are available for the physics campus dataset. For ever
 
 | Name                                                             | Description                                                                                             | Overview                                                                                                                                                                                                                |
 | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **phyics_campus_1_vfp**<br/>or<br/>**physics_campus_1_dijkstra** | Plan from the entrance of the building through the tunnel to the parking lot below                      | <img src="pluto_navigation/maps/physics_campus_westerberg/physics_campus_westerberg_experiment_1_vfp.png?raw=true" title="Physics Campus Westerberg Experiment 1" alt="PhysicsCampusWesterbergExperiment1" width="200"> |
-| **phyics_campus_2_vfp**<br/>or<br/>**physics_campus_2_dijkstra** | Like *physics_campus_1* but with another goal which results in the shortest path not passing the tunnel | <img src="pluto_navigation/maps/physics_campus_westerberg/physics_campus_westerberg_experiment_2_vfp.png?raw=true" title="Physics Campus Westerberg Experiment 2" alt="PhysicsCampusWesterbergExperiment2" width="200"> |
-| **phyics_campus_3_vfp**<br/>or<br/>**physics_campus_3_dijkstra** | Uses the same starting position as the first examples but the goal is not at the bottom parking lot     | <img src="pluto_navigation/maps/physics_campus_westerberg/physics_campus_westerberg_experiment_3_vfp.png?raw=true" title="Physics Campus Westerberg Experiment 3" alt="PhysicsCampusWesterbergExperiment3" width="200"> |
+| **phyics_campus_1_vfp**<br/>or<br/>**physics_campus_1_dijkstra** | Plan from the entrance of the building through the tunnel to the parking lot below                      | <img src="pluto_navigation/maps/physics_campus_westerberg/physics_campus_westerberg_experiment_1_vfp.png?raw=true" title="Physics Campus Westerberg Experiment 1" alt="PhysicsCampusWesterbergExperiment1" width="300"> |
+| **phyics_campus_2_vfp**<br/>or<br/>**physics_campus_2_dijkstra** | Like *physics_campus_1* but with another goal which results in the shortest path not passing the tunnel | <img src="pluto_navigation/maps/physics_campus_westerberg/physics_campus_westerberg_experiment_2_vfp.png?raw=true" title="Physics Campus Westerberg Experiment 2" alt="PhysicsCampusWesterbergExperiment2" width="300"> |
+| **phyics_campus_3_vfp**<br/>or<br/>**physics_campus_3_dijkstra** | Uses the same starting position as the first examples but the goal is not at the bottom parking lot     | <img src="pluto_navigation/maps/physics_campus_westerberg/physics_campus_westerberg_experiment_3_vfp.png?raw=true" title="Physics Campus Westerberg Experiment 3" alt="PhysicsCampusWesterbergExperiment3" width="300"> |
 
 #### Farmer's Pit Stemwede
 
@@ -190,3 +190,11 @@ The following experiments are available for the physics campus dataset. For ever
 #### Market Garden Ibbenbüren
 
 in progress, description coming soon.
+
+##### Experiments
+
+The following experiments are available for the physics campus dataset. For every experiment there is one option to use the dijkstra planner and one option to use the vector field planner (vfp). To run the experiment, follow the instructions from [Experiments](#experiments).
+
+| Name                                                                        | Description | Overview                                                                                                                                                                                                                                 |
+| --------------------------------------------------------------------------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **market_garden_inner_1_vfp**<br/>or<br/>**market_garden_inner_1_dijkstra** |             | <img src="pluto_navigation/maps/market_garden_ibbenbueren/market_garden_ibbenbueren_inner_experiment_1_vfp.png?raw=true" title="Market Garden Ibbenbüren Inner Experiment 1" alt="Market GardenIbbenbuerenInnerExperiment1" width="200"> |

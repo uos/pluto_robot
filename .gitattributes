@@ -19,3 +19,4 @@ pluto_navigation/maps/stone_quarry_brockum/stone_quarry_brockum_experiment_1_vfp
 pluto_navigation/maps/stone_quarry_brockum/stone_quarry_brockum_experiment_2_vfp.png filter=lfs diff=lfs merge=lfs -text
 pluto_navigation/maps/stone_quarry_brockum/stone_quarry_brockum_experiment_3_vfp.png filter=lfs diff=lfs merge=lfs -text
 pluto_navigation/maps/stone_quarry_brockum/stone_quarry_brockum_experiment_4_vfp.png filter=lfs diff=lfs merge=lfs -text
+pluto_navigation/maps/market_garden_ibbenbueren/market_garden_ibbenbueren_inner_experiment_1_vfp.png filter=lfs diff=lfs merge=lfs -text
