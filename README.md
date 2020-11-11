@@ -73,10 +73,10 @@ See the Demo Video:
 We provide experiments consisting of starting positions and goals to test the navigation. To run an experiment you first need to launch the navigation stack with the chosen [Environment Dataset](#environment-datasets) and then publish the experiments poses:
 
 ```bash
-roslaunch pluto_navigation experiment.launch experiment:={experiment}
+roslaunch pluto_navigation experiment.launch experiment:={experiment_name}
 ```
 
-Replace `{experiment}` with the experiment you choose.
+Replace `{experiment_name}` with the name of the experiment you choose.
 Available experiments for each dataset can be found in the [Environment Dataset Section](#environment-datasets) in the description of the correspoiding dataset.
 
 ### How to get our datasets
@@ -139,6 +139,16 @@ in progress, description coming soon.
 #### Physics Campus Westerberg
 
 in progress, description coming soon.
+
+##### Experiments
+
+The following experiments are available for the physics campus dataset. For every experiment there is one option to use the dijkstra planner and one option to use the vector field planner (vfp). To run the experiment, follow the instructions from [Experiments](#experiments).
+
+| Name                                                             | Description                                                                                             | Overview                                                                                                                                                                                |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **phyics_campus_1_vfp**<br/>or<br/>**physics_campus_1_dijkstra** | Plan from the entrance of the building through the tunnel to the parking lot below                      | ![PhysicsCampusWesterbergExperiment1](pluto_navigation/maps/physics_campus_westerberg/physics_campus_westerberg_experiment_1_vfp.png?raw=true "Physics Campus Westerberg Experiment 1") |
+| **phyics_campus_2_vfp**<br/>or<br/>**physics_campus_2_dijkstra** | Like *physics_campus_1* but with another goal which results in the shortest path not passing the tunnel | ![PhysicsCampusWesterbergExperiment2](pluto_navigation/maps/physics_campus_westerberg/physics_campus_westerberg_experiment_2_vfp.png?raw=true "Physics Campus Westerberg Experiment 2") |
+| **phyics_campus_3_vfp**<br/>or<br/>**physics_campus_3_dijkstra** | Uses the same starting position as the first examples but the goal is not at the bottom parking lot     | ![PhysicsCampusWesterbergExperiment3](pluto_navigation/maps/physics_campus_westerberg/physics_campus_westerberg_experiment_3_vfp.png?raw=true "Physics Campus Westerberg Experiment 3") |
 
 #### Farmer's Pit Stemwede
 
