@@ -120,7 +120,6 @@ class Control(smach.StateMachine):
 
 
 class Planning(smach.StateMachine):
-    cnt = 0
 
     def __init__(self):
         smach.StateMachine.__init__(
@@ -156,11 +155,7 @@ class Planning(smach.StateMachine):
         goal.use_start_pose = False
         goal.tolerance = 0.2  # 20cm tolerance to the target
         goal.target_pose = user_data.target_pose
-        if Planning.cnt % 2 == 0:
-            goal.planner = 'wave_front_planner'  # name of the planner to call see move base flex planners.yaml config
-        else:
-            goal.planner = 'dijkstra_mesh_planner'
-        Planning.cnt = Planning.cnt + 1
+        goal.planner = 'wave_front_planner'  
 
     @staticmethod
     @smach.cb_interface(
