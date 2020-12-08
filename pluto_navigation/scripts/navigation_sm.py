@@ -68,6 +68,9 @@ class Control(smach.StateMachine):
             ExePathResult.ROBOT_STUCK: 'ROBOT_SUCK',
             ExePathResult.TF_ERROR: 'TF_ERROR',
             ExePathResult.SUCCESS: 'SUCCESS',
+            ExePathResult.OUT_OF_MAP: 'OUT_OF_MAP',
+            ExePathResult.MAP_ERROR: 'MAP_ERROR',
+            ExePathResult.STOPPED: 'STOPPED'
         }
 
         controller_aborted_map = [
@@ -75,6 +78,9 @@ class Control(smach.StateMachine):
             ExePathResult.INTERNAL_ERROR,
             ExePathResult.INVALID_PATH,
             ExePathResult.NOT_INITIALIZED,
+            ExePathResult.MAP_ERROR,
+            ExePathResult.OUT_OF_MAP,
+            ExePathResult.STOPPED
         ]
 
         controller_failed_map = [
