@@ -15,11 +15,11 @@
   <license>BSD-3</license>
 
   <buildtool_depend>catkin</buildtool_depend>
-  <exec_depend>mbf_mesh_nav</exec_depend>
-  <exec_depend>mbf_msgs</exec_depend>
   <exec_depend>dijkstra_mesh_planner</exec_depend>
-  <exec_depend>wave_front_planner</exec_depend>
+  <exec_depend>mbf_msgs</exec_depend>
+  <exec_depend>mbf_mesh_nav</exec_depend>
+  <exec_depend>mesh_tools</exec_depend>
   <exec_depend>pluto_bringup</exec_depend>
   <exec_depend>pluto_gazebo</exec_depend>
-
+  <exec_depend>wave_front_planner</exec_depend>
 </package>
