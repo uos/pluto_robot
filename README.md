@@ -11,7 +11,7 @@ Author: [Sebastian Pütz](mailto:spuetz@uos.de)
 * [Simulation](#simulation)
 * [Mesh Navigation](#mesh-navigation)
   - [Experiments](#experiments)
-  - [How to get Out datasets](#how-to-get-our-datasets)
+  - [How to get our datasets](#how-to-get-our-datasets)
   - [Environmental Datasets](#environment-datasets)
 
 ## Installation
