@@ -42,7 +42,7 @@ Toolbars:
 Visualization Manager:
   Class: ""
   Displays:
-    - Class: rviz_mesh_plugin/TexturedMesh
+    - Class: rviz_map_plugin/Mesh
       Display Type:
         Color Scale: Rainbow
         Faces Alpha: 0
@@ -151,7 +151,7 @@ Visualization Manager:
     - Class: rviz/PublishPoint
       Single click: true
       Topic: /clicked_point
-    - Class: rviz_mesh_plugin/MeshGoal
+    - Class: rviz_map_plugin/MeshGoal
       Switch Bottom/Top: false
       Topic: goal
   Value: true

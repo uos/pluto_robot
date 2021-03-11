@@ -15,7 +15,7 @@ Panels:
         - /Marker2/Namespaces1
         - /Path2/Offset1
       Splitter Ratio: 0.49900200963020325
-    Tree Height: 1386
+    Tree Height: 838
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -58,7 +58,7 @@ Visualization Manager:
       Plane Cell Count: 100
       Reference Frame: <Fixed Frame>
       Value: false
-    - Class: rviz_mesh_plugin/TexturedMesh
+    - Class: rviz_map_plugin/Mesh
       Display Type:
         Color Scale: Rainbow
         Faces Alpha: 0.10000000149011612
@@ -99,75 +99,6 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base_footprint:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        imu_center:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        imu_left:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        imu_right:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_front_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_middle_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_rear_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_front_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_middle_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_rear_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        velodyne:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        virtual_axis_left:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        virtual_axis_right:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
       Name: RobotModel
       Robot Description: robot_description
       TF Prefix: ""
@@ -191,6 +122,7 @@ Visualization Manager:
         Z: 0.10000000149011612
       Pose Color: 0; 0; 0
       Pose Style: None
+      Queue Size: 10
       Radius: 0.029999999329447746
       Shaft Diameter: 0.009999999776482582
       Shaft Length: 0.009999999776482582
@@ -211,11 +143,13 @@ Visualization Manager:
       Enabled: false
       History Length: 3
       Name: Face Debug
+      Queue Size: 10
       Radius: 0.05000000074505806
       Topic: /move_base_flex/mesh_map/position
       Unreliable: false
       Value: false
-    - Class: rviz/Axes
+    - Alpha: 1
+      Class: rviz/Axes
       Enabled: false
       Length: 0.20000000298023224
       Name: Axes
@@ -265,13 +199,7 @@ Visualization Manager:
       Marker Topic: /move_base_flex/mesh_map/marker
       Name: Marker
       Namespaces:
-        goal_face: true
-        goal_face_v1: true
-        goal_face_v2: true
-        goal_face_v3: true
-        goal_point: true
-        start_face: true
-        start_point: true
+        {}
       Queue Size: 100
       Value: true
     - Alpha: 1
@@ -291,6 +219,7 @@ Visualization Manager:
         Z: 0.10000000149011612
       Pose Color: 0; 0; 0
       Pose Style: None
+      Queue Size: 10
       Radius: 0.029999999329447746
       Shaft Diameter: 0.009999999776482582
       Shaft Length: 0.009999999776482582
@@ -306,6 +235,7 @@ Visualization Manager:
       Head Length: 0.30000001192092896
       Head Radius: 0.20000000298023224
       Name: Pose
+      Queue Size: 10
       Shaft Length: 0.30000001192092896
       Shaft Radius: 0.10000000149011612
       Shape: Arrow
@@ -336,7 +266,7 @@ Visualization Manager:
     - Class: rviz/PublishPoint
       Single click: true
       Topic: /clicked_point
-    - Class: rviz_mesh_plugin/MeshGoal
+    - Class: rviz_map_plugin/MeshGoal
       Switch Bottom/Top: true
       Topic: goal
   Value: true
@@ -349,6 +279,7 @@ Visualization Manager:
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
+      Field of View: 0.7853981852531433
       Focal Point:
         X: -0.4065307378768921
         Y: 3.100226879119873
@@ -360,7 +291,6 @@ Visualization Manager:
       Near Clip Distance: 0.009999999776482582
       Pitch: 0.5647967457771301
       Target Frame: <Fixed Frame>
-      Value: Orbit (rviz)
       Yaw: 4.279393672943115
     Saved:
       - Class: rviz/Orbit
@@ -370,6 +300,7 @@ Visualization Manager:
           Stereo Focal Distance: 1
           Swap Stereo Eyes: false
           Value: false
+        Field of View: 0.7853981852531433
         Focal Point:
           X: 7.063137531280518
           Y: -3.9486100673675537
@@ -381,7 +312,6 @@ Visualization Manager:
         Near Clip Distance: 0.009999999776482582
         Pitch: 0.2447965443134308
         Target Frame: <Fixed Frame>
-        Value: Orbit (rviz)
         Yaw: 3.001213312149048
       - Class: rviz/Orbit
         Distance: 81.81532287597656
@@ -390,6 +320,7 @@ Visualization Manager:
           Stereo Focal Distance: 1
           Swap Stereo Eyes: false
           Value: false
+        Field of View: 0.7853981852531433
         Focal Point:
           X: 24.680192947387695
           Y: -9.706969261169434
@@ -401,7 +332,6 @@ Visualization Manager:
         Near Clip Distance: 0.009999999776482582
         Pitch: 1.5547963380813599
         Target Frame: <Fixed Frame>
-        Value: Orbit (rviz)
         Yaw: 4.691219329833984
       - Class: rviz/Orbit
         Distance: 81.81532287597656
@@ -410,6 +340,7 @@ Visualization Manager:
           Stereo Focal Distance: 1
           Swap Stereo Eyes: false
           Value: false
+        Field of View: 0.7853981852531433
         Focal Point:
           X: 24.680192947387695
           Y: -9.706969261169434
@@ -421,7 +352,6 @@ Visualization Manager:
         Near Clip Distance: 0.009999999776482582
         Pitch: 0.9147969484329224
         Target Frame: <Fixed Frame>
-        Value: Orbit (rviz)
         Yaw: 4.631217956542969
       - Class: rviz/Orbit
         Distance: 42.55481719970703
@@ -430,6 +360,7 @@ Visualization Manager:
           Stereo Focal Distance: 1
           Swap Stereo Eyes: false
           Value: false
+        Field of View: 0.7853981852531433
         Focal Point:
           X: -0.5751736164093018
           Y: -12.858388900756836
@@ -441,7 +372,6 @@ Visualization Manager:
         Near Clip Distance: 0.009999999776482582
         Pitch: 0.4497973620891571
         Target Frame: <Fixed Frame>
-        Value: Orbit (rviz)
         Yaw: 2.0212182998657227
       - Class: rviz/Orbit
         Distance: 32.47990798950195
@@ -450,6 +380,7 @@ Visualization Manager:
           Stereo Focal Distance: 1
           Swap Stereo Eyes: false
           Value: false
+        Field of View: 0.7853981852531433
         Focal Point:
           X: -0.9168626666069031
           Y: -8.860661506652832
@@ -461,7 +392,6 @@ Visualization Manager:
         Near Clip Distance: 0.009999999776482582
         Pitch: 0.38979730010032654
         Target Frame: <Fixed Frame>
-        Value: Orbit (rviz)
         Yaw: 1.5862218141555786
       - Class: rviz/Orbit
         Distance: 74.18791961669922
@@ -470,6 +400,7 @@ Visualization Manager:
           Stereo Focal Distance: 1
           Swap Stereo Eyes: false
           Value: false
+        Field of View: 0.7853981852531433
         Focal Point:
           X: -14.771940231323242
           Y: 0.03673166409134865
@@ -481,7 +412,6 @@ Visualization Manager:
         Near Clip Distance: 0.009999999776482582
         Pitch: 1.5697963237762451
         Target Frame: <Fixed Frame>
-        Value: Orbit (rviz)
         Yaw: 4.381217002868652
       - Class: rviz/Orbit
         Distance: 81.89396667480469
@@ -490,6 +420,7 @@ Visualization Manager:
           Stereo Focal Distance: 1
           Swap Stereo Eyes: false
           Value: false
+        Field of View: 0.7853981852531433
         Focal Point:
           X: -12.324387550354004
           Y: -2.642261505126953
@@ -501,7 +432,6 @@ Visualization Manager:
         Near Clip Distance: 0.009999999776482582
         Pitch: 0.6847962141036987
         Target Frame: <Fixed Frame>
-        Value: Orbit (rviz)
         Yaw: 2.8212156295776367
       - Class: rviz/Orbit
         Distance: 43.10115432739258
@@ -510,6 +440,7 @@ Visualization Manager:
           Stereo Focal Distance: 1
           Swap Stereo Eyes: false
           Value: false
+        Field of View: 0.7853981852531433
         Focal Point:
           X: -32.92716598510742
           Y: 2.326624870300293
@@ -521,15 +452,14 @@ Visualization Manager:
         Near Clip Distance: 0.009999999776482582
         Pitch: 0.25979629158973694
         Target Frame: <Fixed Frame>
-        Value: Orbit (rviz)
         Yaw: 0.2712164521217346
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 2128
+  Height: 1412
   Hide Left Dock: false
-  Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd0000000400000000000001f300000780fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000007000fffffffb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000001e0054006f006f006c002000500072006f0070006500720074006900650073010000004b0000013a0000007000fffffffb000000100044006900730070006c006100790073010000018c0000063f000000f900fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000016900000780fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000004b00000780000000ca00fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e1000001970000000300000f000000005afc0100000002fb0000000800540069006d0065010000000000000f00000002cc00fffffffb0000000800540069006d0065010000000000000450000000000000000000000b960000078000000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Hide Right Dock: true
+  QMainWindow State: 000000ff00000000fd000000040000000000000171000004d7fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005300fffffffb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000034000000cb0000005300fffffffb000000100044006900730070006c006100790073010000010400000407000000b100fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c000002610000000100000169000004d7fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a005600690065007700730000000034000004d70000009200fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004fc0000005afc0100000002fb0000000800540069006d00650100000000000004fc000001cf00fffffffb0000000800540069006d0065010000000000000450000000000000000000000386000004d700000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -537,7 +467,7 @@ Window Geometry:
   Tool Properties:
     collapsed: false
   Views:
-    collapsed: false
-  Width: 3840
-  X: 0
-  Y: 32
+    collapsed: true
+  Width: 1276
+  X: 1280
+  Y: 1080
